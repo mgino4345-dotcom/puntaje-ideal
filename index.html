@@ -170,45 +170,14 @@ gap:6px;padding:11px 9px
 
   <h2 class="section-title">⚽ Partidos de hoy</h2>
 
-  <section class="league-card">
-    <div class="league-head">
-      🇵🇪 Perú - Liga 1
-      <span>3 partidos</span>
-    </div>
+<section class="league-card">
+  <div class="league-head">
+    ⚽ Partidos cargados desde JSON
+    <span>Automático</span>
+  </div>
 
-    <div class="match">
-      <div class="time">67'</div>
-      <div class="teams">
-        <div class="team"><span>Alianza Lima</span></div>
-        <div class="team"><span>Universitario</span></div>
-        <div class="prediction">Pronóstico: Over 1.5</div>
-      </div>
-      <div class="score">1<br>0</div>
-      <div class="status live">EN VIVO</div>
-    </div>
-
-    <div class="match">
-      <div class="time">18:00</div>
-      <div class="teams">
-        <div class="team"><span>Sporting Cristal</span></div>
-        <div class="team"><span>Melgar</span></div>
-        <div class="prediction">Pronóstico: Ambos marcan</div>
-      </div>
-      <div class="score">-<br>-</div>
-      <div class="status next">PRÓXIMO</div>
-    </div>
-
-    <div class="match">
-      <div class="time">FT</div>
-      <div class="teams">
-        <div class="team"><span>Cusco FC</span></div>
-        <div class="team"><span>Cienciano</span></div>
-        <div class="prediction">Pronóstico: Over 1.5 ✅</div>
-      </div>
-      <div class="score">2<br>1</div>
-      <div class="status end">FINAL</div>
-    </div>
-  </section>
+  <div id="partidos-json"></div>
+</section>
 
   <section class="league-card">
     <div class="league-head">
@@ -296,16 +265,28 @@ gap:6px;padding:11px 9px
   © 2026 Puntaje Ideal - Resultados, partidos y pronósticos deportivos
 </footer>
 <script>
-
 fetch('partidos.json')
 .then(response => response.json())
-.then(data => {
-    console.log('Partidos cargados:', data);
-})
-.catch(error => {
-    console.error('Error cargando JSON:', error);
-});
+.then(partidos => {
+  const contenedor = document.getElementById('partidos-json');
+  contenedor.innerHTML = '';
 
+  partidos.forEach(p => {
+    contenedor.innerHTML += `
+      <div class="match">
+        <div class="time">${p.hora}</div>
+        <div class="teams">
+          <div class="team"><span>${p.local}</span></div>
+          <div class="team"><span>${p.visitante}</span></div>
+          <div class="prediction">Pronóstico: ${p.pronostico}</div>
+        </div>
+        <div class="score">-<br>-</div>
+        <div class="status next">PRÓXIMO</div>
+      </div>
+    `;
+  });
+})
+.catch(error => console.error('Error cargando partidos:', error));
 </script>
 </body>
 </html>
