@@ -140,7 +140,7 @@ gap:6px;padding:11px 9px
     </div>
 
     <div class="search">
-      <input type="text" placeholder="Buscar equipo, liga o canal">
+      <input type="text" id="buscador" placeholder="Buscar equipo, liga o canal">
     </div>
   </div>
 
@@ -266,9 +266,9 @@ gap:6px;padding:11px 9px
   © 2026 Puntaje Ideal - Resultados, partidos y pronósticos deportivos
 </footer>
 <script>
-fetch('partidos.json')
-.then(response => response.json())
-.then(partidos => {
+let partidosGlobal = [];
+
+function mostrarPartidos(partidos) {
   const contenedor = document.getElementById('partidos-json');
   contenedor.innerHTML = '';
 
@@ -285,6 +285,26 @@ fetch('partidos.json')
         <div class="status next">PRÓXIMO</div>
       </div>
     `;
+  });
+}
+
+fetch('partidos.json')
+.then(response => response.json())
+.then(partidos => {
+  partidosGlobal = partidos;
+  mostrarPartidos(partidosGlobal);
+
+  document.getElementById('buscador').addEventListener('input', function() {
+    const texto = this.value.toLowerCase();
+
+    const filtrados = partidosGlobal.filter(p =>
+      p.local.toLowerCase().includes(texto) ||
+      p.visitante.toLowerCase().includes(texto) ||
+      p.liga.toLowerCase().includes(texto) ||
+      p.pronostico.toLowerCase().includes(texto)
+    );
+
+    mostrarPartidos(filtrados);
   });
 })
 .catch(error => console.error('Error cargando partidos:', error));
