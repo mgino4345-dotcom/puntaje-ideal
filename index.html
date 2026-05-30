@@ -6,116 +6,94 @@
 <title>Puntaje Ideal</title>
 
 <style>
-  .logo-box{
-display:flex;
-align-items:center;
-gap:15px;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#eef3fb;color:#222}
 
-.logo-img{
-width:80px;
-height:auto;
-border-radius:10px;
+header{background:#0d47a1;color:white}
+.topbar{
+max-width:1200px;margin:auto;padding:12px;
+display:flex;align-items:center;gap:15px;flex-wrap:wrap
 }
+.logo-img{width:65px;border-radius:10px}
+.logo-title{font-size:28px;font-weight:900}
+.logo-sub{font-size:13px}
+.search{
+margin-left:auto;display:flex;background:white;border-radius:6px;overflow:hidden;
+border:1px solid #ddd
+}
+.search input{border:0;padding:10px;width:280px;outline:none}
+.search button{border:0;background:#ffc107;padding:10px 14px;font-weight:bold}
 
-@media(max-width:768px){
-.logo-img{
-width:60px;
-}
-}
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
-
-body{
-background:#f4f4f4;
-}
-
-header{
-background:#0d47a1;
-color:white;
-padding:15px;
-}
-
-.logo{
-font-size:32px;
-font-weight:bold;
-}
-
-.subtitulo{
-font-size:14px;
-}
-
-nav{
-background:#08306b;
-padding:10px;
-}
-
+nav{background:#07306c}
 nav ul{
-display:flex;
-list-style:none;
-gap:20px;
-flex-wrap:wrap;
+max-width:1200px;margin:auto;display:flex;list-style:none;overflow-x:auto
 }
-
 nav a{
-color:white;
-text-decoration:none;
-font-weight:bold;
+display:block;color:white;text-decoration:none;font-weight:bold;font-size:14px;
+padding:13px 16px
+}
+nav a:hover{background:#031d42}
+
+.leagues{
+background:white;border-bottom:1px solid #ddd
+}
+.leagues-inner{
+max-width:1200px;margin:auto;padding:10px;display:flex;gap:10px;overflow-x:auto
+}
+.league{
+white-space:nowrap;background:#eaf1ff;border:1px solid #c9d8ff;
+padding:7px 12px;border-radius:20px;font-size:13px;font-weight:bold;color:#0d47a1
 }
 
-.container{
-max-width:1200px;
-margin:auto;
-padding:20px;
+.container{max-width:1200px;margin:auto;padding:18px}
+
+.hero{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;
+margin-bottom:20px
+}
+.match-card{
+background:white;border-radius:10px;padding:15px;box-shadow:0 2px 8px #0001;
+border-left:5px solid #ffc107
+}
+.match-time{font-size:12px;font-weight:bold;color:#555}
+.match-league{font-size:12px;font-weight:bold;color:#0d47a1;margin:5px 0}
+.teams{font-size:15px;font-weight:bold;line-height:1.8}
+.prediction{
+margin-top:10px;background:#fff3cd;padding:8px;border-radius:6px;
+font-weight:bold;color:#7a5700
 }
 
 .card{
-background:white;
-padding:20px;
-border-radius:10px;
-margin-bottom:20px;
-box-shadow:0 2px 5px rgba(0,0,0,.1);
+background:white;border-radius:10px;padding:18px;margin-bottom:18px;
+box-shadow:0 2px 8px #0001
 }
+h2{color:#0d47a1;margin-bottom:15px}
 
-h2{
-margin-bottom:15px;
-color:#0d47a1;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-table th{
-background:#0d47a1;
-color:white;
-padding:10px;
-}
-
-table td{
-padding:10px;
-border-bottom:1px solid #ddd;
-text-align:center;
-}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:700px}
+th{background:#0d47a1;color:white;padding:11px;font-size:13px}
+td{padding:11px;border-bottom:1px solid #ddd;text-align:center;font-size:13px}
+tr:hover{background:#f5f8ff}
 
 .pick{
-background:#fff3cd;
-padding:10px;
-margin-bottom:10px;
-border-left:5px solid #ffc107;
+display:flex;justify-content:space-between;gap:10px;align-items:center;
+background:#fff7d6;border-left:5px solid #ffc107;padding:12px;margin-bottom:8px
+}
+.badge{
+background:#0d47a1;color:white;border-radius:20px;padding:5px 10px;font-size:12px;
+font-weight:bold
 }
 
 footer{
-background:#0d47a1;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:30px;
+background:#0d47a1;color:white;text-align:center;padding:20px;margin-top:30px
+}
+
+@media(max-width:768px){
+.logo-title{font-size:24px}
+.search{width:100%;margin-left:0}
+.search input{width:100%}
+nav a{font-size:12px;padding:11px 9px}
+.container{padding:14px}
 }
 </style>
 </head>
@@ -123,88 +101,141 @@ margin-top:30px;
 <body>
 
 <header>
-<div class="logo-box">
+  <div class="topbar">
     <img src="logo.png" alt="Puntaje Ideal" class="logo-img">
     <div>
-        <div class="logo">Puntaje Ideal</div>
-        <div class="subtitulo">
-            Partidos, estadísticas y pronósticos deportivos
-        </div>
+      <div class="logo-title">Puntaje Ideal</div>
+      <div class="logo-sub">Partidos, estadísticas y pronósticos deportivos</div>
     </div>
-</div>
-<div class="subtitulo">
-Partidos, estadísticas y pronósticos deportivos
-</div>
+
+    <div class="search">
+      <input type="text" placeholder="Buscar equipos, ligas o canales">
+      <button>Buscar</button>
+    </div>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Partidos de Hoy</a></li>
+      <li><a href="#">Pronósticos</a></li>
+      <li><a href="#">Resultados</a></li>
+      <li><a href="#">Canales TV</a></li>
+      <li><a href="#">Estadísticas</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+  </nav>
 </header>
 
-<nav>
-<ul>
-<li><a href="#">Inicio</a></li>
-<li><a href="#">Partidos de Hoy</a></li>
-<li><a href="#">Pronósticos</a></li>
-<li><a href="#">Resultados</a></li>
-<li><a href="#">Contacto</a></li>
-</ul>
-</nav>
+<section class="leagues">
+  <div class="leagues-inner">
+    <div class="league">🇵🇪 Liga 1</div>
+    <div class="league">🏆 Copa Libertadores</div>
+    <div class="league">🌎 Sudamericana</div>
+    <div class="league">🇪🇸 La Liga</div>
+    <div class="league">🏴 Premier League</div>
+    <div class="league">🇮🇹 Serie A</div>
+    <div class="league">🇩🇪 Bundesliga</div>
+    <div class="league">🇫🇷 Ligue 1</div>
+  </div>
+</section>
 
-<div class="container">
+<main class="container">
 
-<div class="card">
-<h2>Partidos de Hoy</h2>
+  <section class="hero">
+    <div class="match-card">
+      <div class="match-time">15:00</div>
+      <div class="match-league">Liga 1 Perú</div>
+      <div class="teams">Alianza Lima<br>vs<br>Universitario</div>
+      <div class="prediction">Pronóstico: Over 1.5</div>
+    </div>
 
-<table>
-<tr>
-<th>Hora</th>
-<th>Liga</th>
-<th>Partido</th>
-<th>Pronóstico</th>
-</tr>
+    <div class="match-card">
+      <div class="match-time">18:00</div>
+      <div class="match-league">Argentina</div>
+      <div class="teams">Boca Juniors<br>vs<br>Racing</div>
+      <div class="prediction">Pronóstico: Ambos marcan</div>
+    </div>
 
-<tr>
-<td>15:00</td>
-<td>Liga 1</td>
-<td>Alianza Lima vs Universitario</td>
-<td>Over 1.5</td>
-</tr>
+    <div class="match-card">
+      <div class="match-time">20:00</div>
+      <div class="match-league">Brasil</div>
+      <div class="teams">Flamengo<br>vs<br>Palmeiras</div>
+      <div class="prediction">Pronóstico: Over 2.5</div>
+    </div>
+  </section>
 
-<tr>
-<td>18:00</td>
-<td>Argentina</td>
-<td>Boca Juniors vs Racing</td>
-<td>Ambos Marcan</td>
-</tr>
+  <section class="card">
+    <h2>📺 Partidos de fútbol en vivo hoy</h2>
 
-<tr>
-<td>20:00</td>
-<td>Brasil</td>
-<td>Flamengo vs Palmeiras</td>
-<td>Over 2.5</td>
-</tr>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Hora</th>
+            <th>Liga</th>
+            <th>Partido</th>
+            <th>Canal</th>
+            <th>Pronóstico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>15:00</td>
+            <td>Liga 1</td>
+            <td>Alianza Lima vs Universitario</td>
+            <td>L1 MAX</td>
+            <td>Over 1.5</td>
+          </tr>
+          <tr>
+            <td>18:00</td>
+            <td>Argentina</td>
+            <td>Boca Juniors vs Racing</td>
+            <td>ESPN</td>
+            <td>Ambos marcan</td>
+          </tr>
+          <tr>
+            <td>20:00</td>
+            <td>Brasil</td>
+            <td>Flamengo vs Palmeiras</td>
+            <td>Star+</td>
+            <td>Over 2.5</td>
+          </tr>
+          <tr>
+            <td>21:30</td>
+            <td>MLS</td>
+            <td>Inter Miami vs Orlando City</td>
+            <td>Apple TV</td>
+            <td>Over 1.5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-</table>
-</div>
+  <section class="card">
+    <h2>🔥 Picks de Puntaje Ideal</h2>
 
-<div class="card">
-<h2>🔥 Picks del Día</h2>
+    <div class="pick">
+      <span>✅ Ticket seguro: Over 1.5 goles</span>
+      <span class="badge">Bajo riesgo</span>
+    </div>
 
-<div class="pick">
-✅ Over 1.5 goles
-</div>
+    <div class="pick">
+      <span>✅ Pick medio: Ambos equipos marcan</span>
+      <span class="badge">Medio</span>
+    </div>
 
-<div class="pick">
-✅ Ambos marcan
-</div>
+    <div class="pick">
+      <span>✅ Pick plus: Over 2.5 goles</span>
+      <span class="badge">Plus</span>
+    </div>
+  </section>
 
-<div class="pick">
-✅ Doble oportunidad
-</div>
-
-</div>
-
-</div>
+</main>
 
 <footer>
-© 2026 Puntaje Ideal - Todos los derechos reservados
+  © 2026 Puntaje Ideal - Todos los derechos reservados
 </footer>
 
 </body>
