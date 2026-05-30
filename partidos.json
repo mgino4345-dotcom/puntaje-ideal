@@ -1,0 +1,23 @@
+[
+  {
+    "hora": "15:00",
+    "liga": "Liga 1",
+    "local": "Alianza Lima",
+    "visitante": "Universitario",
+    "pronostico": "Over 1.5"
+  },
+  {
+    "hora": "18:00",
+    "liga": "Argentina",
+    "local": "Boca Juniors",
+    "visitante": "Racing Club",
+    "pronostico": "Ambos marcan"
+  },
+  {
+    "hora": "20:00",
+    "liga": "Brasil",
+    "local": "Flamengo",
+    "visitante": "Palmeiras",
+    "pronostico": "Over 2.5"
+  }
+]
