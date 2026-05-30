@@ -295,6 +295,17 @@ gap:6px;padding:11px 9px
 <footer>
   © 2026 Puntaje Ideal - Resultados, partidos y pronósticos deportivos
 </footer>
+<script>
 
+fetch('partidos.json')
+.then(response => response.json())
+.then(data => {
+    console.log('Partidos cargados:', data);
+})
+.catch(error => {
+    console.error('Error cargando JSON:', error);
+});
+
+</script>
 </body>
 </html>
