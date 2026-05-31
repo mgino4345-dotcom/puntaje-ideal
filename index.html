@@ -566,13 +566,33 @@ function cargarEstadisticasGenerales() {
     if (!contenedor) return;
 
     contenedor.innerHTML = `
-      <div class="tabla-posiciones">
+      <div class="tabla-flash">
+        <div class="tabla-header">
+          <span>#</span>
+          <span>Equipo</span>
+          <span>PJ</span>
+          <span>G</span>
+          <span>E</span>
+          <span>P</span>
+          <span>DG</span>
+          <span>PTS</span>
+        </div>
+
         ${tabla.map(equipo => `
           <div class="tabla-row">
-            <span>${equipo.position}</span>
-            <img src="${equipo.team.crest}" alt="${equipo.team.name}">
-            <strong>${equipo.team.name}</strong>
-            <span>Pts ${equipo.points}</span>
+            <span class="tabla-pos">${equipo.position}</span>
+
+            <div class="tabla-equipo">
+              <img src="${equipo.team.crest}" alt="${equipo.team.name}">
+              <strong>${equipo.team.name}</strong>
+            </div>
+
+            <span>${equipo.playedGames}</span>
+            <span>${equipo.won}</span>
+            <span>${equipo.draw}</span>
+            <span>${equipo.lost}</span>
+            <span>${equipo.goalDifference}</span>
+            <span class="tabla-puntos">${equipo.points}</span>
           </div>
         `).join("")}
       </div>
