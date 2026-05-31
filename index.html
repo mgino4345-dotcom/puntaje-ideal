@@ -321,13 +321,64 @@ fetch('partidos.json')
   partidosGlobal = partidos;
   mostrarPartidos(partidosGlobal);
 
+let partidosGlobal = [];
 let ligaSeleccionada = "TODOS";
+
+function mostrarPartidos(partidos) {
+  const contenedor = document.getElementById('partidos-json');
+  contenedor.innerHTML = '';
+
+  partidos.forEach(p => {
+    contenedor.innerHTML += `
+      <div class="match">
+        <div class="time">${p.hora}</div>
+
+        <div class="teams">
+          <div class="mini-league">${p.pais || ''} ${p.liga || ''}</div>
+
+          <div class="team">
+            <span class="team-name">
+              <img src="${p.escudoLocal}" class="team-logo" alt="${p.local}">
+              ${p.local}
+            </span>
+          </div>
+
+          <div class="team">
+            <span class="team-name">
+              <img src="${p.escudoVisitante}" class="team-logo" alt="${p.visitante}">
+              ${p.visitante}
+            </span>
+          </div>
+
+          <div class="prediction">Pronóstico: ${p.pronostico}</div>
+        </div>
+
+        <div class="score">
+          ${
+            p.golesLocal !== null && p.golesVisitante !== null
+            ? `${p.golesLocal}<br>${p.golesVisitante}`
+            : 'VS'
+          }
+        </div>
+
+        <div class="status ${
+          p.estado === 'LIVE' ? 'live' :
+          p.estado === 'FINAL' ? 'end' : 'next'
+        }">
+          ${
+            p.estado === 'LIVE' ? 'EN VIVO' :
+            p.estado === 'FINAL' ? 'FINAL' : 'PRÓXIMO'
+          }
+        </div>
+      </div>
+    `;
+  });
+}
 
 function aplicarFiltros() {
   const texto = document.getElementById('buscador').value.toLowerCase();
 
   const filtrados = partidosGlobal.filter(p => {
-
     const coincideTexto =
       p.local.toLowerCase().includes(texto) ||
       p.visitante.toLowerCase().includes(texto) ||
@@ -335,8 +386,7 @@ function aplicarFiltros() {
       p.pronostico.toLowerCase().includes(texto);
 
     const coincideLiga =
-      ligaSeleccionada === "TODOS" ||
-      p.liga === ligaSeleccionada;
+      ligaSeleccionada === "TODOS" || p.liga === ligaSeleccionada;
 
     return coincideTexto && coincideLiga;
   });
@@ -344,26 +394,27 @@ function aplicarFiltros() {
   mostrarPartidos(filtrados);
 }
 
-document.getElementById('buscador')
-  .addEventListener('input', aplicarFiltros);
+fetch('partidos.json')
+.then(response => response.json())
+.then(partidos => {
+  partidosGlobal = partidos;
+  mostrarPartidos(partidosGlobal);
 
-document.querySelectorAll('.filtro-liga')
-  .forEach(boton => {
+  document.getElementById('buscador')
+    .addEventListener('input', aplicarFiltros);
 
-    boton.addEventListener('click', function() {
+  document.querySelectorAll('.filtro-liga')
+    .forEach(boton => {
+      boton.addEventListener('click', function() {
+        document.querySelectorAll('.filtro-liga')
+          .forEach(b => b.classList.remove('active'));
 
-      document.querySelectorAll('.filtro-liga')
-        .forEach(b => b.classList.remove('active'));
-
-      this.classList.add('active');
-
-      ligaSeleccionada = this.dataset.liga;
-
-      aplicarFiltros();
-
+        this.classList.add('active');
+        ligaSeleccionada = this.dataset.liga;
+        aplicarFiltros();
+      });
     });
-
-});
+})
 .catch(error => console.error('Error cargando partidos:', error));
  fetch('historial.json')
 .then(response => response.json())
