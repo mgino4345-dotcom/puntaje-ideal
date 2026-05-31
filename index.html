@@ -287,7 +287,6 @@ function mostrarPartidos(partidos) {
     contenedor.innerHTML += `
       <div class="match">
         <div class="time">${p.hora}</div>
-
         <div class="teams">
           <div class="mini-league">${p.pais || ''} ${p.liga || ''}</div>
 
@@ -349,65 +348,7 @@ function aplicarFiltros() {
   mostrarPartidos(filtrados);
 }
 
-async function cargarPartidosAPI() {
-  const response = await fetch(
-    "https://puntaje-api.mgino4345.workers.dev/partidos?competencia=BSA"
-  );
-
-  const data = await response.json();
-
-  partidosGlobal = data.matches.map(p => ({
-    hora: new Date(p.utcDate).toLocaleTimeString('es-PE', {
-      hour: '2-digit',
-      minute: '2-digit'
-    }),
-
-    pais: p.area.code,
-    liga: p.competition.name,
-
-    local: p.homeTeam.name,
-    visitante: p.awayTeam.name,
-
-    escudoLocal: p.homeTeam.crest,
-    escudoVisitante: p.awayTeam.crest,
-
-    golesLocal: p.score.fullTime.home,
-    golesVisitante: p.score.fullTime.away,
-
-    estado:
-      p.status === "FINISHED" ? "FINAL" :
-      p.status === "IN_PLAY" || p.status === "PAUSED" ? "LIVE" :
-      "PROXIMO",
-
-    pronostico: "Pendiente"
-  }));
-
-  mostrarPartidos(partidosGlobal);
-  actualizarContadoresLiga();
-}
-
-cargarPartidosAPI();
-
-  document.getElementById('buscador')
-    .addEventListener('input', aplicarFiltros);
-
-  document.querySelectorAll('.filtro-liga')
-    .forEach(boton => {
-
-      boton.addEventListener('click', function() {
-
-        document.querySelectorAll('.filtro-liga')
-          .forEach(b => b.classList.remove('active'));
-
-        this.classList.add('active');
-
-        ligaSeleccionada = this.dataset.liga;
-
-        aplicarFiltros();
-      });
-
-    });
- function actualizarContadoresLiga() {
+function actualizarContadoresLiga() {
   const botones = document.querySelectorAll('.filtro-liga');
 
   botones.forEach(boton => {
@@ -426,10 +367,62 @@ cargarPartidosAPI();
 
     boton.textContent = `${boton.dataset.nombre} (${cantidad})`;
   });
-})
-.catch(error => console.error(error));
+}
 
-  
+async function cargarPartidosAPI() {
+  try {
+    const response = await fetch(
+      "https://puntaje-api.mgino4345.workers.dev/partidos?competencia=BSA"
+    );
+
+    const data = await response.json();
+
+    partidosGlobal = data.matches.map(p => ({
+      hora: new Date(p.utcDate).toLocaleTimeString('es-PE', {
+        hour: '2-digit',
+        minute: '2-digit'
+      }),
+      pais: p.area.code,
+      liga: p.competition.name,
+      local: p.homeTeam.name,
+      visitante: p.awayTeam.name,
+      escudoLocal: p.homeTeam.crest,
+      escudoVisitante: p.awayTeam.crest,
+      golesLocal: p.score.fullTime.home,
+      golesVisitante: p.score.fullTime.away,
+      estado:
+        p.status === "FINISHED" ? "FINAL" :
+        p.status === "IN_PLAY" || p.status === "PAUSED" ? "LIVE" :
+        "PROXIMO",
+      pronostico: "Pendiente"
+    }));
+
+    mostrarPartidos(partidosGlobal);
+    actualizarContadoresLiga();
+
+  } catch (error) {
+    console.error("Error cargando API:", error);
+  }
+}
+
+document.getElementById('buscador')
+  .addEventListener('input', aplicarFiltros);
+
+document.querySelectorAll('.filtro-liga')
+  .forEach(boton => {
+    boton.addEventListener('click', function() {
+      document.querySelectorAll('.filtro-liga')
+        .forEach(b => b.classList.remove('active'));
+
+      this.classList.add('active');
+      ligaSeleccionada = this.dataset.liga;
+
+      aplicarFiltros();
+    });
+  });
+
+cargarPartidosAPI();
+
 fetch('historial.json')
 .then(response => response.json())
 .then(historial => {
@@ -447,12 +440,10 @@ fetch('historial.json')
         <strong>✅ Ganados</strong><br>
         <span style="font-size:24px;color:#22c55e">${ganados}</span>
       </div>
-
       <div style="background:#111827;padding:15px;border-radius:10px">
         <strong>❌ Perdidos</strong><br>
         <span style="font-size:24px;color:#ef4444">${perdidos}</span>
       </div>
-
       <div style="background:#111827;padding:15px;border-radius:10px">
         <strong>🎯 Efectividad</strong><br>
         <span style="font-size:24px;color:#facc15">${efectividad}%</span>
@@ -468,19 +459,11 @@ fetch('historial.json')
     contenedor.innerHTML += `
       <div class="match">
         <div class="time">${item.fecha}</div>
-
         <div class="teams">
-          <div class="team">
-            <span>${item.partido}</span>
-          </div>
-
-          <div class="prediction">
-            Pick: ${item.pick}
-          </div>
+          <div class="team"><span>${item.partido}</span></div>
+          <div class="prediction">Pick: ${item.pick}</div>
         </div>
-
         <div class="score">-</div>
-
         <div class="status" style="background:${color};color:white;">
           ${item.resultado}
         </div>
@@ -495,7 +478,6 @@ fetch('bankroll.json')
   const actual = bankroll.actual;
   const objetivo1 = bankroll.objetivo1;
   const objetivo2 = bankroll.objetivo2;
-
   const progreso = Math.min((actual / objetivo2) * 100, 100).toFixed(0);
 
   let metaActual;
@@ -521,15 +503,12 @@ fetch('bankroll.json')
       <p><strong>Bankroll actual:</strong> S/ ${actual.toFixed(2)}</p>
       <p><strong>Objetivo 1:</strong> S/ ${objetivo1.toFixed(2)}</p>
       <p><strong>Objetivo final:</strong> S/ ${objetivo2.toFixed(2)}</p>
-
       <div style="margin:16px 0;color:#facc15;font-weight:bold">
         🚀 Objetivo actual: convertir S/${actual.toFixed(2)} → S/${metaActual.toFixed(2)}
       </div>
-
       <div style="margin-bottom:14px;color:#38bdf8;font-weight:bold">
         ${mensajeNivel}
       </div>
-
       <div style="background:#374151;border-radius:20px;overflow:hidden;margin-top:12px">
         <div style="width:${progreso}%;background:#16a34a;padding:8px;text-align:center;font-weight:bold">
           ${progreso}%
@@ -550,7 +529,6 @@ Promise.all([
   const efectividad = total > 0 ? ((ganados / total) * 100).toFixed(1) : 0;
 
   const mercados = {};
-
   historial.forEach(item => {
     mercados[item.pick] = (mercados[item.pick] || 0) + 1;
   });
@@ -565,27 +543,22 @@ Promise.all([
         <strong>📋 Picks totales</strong><br>
         <span style="font-size:24px;color:#38bdf8">${total}</span>
       </div>
-
       <div style="background:#111827;padding:15px;border-radius:10px">
         <strong>✅ Ganados</strong><br>
         <span style="font-size:24px;color:#22c55e">${ganados}</span>
       </div>
-
       <div style="background:#111827;padding:15px;border-radius:10px">
         <strong>❌ Perdidos</strong><br>
         <span style="font-size:24px;color:#ef4444">${perdidos}</span>
       </div>
-
       <div style="background:#111827;padding:15px;border-radius:10px">
         <strong>🎯 Efectividad</strong><br>
         <span style="font-size:24px;color:#facc15">${efectividad}%</span>
       </div>
-
       <div style="background:#111827;padding:15px;border-radius:10px">
         <strong>⚽ Mejor mercado</strong><br>
         <span style="font-size:20px;color:#facc15">${mejorMercado}</span>
       </div>
-
       <div style="background:#111827;padding:15px;border-radius:10px">
         <strong>💰 Bankroll actual</strong><br>
         <span style="font-size:24px;color:#22c55e">S/ ${bankroll.actual.toFixed(2)}</span>
