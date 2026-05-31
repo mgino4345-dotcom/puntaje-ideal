@@ -14,7 +14,7 @@ body{
 }
 
 .container{
-  max-width:800px;
+  max-width:900px;
   margin:auto;
   background:#181c23;
   padding:20px;
@@ -27,6 +27,7 @@ input,select,button,textarea{
   margin:8px 0;
   border-radius:8px;
   border:0;
+  box-sizing:border-box;
 }
 
 button{
@@ -36,8 +37,16 @@ button{
   cursor:pointer;
 }
 
+button.api{
+  background:#16a34a;
+}
+
+button.clean{
+  background:#374151;
+}
+
 textarea{
-  height:260px;
+  height:280px;
   background:#111827;
   color:#facc15;
 }
@@ -56,8 +65,28 @@ a{
   gap:10px;
 }
 
+.preview{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:10px 0;
+}
+
+.preview-card{
+  background:#111827;
+  border-radius:10px;
+  padding:12px;
+  text-align:center;
+}
+
+.preview-card img{
+  max-width:80px;
+  height:80px;
+  object-fit:contain;
+}
+
 @media(max-width:700px){
-  .grid{
+  .grid,.preview{
     grid-template-columns:1fr;
   }
 }
@@ -77,16 +106,34 @@ a{
 </div>
 
 <div class="grid">
+  <input id="pais" placeholder="País/Bandera: 🇵🇪">
+  <input id="canal" placeholder="Canal TV: ESPN, L1 MAX, Disney+">
+</div>
+
+<div class="grid">
   <input id="local" placeholder="Equipo local">
   <input id="visitante" placeholder="Equipo visitante">
-  <button type="button" onclick="buscarEscudosAPI()">
+</div>
+
+<button type="button" class="api" onclick="buscarEscudosAPI()">
   🔍 Buscar escudos con API
 </button>
-</div>
 
 <div class="grid">
   <input id="escudoLocal" placeholder="Escudo local: escudos/alianzalima.png">
   <input id="escudoVisitante" placeholder="Escudo visitante: escudos/universitario.png">
+</div>
+
+<div class="preview">
+  <div class="preview-card">
+    <strong>Escudo local</strong><br>
+    <img id="previewLocal" src="" alt="">
+  </div>
+
+  <div class="preview-card">
+    <strong>Escudo visitante</strong><br>
+    <img id="previewVisitante" src="" alt="">
+  </div>
 </div>
 
 <div class="grid">
@@ -94,7 +141,6 @@ a{
   <input id="golesVisitante" type="number" placeholder="Goles visitante">
 </div>
 
-<input id="canal" placeholder="Canal TV: ESPN, L1 MAX, Disney+">
 <input id="pronostico" placeholder="Pronóstico: Over 1.5">
 
 <select id="estado">
@@ -105,7 +151,7 @@ a{
 
 <button onclick="generarJSON()">Generar JSON</button>
 <button onclick="copiarJSON()">Copiar JSON</button>
-<button onclick="limpiar()">Limpiar formulario</button>
+<button class="clean" onclick="limpiar()">Limpiar formulario</button>
 
 <textarea id="resultado" readonly></textarea>
 
@@ -113,7 +159,6 @@ a{
 
 </div>
 
-  
 <script>
 function valorONull(id){
   const valor = document.getElementById(id).value;
@@ -126,7 +171,6 @@ function valorONull(id){
 }
 
 function generarJSON(){
-
   const estado = document.getElementById("estado").value;
 
   let golesLocal = valorONull("golesLocal");
@@ -139,6 +183,7 @@ function generarJSON(){
 
   const partido = {
     hora: document.getElementById("hora").value,
+    pais: document.getElementById("pais").value,
     liga: document.getElementById("liga").value,
     local: document.getElementById("local").value,
     visitante: document.getElementById("visitante").value,
@@ -166,49 +211,43 @@ function limpiar(){
   document.querySelectorAll("input").forEach(input => input.value = "");
   document.getElementById("estado").value = "PROXIMO";
   document.getElementById("resultado").value = "";
-}
-  function buscarEscudosAPI() {
-  const local = document.getElementById("local").value;
-  const visitante = document.getElementById("visitante").value;
-
-  buscarEscudoEquipo(local, "escudoLocal");
-  buscarEscudoEquipo(visitante, "escudoVisitante");
+  document.getElementById("previewLocal").src = "";
+  document.getElementById("previewVisitante").src = "";
 }
 
-function buscarEscudosAPI() {
+function buscarEscudosAPI(){
+  const local = document.getElementById("local").value.trim();
+  const visitante = document.getElementById("visitante").value.trim();
 
-  const local = document.getElementById("local").value;
-  const visitante = document.getElementById("visitante").value;
+  if(!local || !visitante){
+    alert("Escribe primero el equipo local y visitante");
+    return;
+  }
 
-  buscarEscudoEquipo(local, "escudoLocal");
-  buscarEscudoEquipo(visitante, "escudoVisitante");
+  buscarEscudoEquipo(local, "escudoLocal", "previewLocal");
+  buscarEscudoEquipo(visitante, "escudoVisitante", "previewVisitante");
 }
 
-function buscarEscudoEquipo(nombreEquipo, campoDestino) {
-
+function buscarEscudoEquipo(nombreEquipo, campoDestino, previewDestino){
   const equipo = encodeURIComponent(nombreEquipo);
+  const url = `https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=${equipo}`;
 
-  fetch(`https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=${equipo}`)
+  fetch(url)
     .then(response => response.json())
     .then(data => {
+      if(data.teams && data.teams.length > 0){
+        const escudo = data.teams[0].strBadge;
 
-      if (data.teams && data.teams.length > 0) {
-
-        document.getElementById(campoDestino).value =
-          data.teams[0].strBadge;
-
+        document.getElementById(campoDestino).value = escudo;
+        document.getElementById(previewDestino).src = escudo;
       } else {
-
-        alert(`No se encontró: ${nombreEquipo}`);
-
+        alert(`No se encontró escudo para: ${nombreEquipo}`);
       }
-
     })
     .catch(error => {
       console.error(error);
-      alert("Error consultando API");
+      alert("Error consultando TheSportsDB");
     });
-
 }
 </script>
 
