@@ -286,10 +286,6 @@ function mostrarPartidos(partidos) {
   partidos.forEach(p => {
     contenedor.innerHTML += `
       <div class="match">
-       <div class="time">
-  📅 ${p.fecha}<br>
-  🕒 ${p.hora}
-</div>
         <div class="teams">
           <div class="mini-league">${p.pais || ''} ${p.liga || ''}</div>
 
