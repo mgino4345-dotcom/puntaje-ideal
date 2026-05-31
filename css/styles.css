@@ -476,4 +476,12 @@ footer{
     font-size:22px;
     line-height:1.4;
   }
+
+  .scoreline-time{
+  color:#64748b;
+  font-weight:700;
+  font-size:14px;
+  text-align:center;
+}
+  
 }
