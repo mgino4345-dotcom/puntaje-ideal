@@ -492,4 +492,40 @@ footer{
   color:#ffb300;
   font-weight:700;
 }
+  //TABLA DE POSICIONES//
+  #selectorTabla{
+  background:#111827;
+  color:#facc15;
+  border:1px solid #374151;
+  border-radius:8px;
+  padding:6px;
+  font-weight:bold;
+}
+
+.tabla-posiciones{
+  padding:10px;
+}
+
+.tabla-row{
+  display:grid;
+  grid-template-columns:35px 30px 1fr 70px;
+  align-items:center;
+  gap:10px;
+  background:#111827;
+  border-bottom:1px solid #2a303a;
+  padding:10px;
+  color:white;
+}
+
+.tabla-row img{
+  width:24px;
+  height:24px;
+  object-fit:contain;
+}
+
+.tabla-row span:last-child{
+  color:#facc15;
+  font-weight:900;
+  text-align:right;
+}
 }
