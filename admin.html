@@ -4,53 +4,147 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin - Puntaje Ideal</title>
+
 <style>
-body{font-family:Arial;background:#0f1115;color:white;padding:20px}
-.container{max-width:700px;margin:auto;background:#181c23;padding:20px;border-radius:12px}
-input,select,button,textarea{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:0}
-button{background:#0d47a1;color:white;font-weight:bold;cursor:pointer}
-textarea{height:220px;background:#111827;color:#facc15}
-h1{color:#facc15}
-a{color:#facc15}
+body{
+  font-family:Arial;
+  background:#0f1115;
+  color:white;
+  padding:20px;
+}
+
+.container{
+  max-width:800px;
+  margin:auto;
+  background:#181c23;
+  padding:20px;
+  border-radius:12px;
+}
+
+input,select,button,textarea{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:8px;
+  border:0;
+}
+
+button{
+  background:#0d47a1;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+textarea{
+  height:260px;
+  background:#111827;
+  color:#facc15;
+}
+
+h1{
+  color:#facc15;
+}
+
+a{
+  color:#facc15;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+@media(max-width:700px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
+
 <body>
 
 <div class="container">
-<h1>Panel Admin - Puntaje Ideal</h1>
-<p>Generador de partidos para partidos.json</p>
 
-<input id="hora" placeholder="Hora: 15:00">
-<input id="liga" placeholder="Liga: Liga 1">
-<input id="local" placeholder="Equipo local">
-<input id="visitante" placeholder="Equipo visitante">
-<input id="canal" placeholder="Canal TV">
+<h1>Panel Admin - Puntaje Ideal</h1>
+<p>Generador completo para partidos.json</p>
+
+<div class="grid">
+  <input id="hora" placeholder="Hora: 15:00">
+  <input id="liga" placeholder="Liga: Liga 1">
+</div>
+
+<div class="grid">
+  <input id="local" placeholder="Equipo local">
+  <input id="visitante" placeholder="Equipo visitante">
+</div>
+
+<div class="grid">
+  <input id="escudoLocal" placeholder="Escudo local: escudos/alianzalima.png">
+  <input id="escudoVisitante" placeholder="Escudo visitante: escudos/universitario.png">
+</div>
+
+<div class="grid">
+  <input id="golesLocal" type="number" placeholder="Goles local">
+  <input id="golesVisitante" type="number" placeholder="Goles visitante">
+</div>
+
+<input id="canal" placeholder="Canal TV: ESPN, L1 MAX, Disney+">
 <input id="pronostico" placeholder="Pronóstico: Over 1.5">
 
 <select id="estado">
-<option value="PROXIMO">PROXIMO</option>
-<option value="EN VIVO">EN VIVO</option>
-<option value="FINAL">FINAL</option>
+  <option value="PROXIMO">PROXIMO</option>
+  <option value="LIVE">LIVE</option>
+  <option value="FINAL">FINAL</option>
 </select>
 
 <button onclick="generarJSON()">Generar JSON</button>
 <button onclick="copiarJSON()">Copiar JSON</button>
+<button onclick="limpiar()">Limpiar formulario</button>
 
 <textarea id="resultado" readonly></textarea>
 
 <p><a href="index.html">Volver a la web</a></p>
+
 </div>
 
 <script>
+function valorONull(id){
+  const valor = document.getElementById(id).value;
+
+  if(valor === ""){
+    return null;
+  }
+
+  return Number(valor);
+}
+
 function generarJSON(){
+
+  const estado = document.getElementById("estado").value;
+
+  let golesLocal = valorONull("golesLocal");
+  let golesVisitante = valorONull("golesVisitante");
+
+  if(estado === "PROXIMO"){
+    golesLocal = null;
+    golesVisitante = null;
+  }
+
   const partido = {
     hora: document.getElementById("hora").value,
     liga: document.getElementById("liga").value,
     local: document.getElementById("local").value,
     visitante: document.getElementById("visitante").value,
+    escudoLocal: document.getElementById("escudoLocal").value,
+    escudoVisitante: document.getElementById("escudoVisitante").value,
+    golesLocal: golesLocal,
+    golesVisitante: golesVisitante,
+    estado: estado,
     canal: document.getElementById("canal").value,
-    pronostico: document.getElementById("pronostico").value,
-    estado: document.getElementById("estado").value
+    pronostico: document.getElementById("pronostico").value
   };
 
   document.getElementById("resultado").value =
@@ -62,6 +156,12 @@ function copiarJSON(){
   texto.select();
   document.execCommand("copy");
   alert("JSON copiado");
+}
+
+function limpiar(){
+  document.querySelectorAll("input").forEach(input => input.value = "");
+  document.getElementById("estado").value = "PROXIMO";
+  document.getElementById("resultado").value = "";
 }
 </script>
 
