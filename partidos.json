@@ -13,8 +13,8 @@
     "liga": "Argentina",
     "local": "Boca Juniors",
     "visitante": "Racing Club",
-    "escudoLocal": "boca.png",
-    "escudoVisitante": "racing.png",
+    "escudoLocal": "escudos/boca.png",
+    "escudoVisitante": "escudos/racing.png",
     "pronostico": "Ambos marcan"
   },
   {
@@ -22,8 +22,8 @@
     "liga": "Brasil",
     "local": "Flamengo",
     "visitante": "Palmeiras",
-    "escudoLocal": "flamengo.png",
-    "escudoVisitante": "palmeiras.png",
+    "escudoLocal": "escudos/flamengo.png",
+    "escudoVisitante": "escudos/palmeiras.png",
     "pronostico": "Over 2.5"
   }
 ]
