@@ -6,8 +6,8 @@
   "visitante": "Universitario",
   "escudoLocal": "escudos/alianzalima.png",
   "escudoVisitante": "escudos/universitario.png",
-  "golesLocal": null,
-  "golesVisitante": null,
+  "golesLocal": 2,
+  "golesVisitante": 1,
   "estado": "PROXIMO",
   "pronostico": "Over 1.5"
 },
