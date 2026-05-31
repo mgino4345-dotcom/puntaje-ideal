@@ -1,6 +1,7 @@
 [
   {
     "hora": "15:00",
+    "pais": "🇵🇪",
     "liga": "Liga 1",
     "local": "Alianza Lima",
     "visitante": "Universitario",
@@ -13,7 +14,8 @@
   },
   {
     "hora": "18:00",
-    "liga": "Argentina",
+    "pais": "🇦🇷",
+    "liga": "Primera División",
     "local": "Boca Juniors",
     "visitante": "Racing Club",
     "escudoLocal": "escudos/boca.png",
@@ -25,7 +27,8 @@
   },
   {
     "hora": "20:00",
-    "liga": "Brasil",
+    "pais": "🇧🇷",
+    "liga": "Serie A",
     "local": "Flamengo",
     "visitante": "Palmeiras",
     "escudoLocal": "escudos/flamengo.png",
