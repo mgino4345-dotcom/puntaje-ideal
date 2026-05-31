@@ -381,6 +381,28 @@ fetch('partidos.json')
     });
 
 })
+
+  function actualizarContadoresLiga() {
+  const botones = document.querySelectorAll('.filtro-liga');
+
+  botones.forEach(boton => {
+    const liga = boton.dataset.liga;
+    let cantidad = 0;
+
+    if (liga === "TODOS") {
+      cantidad = partidosGlobal.length;
+    } else {
+      cantidad = partidosGlobal.filter(p => p.liga === liga).length;
+    }
+
+    if (!boton.dataset.nombre) {
+      boton.dataset.nombre = boton.textContent.replace(/\s\(\d+\)$/, '');
+    }
+
+    boton.textContent = `${boton.dataset.nombre} (${cantidad})`;
+  });
+}
+  
 .catch(error => console.error(error));
 fetch('historial.json')
 .then(response => response.json())
