@@ -242,24 +242,27 @@ function aplicarFiltros() {
   mostrarPartidos(filtrados);
 }
 
-function actualizarContadoresLiga() {
-  const botones = document.querySelectorAll(".filtro-liga");
+function actualizarContadoresEstado() {
+  const total = partidosGlobal.length;
+  const live = partidosGlobal.filter(p => p.estado === "LIVE").length;
+  const finalizados = partidosGlobal.filter(p => p.estado === "FINAL").length;
+  const proximos = partidosGlobal.filter(p => p.estado === "PROXIMO").length;
 
-  botones.forEach(boton => {
-    const liga = boton.dataset.liga;
+  document.querySelectorAll(".tab-estado").forEach(tab => {
+    const estado = tab.dataset.estado;
+
     let cantidad = 0;
 
-    if (liga === "TODOS") {
-      cantidad = partidosGlobal.length;
-    } else {
-      cantidad = partidosGlobal.filter(p => p.liga === liga).length;
+    if (estado === "TODOS") cantidad = total;
+    if (estado === "LIVE") cantidad = live;
+    if (estado === "FINAL") cantidad = finalizados;
+    if (estado === "PROXIMO") cantidad = proximos;
+
+    if (!tab.dataset.nombre) {
+      tab.dataset.nombre = tab.textContent.replace(/\s\(\d+\)$/, "");
     }
 
-    if (!boton.dataset.nombre) {
-      boton.dataset.nombre = boton.textContent.replace(/\s\(\d+\)$/, "");
-    }
-
-    boton.textContent = `${boton.dataset.nombre} (${cantidad})`;
+    tab.textContent = `${tab.dataset.nombre} (${cantidad})`;
   });
 }
 
@@ -328,6 +331,7 @@ const response = await fetch(`https://puntaje-api.mgino4345.workers.dev/partidos
 
     mostrarPartidos(partidosGlobal);
     actualizarContadoresLiga();
+    actualizarContadoresEstado();
 
   } catch (error) {
     console.error("Error cargando API:", error);
