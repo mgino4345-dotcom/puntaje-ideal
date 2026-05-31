@@ -383,35 +383,178 @@ color:#9ca3af;
   © 2026 Puntaje Ideal - Resultados, partidos y pronósticos deportivos
 </footer>
 <script>
+let partidosGlobal = [];
+let ligaSeleccionada = "TODOS";
+
+function mostrarPartidos(partidos) {
+  const contenedor = document.getElementById("partidos-json");
+  contenedor.innerHTML = "";
+
+  if (partidos.length === 0) {
+    contenedor.innerHTML = `
+      <div class="sin-partidos">
+        ⚽ No hay partidos programados hoy para esta competición
+      </div>
+    `;
+    return;
+  }
+
+  const grupos = {};
+
+  partidos.forEach(p => {
+    const liga = `${p.pais || ""} ${p.liga || "Sin liga"}`;
+
+    if (!grupos[liga]) {
+      grupos[liga] = [];
+    }
+
+    grupos[liga].push(p);
+  });
+
+  Object.keys(grupos).forEach(liga => {
+    contenedor.innerHTML += `
+      <div class="flash-league">
+        <span>${liga}</span>
+        <span>Tabla En Directo ⌃</span>
+      </div>
+    `;
+
+    grupos[liga].forEach(p => {
+      const textoTiempo =
+        p.estado === "LIVE" ? "EN VIVO" :
+        p.estado === "FINAL" ? "Finalizado" :
+        `${p.fecha}<br>${p.hora}`;
+
+      const claseTiempo = p.estado === "LIVE" ? "live-text" : "";
+
+      const marcador =
+        p.golesLocal !== null && p.golesVisitante !== null
+          ? `${p.golesLocal}<br>${p.golesVisitante}`
+          : "-<br>-";
+
+      const estadoTexto =
+        p.estado === "LIVE" ? "LIVE" :
+        p.estado === "FINAL" ? "" :
+        "PRÓXIMO";
+
+      contenedor.innerHTML += `
+        <div class="flash-match">
+          <div class="flash-time ${claseTiempo}">
+            ${textoTiempo}
+          </div>
+
+          <div class="flash-teams">
+            <div class="flash-team">
+              <img src="${p.escudoLocal}" alt="${p.local}">
+              <span>${p.local}</span>
+            </div>
+
+            <div class="flash-team">
+              <img src="${p.escudoVisitante}" alt="${p.visitante}">
+              <span>${p.visitante}</span>
+            </div>
+
+            <div class="prediction">Pronóstico: ${p.pronostico}</div>
+          </div>
+
+          <div class="flash-score">
+            ${marcador}
+          </div>
+
+          <div class="flash-status ${
+            p.estado === "LIVE" ? "live" :
+            p.estado === "FINAL" ? "end" : "next"
+          }">
+            ${estadoTexto}
+          </div>
+        </div>
+      `;
+    });
+  });
+}
+
+function aplicarFiltros() {
+  const texto = document.getElementById("buscador").value.toLowerCase();
+
+  const filtrados = partidosGlobal.filter(p => {
+    const coincideTexto =
+      p.local.toLowerCase().includes(texto) ||
+      p.visitante.toLowerCase().includes(texto) ||
+      p.liga.toLowerCase().includes(texto) ||
+      p.pronostico.toLowerCase().includes(texto);
+
+    const coincideLiga =
+      ligaSeleccionada === "TODOS" || p.liga === ligaSeleccionada;
+
+    return coincideTexto && coincideLiga;
+  });
+
+  mostrarPartidos(filtrados);
+}
+
+function actualizarContadoresLiga() {
+  const botones = document.querySelectorAll(".filtro-liga");
+
+  botones.forEach(boton => {
+    const liga = boton.dataset.liga;
+    let cantidad = 0;
+
+    if (liga === "TODOS") {
+      cantidad = partidosGlobal.length;
+    } else {
+      cantidad = partidosGlobal.filter(p => p.liga === liga).length;
+    }
+
+    if (!boton.dataset.nombre) {
+      boton.dataset.nombre = boton.textContent.replace(/\s\(\d+\)$/, "");
+    }
+
+    boton.textContent = `${boton.dataset.nombre} (${cantidad})`;
+  });
+}
+
 async function cargarPartidosAPI() {
   try {
     const response = await fetch("https://puntaje-api.mgino4345.workers.dev/partidos");
     const data = await response.json();
 
-    partidosGlobal = data.matches.map(p => ({
-      fecha: new Date(p.utcDate).toLocaleDateString("es-PE", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-      }),
-      hora: new Date(p.utcDate).toLocaleTimeString("es-PE", {
-        hour: "2-digit",
-        minute: "2-digit"
-      }),
-      pais: p.area.code,
-      liga: p.competition.name,
-      local: p.homeTeam.name,
-      visitante: p.awayTeam.name,
-      escudoLocal: p.homeTeam.crest,
-      escudoVisitante: p.awayTeam.crest,
-      golesLocal: p.score.fullTime.home,
-      golesVisitante: p.score.fullTime.away,
-      estado:
-        p.status === "FINISHED" ? "FINAL" :
-        p.status === "IN_PLAY" || p.status === "PAUSED" ? "LIVE" :
-        "PROXIMO",
-      pronostico: "Pendiente"
-    }));
+    const listaPartidos = data.matches || data.partidos || [];
+
+    partidosGlobal = listaPartidos.map(p => {
+      const estadoAPI = p.status || p.estado || "";
+
+      return {
+        fecha: new Date(p.utcDate).toLocaleDateString("es-PE", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric"
+        }),
+
+        hora: new Date(p.utcDate).toLocaleTimeString("es-PE", {
+          hour: "2-digit",
+          minute: "2-digit"
+        }),
+
+        pais: p.area?.code || p["área"]?.codigo || "",
+        liga: p.competition?.name || p["competencia"]?.nombre || "",
+
+        local: p.homeTeam?.name || p["equipo local"]?.nombre || "",
+        visitante: p.awayTeam?.name || p["equipo visitante"]?.nombre || "",
+
+        escudoLocal: p.homeTeam?.crest || p["equipo local"]?.crest || "",
+        escudoVisitante: p.awayTeam?.crest || p["equipo visitante"]?.crest || "",
+
+        golesLocal: p.score?.fullTime?.home ?? p["puntaje"]?.fullTime?.home ?? null,
+        golesVisitante: p.score?.fullTime?.away ?? p["puntaje"]?.fullTime?.away ?? null,
+
+        estado:
+          estadoAPI === "FINISHED" || estadoAPI === "TERMINADO" ? "FINAL" :
+          estadoAPI === "IN_PLAY" || estadoAPI === "PAUSED" ? "LIVE" :
+          "PROXIMO",
+
+        pronostico: "Pendiente"
+      };
+    });
 
     mostrarPartidos(partidosGlobal);
     actualizarContadoresLiga();
@@ -420,6 +563,20 @@ async function cargarPartidosAPI() {
     console.error("Error cargando API:", error);
   }
 }
+
+document.getElementById("buscador").addEventListener("input", aplicarFiltros);
+
+document.querySelectorAll(".filtro-liga").forEach(boton => {
+  boton.addEventListener("click", function() {
+    document.querySelectorAll(".filtro-liga")
+      .forEach(b => b.classList.remove("active"));
+
+    this.classList.add("active");
+    ligaSeleccionada = this.dataset.liga;
+
+    aplicarFiltros();
+  });
+});
 
 cargarPartidosAPI();
 
