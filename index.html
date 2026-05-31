@@ -553,7 +553,7 @@ function cargarEstadisticasGenerales() {
   });
 }
 //-- TABLA DE POSICIONES--//
-   async function cargarTablaPosiciones(competencia = "BSA") {
+  async function cargarTablaPosiciones(competencia = "BSA") {
   try {
     const response = await fetch(
       `https://puntaje-api.mgino4345.workers.dev/tabla?competencia=${competencia}`
@@ -568,36 +568,35 @@ function cargarEstadisticasGenerales() {
     contenedor.innerHTML = `
       <div class="tabla-flash">
         <div class="tabla-header">
-          <span>#</span>
-          <span>Equipo</span>
-          <span>PJ</span>
-          <span>G</span>
-          <span>E</span>
-          <span>P</span>
-          <span>DG</span>
-          <span>PTS</span>
+          <div>#</div>
+          <div>Equipo</div>
+          <div>PJ</div>
+          <div>G</div>
+          <div>E</div>
+          <div>P</div>
+          <div>DG</div>
+          <div>PTS</div>
         </div>
 
         ${tabla.map(equipo => `
           <div class="tabla-row">
-            <span class="tabla-pos">${equipo.position}</span>
+            <div class="tabla-pos">${equipo.position}</div>
 
             <div class="tabla-equipo">
               <img src="${equipo.team.crest}" alt="${equipo.team.name}">
               <strong>${equipo.team.name}</strong>
             </div>
 
-            <span>${equipo.playedGames}</span>
-            <span>${equipo.won}</span>
-            <span>${equipo.draw}</span>
-            <span>${equipo.lost}</span>
-            <span>${equipo.goalDifference}</span>
-            <span class="tabla-puntos">${equipo.points}</span>
+            <div>${equipo.playedGames}</div>
+            <div>${equipo.won}</div>
+            <div>${equipo.draw}</div>
+            <div>${equipo.lost}</div>
+            <div>${equipo.goalDifference}</div>
+            <div class="tabla-puntos">${equipo.points}</div>
           </div>
         `).join("")}
       </div>
     `;
-
   } catch (error) {
     console.error("Error cargando tabla:", error);
   }
