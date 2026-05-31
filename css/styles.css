@@ -559,5 +559,109 @@ footer{
     transform:translateX(0);
     opacity:1;
   }
+   
+   /* =========================
+   Mostar Partidos
+========================= */
+
+.scoreline-league{
+  background:#fff3cd;
+  color:#374151;
+  font-weight:700;
+  padding:10px 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.scoreline-match{
+  background:#f8fafc;
+  color:#111827;
+  display:grid;
+  grid-template-columns:30px 80px 1fr 60px 1fr 120px;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  border-bottom:1px solid #e5e7eb;
+  font-size:13px;
+}
+
+.scoreline-star{
+  color:#cbd5e1;
+  font-size:20px;
+  text-align:center;
+}
+
+.scoreline-time{
+  color:#6b7280;
+  font-weight:bold;
+}
+
+.scoreline-time.live-text{
+  color:#ff0050;
+}
+
+.scoreline-home,
+.scoreline-away{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-weight:700;
+}
+
+.scoreline-home{
+  justify-content:flex-end;
+}
+
+.scoreline-away{
+  justify-content:flex-start;
+}
+
+.scoreline-home img,
+.scoreline-away img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+}
+
+.scoreline-result{
+  text-align:center;
+  font-size:17px;
+  font-weight:900;
+  color:#dc2626;
+}
+
+.live-result{
+  color:#ff0050;
+}
+
+.scoreline-extra{
+  color:#9ca3af;
+  font-weight:bold;
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+}
+
+.red-card{
+  background:#dc2626;
+  color:white;
+  font-size:10px;
+  padding:2px 5px;
+  border-radius:4px;
+  font-weight:900;
+}
+
+@media(max-width:768px){
+  .scoreline-match{
+    grid-template-columns:25px 60px 1fr 45px;
+  }
+
+  .scoreline-away,
+  .scoreline-extra{
+    grid-column:3 / span 2;
+  }
 }
 }
