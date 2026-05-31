@@ -301,32 +301,47 @@ color:#9ca3af;
   background:#ff0050;
   color:white;
 }
-  .selector-fecha{
+  .barra-filtros{
   display:flex;
-  justify-content:center;
+  justify-content:space-between;
   align-items:center;
-  gap:12px;
-  margin:10px 0 15px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+  gap:15px;
+}
+
+.tabs-estado{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.selector-fecha{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
 .selector-fecha button{
+  width:52px;
+  height:44px;
+  border-radius:12px;
+  border:none;
   background:#1f2937;
   color:white;
-  border:1px solid #374151;
-  padding:8px 14px;
-  border-radius:10px;
-  font-weight:bold;
   cursor:pointer;
+  font-weight:bold;
 }
 
 .selector-fecha span{
+  padding:12px 22px;
+  border-radius:14px;
   background:#111827;
-  color:#facc15;
   border:1px solid #374151;
-  padding:9px 20px;
-  border-radius:12px;
-  font-weight:900;
+  color:#facc15;
+  font-weight:800;
 }
+ 
 </style>
 </head>
 
@@ -369,17 +384,25 @@ color:#9ca3af;
 
   <h2 class="section-title">⚽ Partidos de hoy</h2>
 
-  <div class="selector-fecha">
-  <button id="diaAnterior">◀</button>
-  <span id="fechaActual"></span>
-  <button id="diaSiguiente">▶</button>
-</div>
+<div class="barra-filtros">
 
-  <div class="tabs-live">
-  <button class="tab-estado active" data-estado="TODOS">TODOS</button>
-  <button class="tab-estado" data-estado="LIVE">EN VIVO</button>
-  <button class="tab-estado" data-estado="FINAL">FINALIZADOS</button>
-  <button class="tab-estado" data-estado="PROXIMO">PRÓXIMOS</button>
+  <div class="tabs-estado">
+    <button class="tab activo">TODOS</button>
+    <button class="tab">EN VIVO</button>
+    <button class="tab">FINALIZADOS</button>
+    <button class="tab">PRÓXIMOS</button>
+  </div>
+
+  <div class="selector-fecha">
+    <button id="diaAnterior">◀</button>
+
+    <span id="fechaActual">
+      31 MAY. 2026
+    </span>
+
+    <button id="diaSiguiente">▶</button>
+  </div>
+
 </div>
 
 <section class="league-card">
