@@ -159,9 +159,9 @@ let marcadoresAnteriores = {};
     alerta.remove();
   }, 6000);
 }
-  
+  //funcion mostrar partidos//
 
-function mostrarPartidos(partidos) {
+  function mostrarPartidos(partidos) {
   const contenedor = document.getElementById("partidos-json");
   contenedor.innerHTML = "";
 
@@ -188,79 +188,60 @@ function mostrarPartidos(partidos) {
 
   Object.keys(grupos).forEach(liga => {
     contenedor.innerHTML += `
-      <div class="flash-league">
-        <span>${liga}</span>
-        <span>Tabla En Directo ⌃</span>
+      <div class="scoreline-league">
+        <span>⭐ ${liga}</span>
+        <span>Tabla En Directo ^</span>
       </div>
     `;
 
     grupos[liga].forEach(p => {
-      const textoTiempo =
-        p.estado === "LIVE" ? "EN VIVO" :
+      const tiempo =
+        p.estado === "LIVE" ? (p.minuto || "EN VIVO") :
         p.estado === "FINAL" ? "Finalizado" :
         `${p.fecha}<br>${p.hora}`;
 
-      const claseTiempo = p.estado === "LIVE" ? "live-text" : "";
-
-      const marcador =
+      const resultado =
         p.golesLocal !== null && p.golesVisitante !== null
-          ? `${p.golesLocal}<br>${p.golesVisitante}`
-          : "-<br>-";
-
-      const estadoTexto =
-        p.estado === "LIVE" ? "LIVE" :
-        p.estado === "FINAL" ? "" :
-        "PRÓXIMO";
+          ? `${p.golesLocal}-${p.golesVisitante}`
+          : "VS";
 
       contenedor.innerHTML += `
-        <div class="flash-match">
-          <div class="flash-time ${claseTiempo}">
-            ${textoTiempo}
+        <div class="scoreline-match">
+
+          <div class="scoreline-star">☆</div>
+
+          <div class="scoreline-time ${p.estado === "LIVE" ? "live-text" : ""}">
+            ${tiempo}
           </div>
 
-<div class="flash-teams">
-  <div class="flash-team-row">
-    <div class="flash-team">
-      <img src="${p.escudoLocal}" alt="${p.local}">
-      <span>${p.local}</span>
-    </div>
-
-    <div class="flash-team-score">
-      ${p.golesLocal !== null ? p.golesLocal : "-"}
-    </div>
-  </div>
-
-  <div class="flash-team-row">
-    <div class="flash-team">
-      <img src="${p.escudoVisitante}" alt="${p.visitante}">
-      <span>${p.visitante}</span>
-    </div>
-
-    <div class="flash-team-score">
-      ${p.golesVisitante !== null ? p.golesVisitante : "-"}
-    </div>
-  </div>
-
-  <div class="prediction">Pronóstico: ${p.pronostico}</div>
-</div>
-
-<div class="flash-score compact-score">
-  ${p.golesLocal !== null && p.golesVisitante !== null
-    ? `${p.golesLocal} - ${p.golesVisitante}`
-    : "VS"}
-</div>
-
-          <div class="flash-status ${
-            p.estado === "LIVE" ? "live" :
-            p.estado === "FINAL" ? "end" : "next"
-          }">
-            ${estadoTexto}
+          <div class="scoreline-home">
+            ${p.rojaLocal > 0 ? `<span class="red-card">${p.rojaLocal}</span>` : ""}
+            <span>${p.local}</span>
+            <img src="${p.escudoLocal}" alt="${p.local}">
           </div>
+
+          <div class="scoreline-result ${p.estado === "LIVE" ? "live-result" : ""}">
+            ${resultado}
+          </div>
+
+          <div class="scoreline-away">
+            <img src="${p.escudoVisitante}" alt="${p.visitante}">
+            <span>${p.visitante}</span>
+            ${p.rojaVisitante > 0 ? `<span class="red-card">${p.rojaVisitante}</span>` : ""}
+          </div>
+
+          <div class="scoreline-extra">
+            ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
+            ${p.corners ? `<span>⚑ ${p.corners}</span>` : ""}
+          </div>
+
         </div>
       `;
     });
   });
 }
+
+/// funcion aplicarfiltros///
 
 function aplicarFiltros() {
   const texto = document.getElementById("buscador").value.toLowerCase();
@@ -367,7 +348,12 @@ const response = await fetch(`https://puntaje-api.mgino4345.workers.dev/partidos
           estadoAPI === "IN_PLAY" || estadoAPI === "PAUSED" ? "LIVE" :
           "PROXIMO",
 
-        pronostico: "Pendiente"
+        pronostico: "Pendiente",
+        minuto: p.minuto || "",
+        ht: p.ht || "",
+        corners: p.corners || "",
+        rojaLocal: p.rojaLocal || 0,
+        rojaVisitante: p.rojaVisitante || 0,
       };
     });
 
