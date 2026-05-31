@@ -211,6 +211,14 @@ gap:6px;padding:11px 9px
 
   <div id="historial-picks"></div>
 </section>
+  <section class="league-card">
+  <div class="league-head">
+    💰 Bankroll Challenge
+    <span>Progreso</span>
+  </div>
+
+  <div id="bankroll-box"></div>
+</section>
 <footer>
   © 2026 Puntaje Ideal - Resultados, partidos y pronósticos deportivos
 </footer>
@@ -293,7 +301,27 @@ fetch('partidos.json')
       </div>
     `;
   });
+});
+  fetch('bankroll.json')
+.then(response => response.json())
+.then(bankroll => {
+  const actual = bankroll.actual;
+  const meta = bankroll.objetivo2;
+  const progreso = Math.min((actual / meta) * 100, 100).toFixed(0);
 
+  document.getElementById('bankroll-box').innerHTML = `
+    <div style="padding:15px">
+      <p><strong>Bankroll actual:</strong> S/ ${actual.toFixed(2)}</p>
+      <p><strong>Objetivo 1:</strong> S/ ${bankroll.objetivo1.toFixed(2)}</p>
+      <p><strong>Objetivo final:</strong> S/ ${meta.toFixed(2)}</p>
+
+      <div style="background:#374151;border-radius:20px;overflow:hidden;margin-top:12px">
+        <div style="width:${progreso}%;background:#16a34a;padding:8px;text-align:center;font-weight:bold">
+          ${progreso}%
+        </div>
+      </div>
+    </div>
+  `;
 });
 </script>
 </body>
