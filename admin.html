@@ -79,6 +79,9 @@ a{
 <div class="grid">
   <input id="local" placeholder="Equipo local">
   <input id="visitante" placeholder="Equipo visitante">
+  <button type="button" onclick="buscarEscudosAPI()">
+  🔍 Buscar escudos con API
+</button>
 </div>
 
 <div class="grid">
@@ -110,6 +113,7 @@ a{
 
 </div>
 
+  
 <script>
 function valorONull(id){
   const valor = document.getElementById(id).value;
@@ -162,6 +166,49 @@ function limpiar(){
   document.querySelectorAll("input").forEach(input => input.value = "");
   document.getElementById("estado").value = "PROXIMO";
   document.getElementById("resultado").value = "";
+}
+  function buscarEscudosAPI() {
+  const local = document.getElementById("local").value;
+  const visitante = document.getElementById("visitante").value;
+
+  buscarEscudoEquipo(local, "escudoLocal");
+  buscarEscudoEquipo(visitante, "escudoVisitante");
+}
+
+function buscarEscudosAPI() {
+
+  const local = document.getElementById("local").value;
+  const visitante = document.getElementById("visitante").value;
+
+  buscarEscudoEquipo(local, "escudoLocal");
+  buscarEscudoEquipo(visitante, "escudoVisitante");
+}
+
+function buscarEscudoEquipo(nombreEquipo, campoDestino) {
+
+  const equipo = encodeURIComponent(nombreEquipo);
+
+  fetch(`https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=${equipo}`)
+    .then(response => response.json())
+    .then(data => {
+
+      if (data.teams && data.teams.length > 0) {
+
+        document.getElementById(campoDestino).value =
+          data.teams[0].strBadge;
+
+      } else {
+
+        alert(`No se encontró: ${nombreEquipo}`);
+
+      }
+
+    })
+    .catch(error => {
+      console.error(error);
+      alert("Error consultando API");
+    });
+
 }
 </script>
 
