@@ -376,13 +376,7 @@ fetch('partidos.json')
 
         aplicarFiltros();
 
-      });
-
-    });
-
-})
-
-  function actualizarContadoresLiga() {
+          function actualizarContadoresLiga() {
   const botones = document.querySelectorAll('.filtro-liga');
 
   botones.forEach(boton => {
@@ -403,6 +397,12 @@ fetch('partidos.json')
   });
 }
   
+
+      });
+
+    });
+
+})
 .catch(error => console.error(error));
 fetch('historial.json')
 .then(response => response.json())
