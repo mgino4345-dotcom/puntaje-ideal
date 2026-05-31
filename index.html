@@ -381,7 +381,7 @@ async function cargarPartidosAPI() {
     const data = await response.json();
 
     partidosGlobal = data.matches.map(p => ({
-      hora: new Date(p.utcDate).toLocaleTimeString('es-PE', {
+      fecha: new Date(p.utcDate).toLocaleTimeString('es-PE', {
         hour: '2-digit',
         minute: '2-digit',
         year: 'numeric'
