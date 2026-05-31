@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puntaje Ideal</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="logo.png">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Puntaje Ideal</title>
 </head>
 
 <body>
@@ -13,6 +13,7 @@
 <header>
   <div class="topbar">
     <img src="logo.png" alt="Puntaje Ideal" class="logo-img">
+
     <div class="brand">
       <h1>Puntaje Ideal</h1>
       <p>Resultados, partidos y pronósticos deportivos</p>
@@ -40,105 +41,102 @@
 
   <h2 class="section-title">⚽ Partidos de hoy</h2>
 
-<div class="barra-filtros">
+  <div class="barra-filtros">
+    <div class="tabs-estado">
+      <button class="tab-estado active" data-estado="TODOS">TODOS (0)</button>
+      <button class="tab-estado" data-estado="LIVE">EN VIVO (0)</button>
+      <button class="tab-estado" data-estado="FINAL">FINALIZADOS (0)</button>
+      <button class="tab-estado" data-estado="PROXIMO">PRÓXIMOS (0)</button>
+    </div>
 
-<div class="tabs-estado">
-  <button class="tab-estado active" data-estado="TODOS">TODOS</button>
-  <button class="tab-estado" data-estado="LIVE">EN VIVO</button>
-  <button class="tab-estado" data-estado="FINAL">FINALIZADOS</button>
-  <button class="tab-estado" data-estado="PROXIMO">PRÓXIMOS</button>
-</div>
-  <div class="selector-fecha">
-    <button id="diaAnterior">◀</button>
-
-    <span id="fechaActual">
-      31 MAY. 2026
-    </span>
-
-    <button id="diaSiguiente">▶</button>
+    <div class="selector-fecha">
+      <button id="diaAnterior">◀</button>
+      <span id="fechaActual"></span>
+      <button id="diaSiguiente">▶</button>
+    </div>
   </div>
-
-</div>
-
-<section class="league-card">
-  <div class="league-head">
-    ⚽ Marcadores y partidos
-    <span>Automático</span>
-  </div>
-  
-  <div id="partidos-json"></div>
-</section>
 
   <section class="league-card">
-  <div class="league-head">
-    🏆 Tabla de Posiciones
-    <span>
-      <select id="selectorTabla">
-        <option value="BSA">Serie A Brasil</option>
-        <option value="PL">Premier League</option>
-        <option value="PD">LaLiga</option>
-        <option value="SA">Serie A Italia</option>
-        <option value="BL1">Bundesliga</option>
-      </select>
-    </span>
-  </div>
+    <div class="league-head">
+      ⚽ Marcadores y partidos
+      <span>Automático</span>
+    </div>
+    <div id="partidos-json"></div>
+  </section>
 
-  <div id="tabla-posiciones"></div>
-</section>
+  <section class="league-card">
+    <div class="league-head">
+      🏆 Tabla de Posiciones
+      <span>
+        <select id="selectorTabla">
+          <option value="BSA">Serie A Brasil</option>
+          <option value="PL">Premier League</option>
+          <option value="PD">LaLiga</option>
+          <option value="SA">Serie A Italia</option>
+          <option value="BL1">Bundesliga</option>
+        </select>
+      </span>
+    </div>
+    <div id="tabla-posiciones"></div>
+  </section>
 
   <h2 class="section-title">🔥 Picks de Puntaje Ideal</h2>
 
   <section class="picks">
     <div class="pick-card">
-      <h3>Ticket seguro</h3>
-      <p>Over 1.5 goles en partidos con tendencia alta.</p>
-      <span class="badge">Bajo riesgo</span>
+      <h3>🟢 Pick fuerte</h3>
+      <p>Selección con mejor señal del motor Puntaje Ideal.</p>
+      <span class="badge">IA</span>
     </div>
 
     <div class="pick-card">
-      <h3>Ticket medio</h3>
-      <p>Combinada corta de 2 partidos seleccionados.</p>
+      <h3>🟡 Pick medio</h3>
+      <p>Entrada moderada según ritmo, liga y marcador.</p>
       <span class="badge gold">Moderado</span>
     </div>
 
     <div class="pick-card">
-      <h3>Pick en vivo</h3>
-      <p>Entrada solo si el partido tiene ritmo y remates.</p>
-      <span class="badge red">Live</span>
+      <h3>🔴 Evitar</h3>
+      <p>Partido sin señal clara para apostar.</p>
+      <span class="badge red">Riesgo</span>
     </div>
   </section>
 
+  <section class="league-card">
+    <div class="league-head">
+      📈 Historial de Picks
+      <span>Últimos resultados</span>
+    </div>
+
+    <div id="estadisticas-historial"></div>
+    <div id="historial-picks"></div>
+  </section>
+
+  <section class="league-card">
+    <div class="league-head">
+      📊 Estadísticas Generales
+      <span>Resumen</span>
+    </div>
+
+    <div id="estadisticas-generales"></div>
+  </section>
+
+  <section class="league-card">
+    <div class="league-head">
+      💰 Bankroll Challenge
+      <span>Progreso</span>
+    </div>
+
+    <div id="bankroll-box"></div>
+  </section>
+
 </main>
-<section class="league-card">
-  <div class="league-head">
-    📈 Historial de Picks
-    <span>Últimos resultados</span>
-  </div>
 
-<div id="estadisticas-historial"></div>
-<div id="historial-picks"></div>
-</section>
-  <section class="league-card">
-  <div class="league-head">
-    📊 Estadísticas Generales
-    <span>Resumen</span>
-  </div>
-
-  <div id="estadisticas-generales"></div>
-</section>
-  <section class="league-card">
-  <div class="league-head">
-    💰 Bankroll Challenge
-    <span>Progreso</span>
-  </div>
-
-  <div id="bankroll-box"></div>
-</section>
 <footer>
   © 2026 Puntaje Ideal - Resultados, partidos y pronósticos deportivos
 </footer>
 
- <script>
+<script>
 let partidosGlobal = [];
 let estadoSeleccionado = "TODOS";
 let fechaSeleccionada = new Date();
@@ -176,6 +174,61 @@ function calcularMinutoPartido(utcDate, estado) {
   return "90+'";
 }
 
+function generarPronosticoIA(p) {
+  let puntos = 0;
+  let mercado = "Over 1.5";
+  let etiqueta = "🔴 EVITAR";
+
+  const liga = (p.liga || "").toLowerCase();
+
+  if (
+    liga.includes("brasileiro") ||
+    liga.includes("premier") ||
+    liga.includes("bundesliga") ||
+    liga.includes("eredivisie") ||
+    liga.includes("liga")
+  ) {
+    puntos += 2;
+  }
+
+  if (p.estado === "LIVE") puntos += 2;
+
+  if (
+    p.golesLocal !== null &&
+    p.golesVisitante !== null &&
+    p.golesLocal + p.golesVisitante >= 1
+  ) {
+    puntos += 3;
+  }
+
+  if (
+    p.estado === "LIVE" &&
+    p.golesLocal === 0 &&
+    p.golesVisitante === 0
+  ) {
+    puntos -= 1;
+  }
+
+  if (p.estado === "FINAL") {
+    return {
+      etiqueta: "⚫ FINALIZADO",
+      mercado: "Sin pick",
+      puntos: 0
+    };
+  }
+
+  if (puntos >= 5) {
+    etiqueta = "🟢 PICK FUERTE";
+  } else if (puntos >= 3) {
+    etiqueta = "🟡 PICK MEDIO";
+  } else {
+    etiqueta = "🔴 EVITAR";
+    mercado = "Sin entrada clara";
+  }
+
+  return { etiqueta, mercado, puntos };
+}
+
 function verificarGoles(partidos) {
   partidos.forEach(p => {
     const id = `${p.local}-${p.visitante}`;
@@ -197,10 +250,12 @@ function verificarGoles(partidos) {
 function mostrarNotificacionGol(p) {
   const alerta = document.createElement("div");
   alerta.className = "gol-alerta";
+
   alerta.innerHTML = `
     ⚽ GOOOOOL<br>
     <strong>${p.local} ${p.golesLocal} - ${p.golesVisitante} ${p.visitante}</strong>
   `;
+
   document.body.appendChild(alerta);
   setTimeout(() => alerta.remove(), 6000);
 }
@@ -245,6 +300,11 @@ function mostrarPartidos(partidos) {
           ? `${p.golesLocal}-${p.golesVisitante}`
           : "VS";
 
+      const clasePick =
+        p.nivelPick && p.nivelPick.includes("FUERTE") ? "pick-fuerte" :
+        p.nivelPick && p.nivelPick.includes("MEDIO") ? "pick-medio" :
+        "pick-evitar";
+
       contenedor.innerHTML += `
         <div class="scoreline-match">
           <div class="scoreline-star">☆</div>
@@ -269,13 +329,13 @@ function mostrarPartidos(partidos) {
             ${p.rojaVisitante > 0 ? `<span class="red-card">${p.rojaVisitante}</span>` : ""}
           </div>
 
-<div class="scoreline-extra">
-  ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
-  ${p.corners ? `<span>⚑ ${p.corners}</span>` : ""}
-  <span class="pick-ia ${p.nivelPick?.includes("FUERTE") ? "pick-fuerte" : p.nivelPick?.includes("MEDIO") ? "pick-medio" : "pick-evitar"}">
-    ${p.pronostico}
-  </span>
-</div>
+          <div class="scoreline-extra">
+            ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
+            ${p.corners ? `<span>⚑ ${p.corners}</span>` : ""}
+            <span class="pick-ia ${clasePick}">
+              ${p.pronostico}
+            </span>
+          </div>
         </div>
       `;
     });
@@ -324,73 +384,7 @@ function actualizarContadoresEstado() {
     tab.textContent = `${tab.dataset.nombre} (${cantidad})`;
   });
 }
-/// PRONOSTICO ///
-   function generarPronosticoIA(p) {
-  let puntos = 0;
-  let mercado = "Over 1.5";
-  let etiqueta = "🔴 EVITAR";
 
-  const liga = (p.liga || "").toLowerCase();
-
-  // Ligas con buena tendencia de goles
-  if (
-    liga.includes("brasileiro") ||
-    liga.includes("premier") ||
-    liga.includes("bundesliga") ||
-    liga.includes("eredivisie") ||
-    liga.includes("liga")
-  ) {
-    puntos += 2;
-  }
-
-  // Partido en vivo
-  if (p.estado === "LIVE") {
-    puntos += 2;
-  }
-
-  // Si ya hay 1 gol, Over 1.5 gana fuerza
-  if (
-    p.golesLocal !== null &&
-    p.golesVisitante !== null &&
-    p.golesLocal + p.golesVisitante >= 1
-  ) {
-    puntos += 3;
-  }
-
-  // Si está 0-0 en vivo, menor seguridad
-  if (
-    p.estado === "LIVE" &&
-    p.golesLocal === 0 &&
-    p.golesVisitante === 0
-  ) {
-    puntos -= 1;
-  }
-
-  // Si ya terminó, no recomendar
-  if (p.estado === "FINAL") {
-    return {
-      etiqueta: "⚫ FINALIZADO",
-      mercado: "Sin pick",
-      puntos: 0
-    };
-  }
-
-  if (puntos >= 5) {
-    etiqueta = "🟢 PICK FUERTE";
-  } else if (puntos >= 3) {
-    etiqueta = "🟡 PICK MEDIO";
-  } else {
-    etiqueta = "🔴 EVITAR";
-    mercado = "Sin entrada clara";
-  }
-
-  return {
-    etiqueta,
-    mercado,
-    puntos
-  };
-}
-   // FIN DE PRONOSTICO //
 async function cargarPartidosAPI() {
   try {
     const fechaAPI = formatoFechaAPI(fechaSeleccionada);
@@ -418,6 +412,17 @@ async function cargarPartidosAPI() {
           ? "LIVE"
           : "PROXIMO";
 
+      const liga = p.competition?.name || p["competencia"]?.nombre || "";
+      const golesLocal = p.score?.fullTime?.home ?? p["puntaje"]?.fullTime?.home ?? null;
+      const golesVisitante = p.score?.fullTime?.away ?? p["puntaje"]?.fullTime?.away ?? null;
+
+      const pronosticoIA = generarPronosticoIA({
+        liga,
+        estado: estadoNormalizado,
+        golesLocal,
+        golesVisitante
+      });
+
       return {
         fecha: new Date(p.utcDate).toLocaleDateString("es-PE", {
           day: "2-digit",
@@ -432,7 +437,7 @@ async function cargarPartidosAPI() {
         }),
 
         pais: p.area?.code || p["área"]?.codigo || "",
-        liga: p.competition?.name || p["competencia"]?.nombre || "",
+        liga,
 
         local: p.homeTeam?.name || p["equipo local"]?.nombre || "",
         visitante: p.awayTeam?.name || p["equipo visitante"]?.nombre || "",
@@ -440,20 +445,17 @@ async function cargarPartidosAPI() {
         escudoLocal: p.homeTeam?.crest || p["equipo local"]?.crest || "",
         escudoVisitante: p.awayTeam?.crest || p["equipo visitante"]?.crest || "",
 
-        golesLocal: p.score?.fullTime?.home ?? p["puntaje"]?.fullTime?.home ?? null,
-        golesVisitante: p.score?.fullTime?.away ?? p["puntaje"]?.fullTime?.away ?? null,
+        golesLocal,
+        golesVisitante,
 
         estado: estadoNormalizado,
-        const pronosticoIA = generarPronosticoIA({
-  liga: p.competition?.name || p["competencia"]?.nombre || "",
-  estado: estadoNormalizado,
-  golesLocal: p.score?.fullTime?.home ?? p["puntaje"]?.fullTime?.home ?? null,
-  golesVisitante: p.score?.fullTime?.away ?? p["puntaje"]?.fullTime?.away ?? null
-});
+
         pronostico: `${pronosticoIA.etiqueta} · ${pronosticoIA.mercado}`,
-nivelPick: pronosticoIA.etiqueta,
-puntosIA: pronosticoIA.puntos,
+        nivelPick: pronosticoIA.etiqueta,
+        puntosIA: pronosticoIA.puntos,
+
         minuto: calcularMinutoPartido(p.utcDate, estadoNormalizado),
+
         ht: p.ht || "",
         corners: p.corners || "",
         rojaLocal: p.rojaLocal || 0,
@@ -467,6 +469,55 @@ puntosIA: pronosticoIA.puntos,
 
   } catch (error) {
     console.error("Error cargando API:", error);
+  }
+}
+
+async function cargarTablaPosiciones(competencia = "BSA") {
+  try {
+    const response = await fetch(
+      `https://puntaje-api.mgino4345.workers.dev/tabla?competencia=${competencia}`
+    );
+
+    const data = await response.json();
+    const tabla = data.standings?.[0]?.table || [];
+
+    const contenedor = document.getElementById("tabla-posiciones");
+    if (!contenedor) return;
+
+    contenedor.innerHTML = `
+      <div class="tabla-flash">
+        <div class="tabla-header">
+          <div>#</div>
+          <div>Equipo</div>
+          <div>PJ</div>
+          <div>G</div>
+          <div>E</div>
+          <div>P</div>
+          <div>DG</div>
+          <div>PTS</div>
+        </div>
+
+        ${tabla.map(equipo => `
+          <div class="tabla-row">
+            <div class="tabla-pos">${equipo.position}</div>
+
+            <div class="tabla-equipo">
+              <img src="${equipo.team.crest}" alt="${equipo.team.name}">
+              <strong>${equipo.team.name}</strong>
+            </div>
+
+            <div>${equipo.playedGames}</div>
+            <div>${equipo.won}</div>
+            <div>${equipo.draw}</div>
+            <div>${equipo.lost}</div>
+            <div>${equipo.goalDifference}</div>
+            <div class="tabla-puntos">${equipo.points}</div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  } catch (error) {
+    console.error("Error cargando tabla:", error);
   }
 }
 
@@ -629,71 +680,14 @@ function cargarEstadisticasGenerales() {
     `;
   });
 }
-//-- TABLA DE POSICIONES--//
-  async function cargarTablaPosiciones(competencia = "BSA") {
-  try {
-    const response = await fetch(
-      `https://puntaje-api.mgino4345.workers.dev/tabla?competencia=${competencia}`
-    );
 
-    const data = await response.json();
-    const tabla = data.standings?.[0]?.table || [];
-
-    const contenedor = document.getElementById("tabla-posiciones");
-    if (!contenedor) return;
-
-    contenedor.innerHTML = `
-      <div class="tabla-flash">
-        <div class="tabla-header">
-          <div>#</div>
-          <div>Equipo</div>
-          <div>PJ</div>
-          <div>G</div>
-          <div>E</div>
-          <div>P</div>
-          <div>DG</div>
-          <div>PTS</div>
-        </div>
-
-        ${tabla.map(equipo => `
-          <div class="tabla-row">
-            <div class="tabla-pos">${equipo.position}</div>
-
-            <div class="tabla-equipo">
-              <img src="${equipo.team.crest}" alt="${equipo.team.name}">
-              <strong>${equipo.team.name}</strong>
-            </div>
-
-            <div>${equipo.playedGames}</div>
-            <div>${equipo.won}</div>
-            <div>${equipo.draw}</div>
-            <div>${equipo.lost}</div>
-            <div>${equipo.goalDifference}</div>
-            <div class="tabla-puntos">${equipo.points}</div>
-          </div>
-        `).join("")}
-      </div>
-    `;
-  } catch (error) {
-    console.error("Error cargando tabla:", error);
-  }
-}
-   //FIN TABLA DE POSICIONES//
 document.addEventListener("DOMContentLoaded", () => {
   actualizarFechaVista();
   cargarPartidosAPI();
+  cargarTablaPosiciones();
   cargarHistorial();
   cargarBankroll();
   cargarEstadisticasGenerales();
-  cargarTablaPosiciones();
-
-const selectorTabla = document.getElementById("selectorTabla");
-
-if (selectorTabla) {
-  selectorTabla.addEventListener("change", function() {
-    cargarTablaPosiciones(this.value);
-  });
-}
 
   const buscador = document.getElementById("buscador");
   if (buscador) buscador.addEventListener("input", aplicarFiltros);
@@ -708,6 +702,13 @@ if (selectorTabla) {
       aplicarFiltros();
     });
   });
+
+  const selectorTabla = document.getElementById("selectorTabla");
+  if (selectorTabla) {
+    selectorTabla.addEventListener("change", function() {
+      cargarTablaPosiciones(this.value);
+    });
+  }
 
   const diaAnterior = document.getElementById("diaAnterior");
   const diaSiguiente = document.getElementById("diaSiguiente");
@@ -733,5 +734,6 @@ if (selectorTabla) {
   }, 60000);
 });
 </script>
-  
+
+</body>
 </html>
