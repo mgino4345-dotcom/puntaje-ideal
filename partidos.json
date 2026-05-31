@@ -4,8 +4,8 @@
     "liga": "Liga 1",
     "local": "Alianza Lima",
     "visitante": "Universitario",
-    "escudoLocal": "alianzalima.png",
-    "escudoVisitante": "universitario.png",
+    "escudoLocal": "escudos/alianzalima.png",
+    "escudoVisitante": "escudos/universitario.png",
     "pronostico": "Over 1.5"
   },
   {
