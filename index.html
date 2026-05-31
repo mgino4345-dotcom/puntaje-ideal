@@ -286,7 +286,10 @@ function mostrarPartidos(partidos) {
   partidos.forEach(p => {
     contenedor.innerHTML += `
       <div class="match">
-        <div class="time">${p.hora}</div>
+       <div class="time">
+  📅 ${p.fecha}<br>
+  🕒 ${p.hora}
+</div>
         <div class="teams">
           <div class="mini-league">${p.pais || ''} ${p.liga || ''}</div>
 
@@ -380,8 +383,15 @@ async function cargarPartidosAPI() {
     partidosGlobal = data.matches.map(p => ({
       hora: new Date(p.utcDate).toLocaleTimeString('es-PE', {
         hour: '2-digit',
-        minute: '2-digit'
+        minute: '2-digit',
+        year: 'numeric'
       }),
+
+        hora: new Date(p.utcDate).toLocaleTimeString('es-PE', {
+    hour: '2-digit',
+    minute: '2-digit'
+  }),
+      
       pais: p.area.code,
       liga: p.competition.name,
       local: p.homeTeam.name,
