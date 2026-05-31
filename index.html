@@ -7,6 +7,16 @@
 <title>Puntaje Ideal</title>
 
 <style>
+  .sin-partidos{
+  padding:40px;
+  text-align:center;
+  color:#9ca3af;
+  font-size:18px;
+  font-weight:bold;
+  background:#111827;
+  border-radius:12px;
+  margin:15px;
+}
   .mini-league{
   font-size:12px;
   color:#9ca3af;
@@ -263,6 +273,15 @@ let ligaSeleccionada = "TODOS";
 function mostrarPartidos(partidos) {
   const contenedor = document.getElementById('partidos-json');
   contenedor.innerHTML = '';
+
+  if (partidos.length === 0) {
+    contenedor.innerHTML = `
+      <div class="sin-partidos">
+        ⚽ No hay partidos disponibles para esta liga
+      </div>
+    `;
+    return;
+  }
 
   partidos.forEach(p => {
     contenedor.innerHTML += `
