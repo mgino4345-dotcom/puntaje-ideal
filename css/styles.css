@@ -1,22 +1,8 @@
-/* =========================
-   BASE GENERAL
-========================= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 
-body{
-  background:#0f1115;
-  color:#e8e8e8;
-}
+body{background:#0f1115;color:#e8e8e8}
 
-header{
-  background:#101820;
-  border-bottom:1px solid #252b33;
-}
+header{background:#101820;border-bottom:1px solid #252b33}
 
 .topbar{
   max-width:1200px;
@@ -27,24 +13,12 @@ header{
   gap:14px;
 }
 
-.logo-img{
-  width:46px;
-  border-radius:8px;
-}
+.logo-img{width:46px;border-radius:8px}
 
-.brand h1{
-  font-size:22px;
-  color:#fff;
-}
+.brand h1{font-size:22px;color:#fff}
+.brand p{font-size:11px;color:#9ca3af}
 
-.brand p{
-  font-size:11px;
-  color:#9ca3af;
-}
-
-.search{
-  margin-left:auto;
-}
+.search{margin-left:auto}
 
 .search input{
   width:300px;
@@ -57,12 +31,7 @@ header{
   outline:none;
 }
 
-/* =========================
-   NAV
-========================= */
-nav{
-  background:#161b22;
-}
+nav{background:#161b22}
 
 nav ul{
   max-width:1200px;
@@ -90,9 +59,6 @@ nav a:hover{
   color:white;
 }
 
-/* =========================
-   CONTENEDOR
-========================= */
 .container{
   max-width:1200px;
   margin:auto;
@@ -105,9 +71,6 @@ nav a:hover{
   color:white;
 }
 
-/* =========================
-   FILTROS DE LIGA
-========================= */
 .scorebar{
   display:flex;
   gap:10px;
@@ -132,9 +95,6 @@ nav a:hover{
   color:white;
 }
 
-/* =========================
-   BARRA FILTROS + FECHA
-========================= */
 .barra-filtros{
   display:flex;
   justify-content:space-between;
@@ -161,9 +121,7 @@ nav a:hover{
   transition:.2s;
 }
 
-.tab-estado:hover{
-  transform:translateY(-2px);
-}
+.tab-estado:hover{transform:translateY(-2px)}
 
 .tab-estado.active{
   background:#ff0050;
@@ -197,9 +155,6 @@ nav a:hover{
   font-weight:900;
 }
 
-/* =========================
-   CARD GENERAL
-========================= */
 .league-card{
   background:#181c23;
   border:1px solid #2a303a;
@@ -223,449 +178,8 @@ nav a:hover{
   color:#9ca3af;
 }
 
-/* =========================
-   DISEÑO FLASHSCORE
-========================= */
-.flash-league{
-  background:#e5e7eb;
-  color:#334155;
-  font-weight:900;
-  padding:9px 12px;
-  border-radius:6px 6px 0 0;
-  margin-top:10px;
-  font-size:13px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.flash-match{
-  background:#f8fafc;
-  color:#111827;
-  display:grid;
-  grid-template-columns:95px 1fr 50px 80px;
-  align-items:center;
-  padding:10px 12px;
-  border-bottom:1px solid #e5e7eb;
-  font-size:13px;
-}
-
-.flash-time{
-  color:#475569;
-  font-weight:bold;
-}
-
-.flash-time.live-text{
-  color:#ff0050;
-}
-
-.flash-teams{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-
-.flash-team{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-weight:700;
-}
-
-.flash-team img{
-  width:22px;
-  height:22px;
-  object-fit:contain;
-}
-
-.flash-score{
-  text-align:center;
-  font-weight:900;
-  font-size:16px;
-  line-height:1.5;
-}
-
-.flash-status{
-  text-align:center;
-  font-weight:900;
-  font-size:11px;
-  border-radius:8px;
-  padding:6px;
-}
-
-.flash-status.live{
-  background:#ff0050;
-  color:white;
-}
-
-.flash-status.end{
-  background:#16a34a;
-  color:white;
-}
-
-.flash-status.next{
-  background:#e5e7eb;
-  color:#374151;
-}
-
-/* =========================
-   MENSAJE SIN PARTIDOS
-========================= */
-.sin-partidos{
-  padding:40px;
-  text-align:center;
-  color:#9ca3af;
-  font-size:18px;
-  font-weight:bold;
-  background:#111827;
-  border-radius:12px;
-  margin:15px;
-}
-
-/* =========================
-   PICKS
-========================= */
-.picks{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:12px;
-  margin-top:12px;
-}
-
-.pick-card{
-  background:#181c23;
-  border:1px solid #2a303a;
-  border-radius:12px;
-  padding:14px;
-}
-
-.pick-card h3{
-  font-size:15px;
-  margin-bottom:8px;
-  color:white;
-}
-
-.pick-card p{
-  font-size:13px;
-  color:#cbd5e1;
-  margin-bottom:10px;
-}
-
-.badge{
-  display:inline-block;
-  background:#0d47a1;
-  color:white;
-  padding:5px 10px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:bold;
-}
-
-.badge.gold{
-  background:#ca8a04;
-}
-
-.badge.red{
-  background:#dc2626;
-}
-
-/* =========================
-   HISTORIAL / ESTADÍSTICAS / BANKROLL
-========================= */
-.match{
-  display:grid;
-  grid-template-columns:70px 1fr 60px 90px;
-  align-items:center;
-  gap:10px;
-  padding:12px 14px;
-  border-top:1px solid #2a303a;
-}
-
-.match:hover{
-  background:#202632;
-}
-
-.time{
-  font-size:12px;
-  color:#9ca3af;
-  font-weight:bold;
-}
-
-.teams{
-  line-height:1.7;
-}
-
-.team{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.score{
-  font-size:20px;
-  font-weight:900;
-  text-align:center;
-  color:#fff;
-}
-
-.status{
-  text-align:center;
-  font-size:11px;
-  font-weight:bold;
-  padding:6px;
-  border-radius:14px;
-}
-
-.live{
-  background:#dc2626;
-  color:white;
-}
-
-.next{
-  background:#374151;
-  color:#d1d5db;
-}
-
-.end{
-  background:#16a34a;
-  color:white;
-}
-
-.prediction{
-  margin-top:6px;
-  font-size:12px;
-  color:#facc15;
-  font-weight:bold;
-}
-
-/* =========================
-   FOOTER
-========================= */
-footer{
-  margin-top:30px;
-  background:#101820;
-  border-top:1px solid #252b33;
-  text-align:center;
-  color:#9ca3af;
-  padding:18px;
-  font-size:13px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-@media(max-width:768px){
-  .topbar{
-    flex-wrap:wrap;
-  }
-
-  .search{
-    width:100%;
-    margin-left:0;
-  }
-
-  .search input{
-    width:100%;
-  }
-
-  .brand h1{
-    font-size:20px;
-  }
-
-  .barra-filtros{
-    align-items:flex-start;
-  }
-
-  .selector-fecha{
-    width:100%;
-    justify-content:center;
-  }
-
-  .tab-estado{
-    padding:10px 14px;
-    font-size:12px;
-  }
-
-  .flash-match{
-    grid-template-columns:75px 1fr 35px 65px;
-    padding:8px;
-  }
-
-  .flash-team img{
-    width:20px;
-    height:20px;
-  }
-
-  .match{
-    grid-template-columns:50px 1fr 45px 70px;
-    gap:6px;
-    padding:11px 9px;
-  }
-
-  .score{
-    font-size:22px;
-    line-height:1.4;
-  }
-
-   /* =========================
-   Marcadores 
-========================= */
-   .flash-team-row{
-  display:grid;
-  grid-template-columns:1fr 28px;
-  align-items:center;
-  gap:8px;
-}
-
-.flash-team-score{
-  font-weight:900;
-  font-size:16px;
-  text-align:center;
-  color:#111827;
-}
-
-.compact-score{
-  font-size:14px;
-  color:#334155;
-  background:#e5e7eb;
-  border-radius:8px;
-  padding:4px 6px;
-}
-
-      /* =========================
-   Alertas 
-========================= */
-
-   .gol-alerta{
-  position:fixed;
-  top:20px;
-  right:20px;
-  background:#ff0050;
-  color:white;
-  padding:18px 22px;
-  border-radius:14px;
-  font-weight:900;
-  z-index:9999;
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-  animation:golEntrada .4s ease;
-}
-
-@keyframes golEntrada{
-  from{
-    transform:translateX(120%);
-    opacity:0;
-  }
-  to{
-    transform:translateX(0);
-    opacity:1;
-  }
-   
-   /* =========================
-   Mostar Partidos
-========================= */
-
+/* MARCADOR TIPO SOFASCORE */
 .scoreline-league{
-  background:#fff3cd;
-  color:#374151;
-  font-weight:700;
-  padding:10px 12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:13px;
-  border-bottom:1px solid #e5e7eb;
-}
-
-.scoreline-match{
-  background:#f8fafc;
-  color:#111827;
-  display:grid;
-  grid-template-columns:30px 80px 1fr 60px 1fr 120px;
-  align-items:center;
-  gap:8px;
-  padding:10px 12px;
-  border-bottom:1px solid #e5e7eb;
-  font-size:13px;
-}
-
-.scoreline-star{
-  color:#cbd5e1;
-  font-size:20px;
-  text-align:center;
-}
-
-.scoreline-time{
-  color:#6b7280;
-  font-weight:bold;
-}
-
-.scoreline-time.live-text{
-  color:#ff0050;
-}
-
-.scoreline-home,
-.scoreline-away{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  font-weight:700;
-}
-
-.scoreline-home{
-  justify-content:flex-end;
-}
-
-.scoreline-away{
-  justify-content:flex-start;
-}
-
-.scoreline-home img,
-.scoreline-away img{
-  width:22px;
-  height:22px;
-  object-fit:contain;
-}
-
-.scoreline-result{
-  text-align:center;
-  font-size:17px;
-  font-weight:900;
-  color:#dc2626;
-}
-
-.live-result{
-  color:#ff0050;
-}
-
-.scoreline-extra{
-  color:#9ca3af;
-  font-weight:bold;
-  display:flex;
-  gap:10px;
-  justify-content:flex-end;
-}
-
-.red-card{
-  background:#dc2626;
-  color:white;
-  font-size:10px;
-  padding:2px 5px;
-  border-radius:4px;
-  font-weight:900;
-}
-
-@media(max-width:768px){
-  .scoreline-match{
-    grid-template-columns:25px 60px 1fr 45px;
-  }
-
-  .scoreline-away,
-  .scoreline-extra{
-    grid-column:3 / span 2;
-  }
-}
-
-   .scoreline-league{
   background:#fff3cd;
   color:#374151;
   font-weight:800;
@@ -674,6 +188,7 @@ footer{
   justify-content:space-between;
   align-items:center;
   font-size:14px;
+  border-bottom:1px solid #e5e7eb;
 }
 
 .scoreline-match{
@@ -685,6 +200,7 @@ footer{
   gap:10px;
   padding:10px 12px;
   border-bottom:1px solid #e5e7eb;
+  font-size:13px;
 }
 
 .scoreline-star{
@@ -736,6 +252,10 @@ footer{
   color:#dc2626;
 }
 
+.live-result{
+  color:#ff0050;
+}
+
 .scoreline-extra{
   color:#9ca3af;
   font-weight:800;
@@ -752,8 +272,208 @@ footer{
   border-radius:4px;
   font-weight:900;
 }
-   .scoreline-home img,
-.scoreline-away img{
-  width:22px !important;
-  height:22px !important;
+
+/* MENSAJE SIN PARTIDOS */
+.sin-partidos{
+  padding:40px;
+  text-align:center;
+  color:#9ca3af;
+  font-size:18px;
+  font-weight:bold;
+  background:#111827;
+  border-radius:12px;
+  margin:15px;
+}
+
+/* PICKS */
+.picks{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+
+.pick-card{
+  background:#181c23;
+  border:1px solid #2a303a;
+  border-radius:12px;
+  padding:14px;
+}
+
+.pick-card h3{
+  font-size:15px;
+  margin-bottom:8px;
+  color:white;
+}
+
+.pick-card p{
+  font-size:13px;
+  color:#cbd5e1;
+  margin-bottom:10px;
+}
+
+.badge{
+  display:inline-block;
+  background:#0d47a1;
+  color:white;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.badge.gold{background:#ca8a04}
+.badge.red{background:#dc2626}
+
+/* HISTORIAL / BANKROLL */
+.match{
+  display:grid;
+  grid-template-columns:70px 1fr 60px 90px;
+  align-items:center;
+  gap:10px;
+  padding:12px 14px;
+  border-top:1px solid #2a303a;
+}
+
+.match:hover{background:#202632}
+
+.time{
+  font-size:12px;
+  color:#9ca3af;
+  font-weight:bold;
+}
+
+.teams{line-height:1.7}
+
+.team{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.score{
+  font-size:20px;
+  font-weight:900;
+  text-align:center;
+  color:#fff;
+}
+
+.status{
+  text-align:center;
+  font-size:11px;
+  font-weight:bold;
+  padding:6px;
+  border-radius:14px;
+}
+
+.live{background:#dc2626;color:white}
+.next{background:#374151;color:#d1d5db}
+.end{background:#16a34a;color:white}
+
+.prediction{
+  margin-top:6px;
+  font-size:12px;
+  color:#facc15;
+  font-weight:bold;
+}
+
+/* ALERTA GOL */
+.gol-alerta{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#ff0050;
+  color:white;
+  padding:18px 22px;
+  border-radius:14px;
+  font-weight:900;
+  z-index:9999;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  animation:golEntrada .4s ease;
+}
+
+@keyframes golEntrada{
+  from{
+    transform:translateX(120%);
+    opacity:0;
+  }
+  to{
+    transform:translateX(0);
+    opacity:1;
+  }
+}
+
+footer{
+  margin-top:30px;
+  background:#101820;
+  border-top:1px solid #252b33;
+  text-align:center;
+  color:#9ca3af;
+  padding:18px;
+  font-size:13px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .topbar{flex-wrap:wrap}
+
+  .search{
+    width:100%;
+    margin-left:0;
+  }
+
+  .search input{width:100%}
+
+  .brand h1{font-size:20px}
+
+  .barra-filtros{
+    align-items:flex-start;
+  }
+
+  .selector-fecha{
+    width:100%;
+    justify-content:center;
+  }
+
+  .tab-estado{
+    padding:10px 14px;
+    font-size:12px;
+  }
+
+  .scoreline-match{
+    grid-template-columns:25px 60px 1fr 45px;
+    gap:6px;
+    padding:9px 8px;
+  }
+
+  .scoreline-away,
+  .scoreline-extra{
+    grid-column:3 / span 2;
+  }
+
+  .scoreline-home,
+  .scoreline-away{
+    font-size:12px;
+  }
+
+  .scoreline-home img,
+  .scoreline-away img{
+    width:20px !important;
+    height:20px !important;
+  }
+
+  .scoreline-result{
+    font-size:15px;
+  }
+
+  .match{
+    grid-template-columns:50px 1fr 45px 70px;
+    gap:6px;
+    padding:11px 9px;
+  }
+
+  .score{
+    font-size:22px;
+    line-height:1.4;
+  }
 }
