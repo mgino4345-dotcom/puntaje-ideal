@@ -13,6 +13,19 @@
     "pronostico": "Over 1.5"
   },
   {
+  "hora": "20:00",
+  "liga": "Serie A Betano",
+  "local": "CRUZERIO",
+  "visitante": "SANTOS",
+  "escudoLocal": "https://r2.thesportsdb.com/images/media/team/badge/uyhbfe1612467038.png",
+  "escudoVisitante": "https://r2.thesportsdb.com/images/media/team/badge/uyhbfe1612467038.png",
+  "golesLocal": null,
+  "golesVisitante": null,
+  "estado": "PROXIMO",
+  "canal": "ESPN",
+  "pronostico": "BBT-SI"
+},
+  {
     "hora": "18:00",
     "pais": "🇦🇷",
     "liga": "Primera División",
