@@ -191,10 +191,12 @@ color:#9ca3af;
     <div class="day">Ayer</div>
     <div class="day active">Hoy</div>
     <div class="day">Mañana</div>
-    <div class="day">Liga 1</div>
-    <div class="day">Libertadores</div>
-    <div class="day">Premier League</div>
-    <div class="day">La Liga</div>
+<div class="day filtro-liga active" data-liga="TODOS">Todos</div>
+<div class="day filtro-liga" data-liga="Liga 1">Liga 1</div>
+<div class="day filtro-liga" data-liga="Libertadores">Libertadores</div>
+<div class="day filtro-liga" data-liga="Premier League">Premier League</div>
+<div class="day filtro-liga" data-liga="La Liga">La Liga</div>
+<div class="day filtro-liga" data-liga="Serie A">Serie A</div>
   </div>
 
   <h2 class="section-title">⚽ Partidos de hoy</h2>
@@ -319,19 +321,49 @@ fetch('partidos.json')
   partidosGlobal = partidos;
   mostrarPartidos(partidosGlobal);
 
-  document.getElementById('buscador').addEventListener('input', function() {
-    const texto = this.value.toLowerCase();
+let ligaSeleccionada = "TODOS";
 
-    const filtrados = partidosGlobal.filter(p =>
+function aplicarFiltros() {
+  const texto = document.getElementById('buscador').value.toLowerCase();
+
+  const filtrados = partidosGlobal.filter(p => {
+
+    const coincideTexto =
       p.local.toLowerCase().includes(texto) ||
       p.visitante.toLowerCase().includes(texto) ||
       p.liga.toLowerCase().includes(texto) ||
-      p.pronostico.toLowerCase().includes(texto)
-    );
+      p.pronostico.toLowerCase().includes(texto);
 
-    mostrarPartidos(filtrados);
+    const coincideLiga =
+      ligaSeleccionada === "TODOS" ||
+      p.liga === ligaSeleccionada;
+
+    return coincideTexto && coincideLiga;
   });
-})
+
+  mostrarPartidos(filtrados);
+}
+
+document.getElementById('buscador')
+  .addEventListener('input', aplicarFiltros);
+
+document.querySelectorAll('.filtro-liga')
+  .forEach(boton => {
+
+    boton.addEventListener('click', function() {
+
+      document.querySelectorAll('.filtro-liga')
+        .forEach(b => b.classList.remove('active'));
+
+      this.classList.add('active');
+
+      ligaSeleccionada = this.dataset.liga;
+
+      aplicarFiltros();
+
+    });
+
+});
 .catch(error => console.error('Error cargando partidos:', error));
  fetch('historial.json')
 .then(response => response.json())
