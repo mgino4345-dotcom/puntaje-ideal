@@ -349,15 +349,44 @@ function aplicarFiltros() {
   mostrarPartidos(filtrados);
 }
 
-fetch('partidos.json')
-.then(response => response.json())
-.then(partidos => {
+async function cargarPartidosAPI() {
+  const response = await fetch(
+    "https://puntaje-api.mgino4345.workers.dev/partidos?competencia=BSA"
+  );
 
-  partidosGlobal = partidos;
+  const data = await response.json();
+
+  partidosGlobal = data.matches.map(p => ({
+    hora: new Date(p.utcDate).toLocaleTimeString('es-PE', {
+      hour: '2-digit',
+      minute: '2-digit'
+    }),
+
+    pais: p.area.code,
+    liga: p.competition.name,
+
+    local: p.homeTeam.name,
+    visitante: p.awayTeam.name,
+
+    escudoLocal: p.homeTeam.crest,
+    escudoVisitante: p.awayTeam.crest,
+
+    golesLocal: p.score.fullTime.home,
+    golesVisitante: p.score.fullTime.away,
+
+    estado:
+      p.status === "FINISHED" ? "FINAL" :
+      p.status === "IN_PLAY" || p.status === "PAUSED" ? "LIVE" :
+      "PROXIMO",
+
+    pronostico: "Pendiente"
+  }));
 
   mostrarPartidos(partidosGlobal);
+  actualizarContadoresLiga();
+}
 
-  actualizarContadoresLiga(); // 👈 AQUÍ
+cargarPartidosAPI();
 
   document.getElementById('buscador')
     .addEventListener('input', aplicarFiltros);
