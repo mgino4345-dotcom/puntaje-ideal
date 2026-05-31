@@ -203,7 +203,14 @@ gap:6px;padding:11px 9px
   </section>
 
 </main>
+<section class="league-card">
+  <div class="league-head">
+    📈 Historial de Picks
+    <span>Últimos resultados</span>
+  </div>
 
+  <div id="historial-picks"></div>
+</section>
 <footer>
   © 2026 Puntaje Ideal - Resultados, partidos y pronósticos deportivos
 </footer>
@@ -250,6 +257,44 @@ fetch('partidos.json')
   });
 })
 .catch(error => console.error('Error cargando partidos:', error));
+  fetch('historial.json')
+.then(response => response.json())
+.then(historial => {
+
+  const contenedor = document.getElementById('historial-picks');
+
+  historial.forEach(item => {
+
+    const color =
+      item.resultado === 'GANADO'
+      ? '#16a34a'
+      : '#dc2626';
+
+    contenedor.innerHTML += `
+      <div class="match">
+        <div class="time">${item.fecha}</div>
+
+        <div class="teams">
+          <div class="team">
+            <span>${item.partido}</span>
+          </div>
+
+          <div class="prediction">
+            Pick: ${item.pick}
+          </div>
+        </div>
+
+        <div class="score">-</div>
+
+        <div class="status"
+          style="background:${color};color:white;">
+          ${item.resultado}
+        </div>
+      </div>
+    `;
+  });
+
+});
 </script>
 </body>
 </html>
