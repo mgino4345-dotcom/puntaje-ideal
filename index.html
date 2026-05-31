@@ -512,9 +512,8 @@ function actualizarContadoresLiga() {
 
 async function cargarPartidosAPI() {
   try {
-    const response = await fetch(
-      "https://puntaje-api.mgino4345.workers.dev/partidos?competencia=BSA"
-    );
+ const fecha =
+  url.searchParams.get("fecha") || hoy;
 
     const data = await response.json();
 
