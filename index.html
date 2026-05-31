@@ -121,15 +121,12 @@
   © 2026 Puntaje Ideal - Resultados, partidos y pronósticos deportivos
 </footer>
 
-  <script>
+ <script>
 let partidosGlobal = [];
 let estadoSeleccionado = "TODOS";
 let fechaSeleccionada = new Date();
 let marcadoresAnteriores = {};
 
-/* =========================
-   FECHA
-========================= */
 function formatoFechaAPI(fecha) {
   return fecha.toISOString().split("T")[0];
 }
@@ -144,14 +141,24 @@ function formatoFechaVista(fecha) {
 
 function actualizarFechaVista() {
   const fechaActual = document.getElementById("fechaActual");
-  if (fechaActual) {
-    fechaActual.textContent = formatoFechaVista(fechaSeleccionada);
-  }
+  if (fechaActual) fechaActual.textContent = formatoFechaVista(fechaSeleccionada);
 }
 
-/* =========================
-   NOTIFICACIÓN DE GOL
-========================= */
+function calcularMinutoPartido(utcDate, estado) {
+  if (estado !== "LIVE") return "";
+
+  const inicio = new Date(utcDate);
+  const ahora = new Date();
+  let minutos = Math.floor((ahora - inicio) / 60000);
+
+  if (minutos < 1) minutos = 1;
+  if (minutos <= 45) return `1T ${minutos}'`;
+  if (minutos <= 60) return "MT";
+  if (minutos <= 105) return `2T ${minutos - 15}'`;
+
+  return "90+'";
+}
+
 function verificarGoles(partidos) {
   partidos.forEach(p => {
     const id = `${p.local}-${p.visitante}`;
@@ -173,20 +180,14 @@ function verificarGoles(partidos) {
 function mostrarNotificacionGol(p) {
   const alerta = document.createElement("div");
   alerta.className = "gol-alerta";
-
   alerta.innerHTML = `
     ⚽ GOOOOOL<br>
     <strong>${p.local} ${p.golesLocal} - ${p.golesVisitante} ${p.visitante}</strong>
   `;
-
   document.body.appendChild(alerta);
-
   setTimeout(() => alerta.remove(), 6000);
 }
 
-/* =========================
-   MOSTRAR PARTIDOS
-========================= */
 function mostrarPartidos(partidos) {
   const contenedor = document.getElementById("partidos-json");
   contenedor.innerHTML = "";
@@ -204,11 +205,7 @@ function mostrarPartidos(partidos) {
 
   partidos.forEach(p => {
     const liga = `${p.pais || ""} ${p.liga || "Sin liga"}`;
-
-    if (!grupos[liga]) {
-      grupos[liga] = [];
-    }
-
+    if (!grupos[liga]) grupos[liga] = [];
     grupos[liga].push(p);
   });
 
@@ -222,11 +219,9 @@ function mostrarPartidos(partidos) {
 
     grupos[liga].forEach(p => {
       const tiempo =
-        p.estado === "LIVE"
-          ? `${p.minuto || "EN VIVO"}`
-          : p.estado === "FINAL"
-          ? "FINAL"
-          : p.hora;
+        p.estado === "LIVE" ? (p.minuto || "EN VIVO") :
+        p.estado === "FINAL" ? "FINAL" :
+        p.hora;
 
       const resultado =
         p.golesLocal !== null && p.golesVisitante !== null
@@ -235,7 +230,6 @@ function mostrarPartidos(partidos) {
 
       contenedor.innerHTML += `
         <div class="scoreline-match">
-
           <div class="scoreline-star">☆</div>
 
           <div class="scoreline-time ${p.estado === "LIVE" ? "live-text" : ""}">
@@ -262,16 +256,12 @@ function mostrarPartidos(partidos) {
             ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
             ${p.corners ? `<span>⚑ ${p.corners}</span>` : ""}
           </div>
-
         </div>
       `;
     });
   });
 }
 
-/* =========================
-   FILTROS
-========================= */
 function aplicarFiltros() {
   const buscador = document.getElementById("buscador");
   const texto = buscador ? buscador.value.toLowerCase() : "";
@@ -314,29 +304,7 @@ function actualizarContadoresEstado() {
     tab.textContent = `${tab.dataset.nombre} (${cantidad})`;
   });
 }
-/* =========================
-    EN VIVO
-========================= */
-    function calcularMinutoPartido(utcDate, estado) {
-  if (estado !== "LIVE") return "";
 
-  const inicio = new Date(utcDate);
-  const ahora = new Date();
-
-  let minutos = Math.floor((ahora - inicio) / 60000);
-
-  if (minutos < 1) minutos = 1;
-
-  if (minutos <= 45) return `${minutos}'`;
-  if (minutos <= 60) return "HT";
-  if (minutos <= 105) return `${minutos - 15}'`;
-  if (minutos > 105) return "90+'";
-
-  return "";
-}
-/* =========================
-   API PARTIDOS
-========================= */
 async function cargarPartidosAPI() {
   try {
     const fechaAPI = formatoFechaAPI(fechaSeleccionada);
@@ -356,6 +324,13 @@ async function cargarPartidosAPI() {
 
     partidosGlobal = listaPartidos.map(p => {
       const estadoAPI = p.status || p.estado || "";
+
+      const estadoNormalizado =
+        estadoAPI === "FINISHED" || estadoAPI === "TERMINADO"
+          ? "FINAL"
+          : estadoAPI === "IN_PLAY" || estadoAPI === "PAUSED"
+          ? "LIVE"
+          : "PROXIMO";
 
       return {
         fecha: new Date(p.utcDate).toLocaleDateString("es-PE", {
@@ -382,46 +357,9 @@ async function cargarPartidosAPI() {
         golesLocal: p.score?.fullTime?.home ?? p["puntaje"]?.fullTime?.home ?? null,
         golesVisitante: p.score?.fullTime?.away ?? p["puntaje"]?.fullTime?.away ?? null,
 
-        estado:
-          estadoAPI === "FINISHED" || estadoAPI === "TERMINADO" ? "FINAL" :
-          estadoAPI === "IN_PLAY" || estadoAPI === "PAUSED" ? "LIVE" :
-          "PROXIMO",
-
+        estado: estadoNormalizado,
         pronostico: "Pendiente",
-
-       function calcularMinutoPartido(utcDate, estado) {
-  if (estado !== "LIVE") return "";
-
-  const inicio = new Date(utcDate);
-  const ahora = new Date();
-
-  let minutos = Math.floor((ahora - inicio) / 60000);
-
-  if (minutos < 1) minutos = 1;
-
-  // Primer tiempo
-  if (minutos <= 45) {
-    return `${minutos}'`;
-  }
-
-  // Descanso
-  if (minutos > 45 && minutos <= 60) {
-    return "MT";
-    // o return "DESCANSO";
-  }
-
-  // Segundo tiempo
-  if (minutos > 60 && minutos <= 105) {
-    return `${minutos - 15}'`;
-  }
-
-  // Tiempo añadido
-  if (minutos > 105) {
-    return "90+'";
-  }
-
-  return "";
-}
+        minuto: calcularMinutoPartido(p.utcDate, estadoNormalizado),
         ht: p.ht || "",
         corners: p.corners || "",
         rojaLocal: p.rojaLocal || 0,
@@ -438,9 +376,6 @@ async function cargarPartidosAPI() {
   }
 }
 
-/* =========================
-   HISTORIAL
-========================= */
 function cargarHistorial() {
   fetch("historial.json")
     .then(response => response.json())
@@ -494,9 +429,6 @@ function cargarHistorial() {
     });
 }
 
-/* =========================
-   BANKROLL
-========================= */
 function cargarBankroll() {
   fetch("bankroll.json")
     .then(response => response.json())
@@ -550,9 +482,6 @@ function cargarBankroll() {
     });
 }
 
-/* =========================
-   ESTADÍSTICAS GENERALES
-========================= */
 function cargarEstadisticasGenerales() {
   Promise.all([
     fetch("historial.json").then(response => response.json()),
@@ -607,9 +536,6 @@ function cargarEstadisticasGenerales() {
   });
 }
 
-/* =========================
-   EVENTOS
-========================= */
 document.addEventListener("DOMContentLoaded", () => {
   actualizarFechaVista();
   cargarPartidosAPI();
@@ -618,9 +544,7 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarEstadisticasGenerales();
 
   const buscador = document.getElementById("buscador");
-  if (buscador) {
-    buscador.addEventListener("input", aplicarFiltros);
-  }
+  if (buscador) buscador.addEventListener("input", aplicarFiltros);
 
   document.querySelectorAll(".tab-estado").forEach(tab => {
     tab.addEventListener("click", function() {
@@ -629,7 +553,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       this.classList.add("active");
       estadoSeleccionado = this.dataset.estado;
-
       aplicarFiltros();
     });
   });
