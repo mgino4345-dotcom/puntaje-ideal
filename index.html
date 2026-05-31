@@ -183,23 +183,37 @@ function mostrarPartidos(partidos) {
             ${textoTiempo}
           </div>
 
-          <div class="flash-teams">
-            <div class="flash-team">
-              <img src="${p.escudoLocal}" alt="${p.local}">
-              <span>${p.local}</span>
-            </div>
+<div class="flash-teams">
+  <div class="flash-team-row">
+    <div class="flash-team">
+      <img src="${p.escudoLocal}" alt="${p.local}">
+      <span>${p.local}</span>
+    </div>
 
-            <div class="flash-team">
-              <img src="${p.escudoVisitante}" alt="${p.visitante}">
-              <span>${p.visitante}</span>
-            </div>
+    <div class="flash-team-score">
+      ${p.golesLocal !== null ? p.golesLocal : "-"}
+    </div>
+  </div>
 
-            <div class="prediction">Pronóstico: ${p.pronostico}</div>
-          </div>
+  <div class="flash-team-row">
+    <div class="flash-team">
+      <img src="${p.escudoVisitante}" alt="${p.visitante}">
+      <span>${p.visitante}</span>
+    </div>
 
-          <div class="flash-score">
-            ${marcador}
-          </div>
+    <div class="flash-team-score">
+      ${p.golesVisitante !== null ? p.golesVisitante : "-"}
+    </div>
+  </div>
+
+  <div class="prediction">Pronóstico: ${p.pronostico}</div>
+</div>
+
+<div class="flash-score compact-score">
+  ${p.golesLocal !== null && p.golesVisitante !== null
+    ? `${p.golesLocal} - ${p.golesVisitante}`
+    : "VS"}
+</div>
 
           <div class="flash-status ${
             p.estado === "LIVE" ? "live" :
