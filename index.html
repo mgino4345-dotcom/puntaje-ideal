@@ -7,6 +7,12 @@
 <title>Puntaje Ideal</title>
 
 <style>
+  .mini-league{
+  font-size:12px;
+  color:#9ca3af;
+  font-weight:bold;
+  margin-bottom:6px;
+}
   .team-name{
   display:flex;
   align-items:center;
@@ -254,24 +260,29 @@ function mostrarPartidos(partidos) {
 
   partidos.forEach(p => {
     contenedor.innerHTML += `
-      <div class="match">
-        <div class="time">${p.hora}</div>
-        <div class="teams">
-<div class="team">
-  <span class="team-name">
-    <img src="${p.escudoLocal}" class="team-logo" alt="${p.local}">
-    ${p.local}
-  </span>
-</div>
+<div class="match">
+  <div class="time">${p.hora}</div>
 
-<div class="team">
-  <span class="team-name">
-    <img src="${p.escudoVisitante}" class="team-logo" alt="${p.visitante}">
-    ${p.visitante}
-  </span>
-</div>
-          <div class="prediction">Pronóstico: ${p.pronostico}</div>
-        </div>
+  <div class="teams">
+
+    <div class="mini-league">${p.pais} ${p.liga}</div>
+
+    <div class="team">
+      <span class="team-name">
+        <img src="${p.escudoLocal}" class="team-logo" alt="${p.local}">
+        ${p.local}
+      </span>
+    </div>
+
+    <div class="team">
+      <span class="team-name">
+        <img src="${p.escudoVisitante}" class="team-logo" alt="${p.visitante}">
+        ${p.visitante}
+      </span>
+    </div>
+
+    <div class="prediction">Pronóstico: ${p.pronostico}</div>
+  </div>
 <div class="score">
   ${
     p.golesLocal !== null && p.golesVisitante !== null
