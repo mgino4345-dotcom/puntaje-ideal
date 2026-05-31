@@ -408,6 +408,10 @@ async function cargarPartidosAPI() {
     }));
 
     mostrarPartidos(partidosGlobal);
+    <div class="time">
+  <div>📅 ${p.fecha}</div>
+  <div>🕒 ${p.hora}</div>
+</div>
     actualizarContadoresLiga();
 
   } catch (error) {
