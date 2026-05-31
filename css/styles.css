@@ -664,4 +664,96 @@ footer{
     grid-column:3 / span 2;
   }
 }
+
+   .scoreline-league{
+  background:#fff3cd;
+  color:#374151;
+  font-weight:800;
+  padding:10px 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:14px;
+}
+
+.scoreline-match{
+  background:#f8fafc;
+  color:#111827;
+  display:grid;
+  grid-template-columns:30px 75px 1fr 60px 1fr 120px;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.scoreline-star{
+  font-size:20px;
+  color:#cbd5e1;
+  text-align:center;
+}
+
+.scoreline-time{
+  color:#6b7280;
+  font-weight:800;
+  font-size:13px;
+}
+
+.scoreline-time.live-text{
+  color:#ff0050;
+}
+
+.scoreline-home,
+.scoreline-away{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:800;
+  font-size:14px;
+}
+
+.scoreline-home{
+  justify-content:flex-end;
+}
+
+.scoreline-away{
+  justify-content:flex-start;
+}
+
+.scoreline-home img,
+.scoreline-away img{
+  width:22px !important;
+  height:22px !important;
+  max-width:22px !important;
+  max-height:22px !important;
+  object-fit:contain;
+}
+
+.scoreline-result{
+  text-align:center;
+  font-size:18px;
+  font-weight:900;
+  color:#dc2626;
+}
+
+.scoreline-extra{
+  color:#9ca3af;
+  font-weight:800;
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+}
+
+.red-card{
+  background:#dc2626;
+  color:white;
+  font-size:10px;
+  padding:2px 5px;
+  border-radius:4px;
+  font-weight:900;
+}
+   .scoreline-home img,
+.scoreline-away img{
+  width:22px !important;
+  height:22px !important;
 }
