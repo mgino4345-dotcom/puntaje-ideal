@@ -1,13 +1,16 @@
 [
   {
-    "hora": "15:00",
-    "liga": "Liga 1",
-    "local": "Alianza Lima",
-    "visitante": "Universitario",
-    "escudoLocal": "escudos/alianzalima.png",
-    "escudoVisitante": "escudos/universitario.png",
-    "pronostico": "Over 1.5"
-  },
+  "hora": "15:00",
+  "liga": "Liga 1",
+  "local": "Alianza Lima",
+  "visitante": "Universitario",
+  "escudoLocal": "escudos/alianzalima.png",
+  "escudoVisitante": "escudos/universitario.png",
+  "golesLocal": null,
+  "golesVisitante": null,
+  "estado": "PROXIMO",
+  "pronostico": "Over 1.5"
+},
   {
     "hora": "18:00",
     "liga": "Argentina",
