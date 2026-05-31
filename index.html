@@ -269,10 +269,13 @@ function mostrarPartidos(partidos) {
             ${p.rojaVisitante > 0 ? `<span class="red-card">${p.rojaVisitante}</span>` : ""}
           </div>
 
-          <div class="scoreline-extra">
-            ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
-            ${p.corners ? `<span>⚑ ${p.corners}</span>` : ""}
-          </div>
+<div class="scoreline-extra">
+  ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
+  ${p.corners ? `<span>⚑ ${p.corners}</span>` : ""}
+  <span class="pick-ia ${p.nivelPick?.includes("FUERTE") ? "pick-fuerte" : p.nivelPick?.includes("MEDIO") ? "pick-medio" : "pick-evitar"}">
+    ${p.pronostico}
+  </span>
+</div>
         </div>
       `;
     });
@@ -321,7 +324,73 @@ function actualizarContadoresEstado() {
     tab.textContent = `${tab.dataset.nombre} (${cantidad})`;
   });
 }
+/// PRONOSTICO ///
+   function generarPronosticoIA(p) {
+  let puntos = 0;
+  let mercado = "Over 1.5";
+  let etiqueta = "🔴 EVITAR";
 
+  const liga = (p.liga || "").toLowerCase();
+
+  // Ligas con buena tendencia de goles
+  if (
+    liga.includes("brasileiro") ||
+    liga.includes("premier") ||
+    liga.includes("bundesliga") ||
+    liga.includes("eredivisie") ||
+    liga.includes("liga")
+  ) {
+    puntos += 2;
+  }
+
+  // Partido en vivo
+  if (p.estado === "LIVE") {
+    puntos += 2;
+  }
+
+  // Si ya hay 1 gol, Over 1.5 gana fuerza
+  if (
+    p.golesLocal !== null &&
+    p.golesVisitante !== null &&
+    p.golesLocal + p.golesVisitante >= 1
+  ) {
+    puntos += 3;
+  }
+
+  // Si está 0-0 en vivo, menor seguridad
+  if (
+    p.estado === "LIVE" &&
+    p.golesLocal === 0 &&
+    p.golesVisitante === 0
+  ) {
+    puntos -= 1;
+  }
+
+  // Si ya terminó, no recomendar
+  if (p.estado === "FINAL") {
+    return {
+      etiqueta: "⚫ FINALIZADO",
+      mercado: "Sin pick",
+      puntos: 0
+    };
+  }
+
+  if (puntos >= 5) {
+    etiqueta = "🟢 PICK FUERTE";
+  } else if (puntos >= 3) {
+    etiqueta = "🟡 PICK MEDIO";
+  } else {
+    etiqueta = "🔴 EVITAR";
+    mercado = "Sin entrada clara";
+  }
+
+  return {
+    etiqueta,
+    mercado,
+    puntos
+  };
+}
+   // FIN DE PRONOSTICO //
 async function cargarPartidosAPI() {
   try {
     const fechaAPI = formatoFechaAPI(fechaSeleccionada);
@@ -375,7 +444,15 @@ async function cargarPartidosAPI() {
         golesVisitante: p.score?.fullTime?.away ?? p["puntaje"]?.fullTime?.away ?? null,
 
         estado: estadoNormalizado,
-        pronostico: "Pendiente",
+        const pronosticoIA = generarPronosticoIA({
+  liga: p.competition?.name || p["competencia"]?.nombre || "",
+  estado: estadoNormalizado,
+  golesLocal: p.score?.fullTime?.home ?? p["puntaje"]?.fullTime?.home ?? null,
+  golesVisitante: p.score?.fullTime?.away ?? p["puntaje"]?.fullTime?.away ?? null
+});
+        pronostico: `${pronosticoIA.etiqueta} · ${pronosticoIA.mercado}`,
+nivelPick: pronosticoIA.etiqueta,
+puntosIA: pronosticoIA.puntos,
         minuto: calcularMinutoPartido(p.utcDate, estadoNormalizado),
         ht: p.ht || "",
         corners: p.corners || "",
