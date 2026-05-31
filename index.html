@@ -314,7 +314,26 @@ function actualizarContadoresEstado() {
     tab.textContent = `${tab.dataset.nombre} (${cantidad})`;
   });
 }
+/* =========================
+    EN VIVO
+========================= */
+    function calcularMinutoPartido(utcDate, estado) {
+  if (estado !== "LIVE") return "";
 
+  const inicio = new Date(utcDate);
+  const ahora = new Date();
+
+  let minutos = Math.floor((ahora - inicio) / 60000);
+
+  if (minutos < 1) minutos = 1;
+
+  if (minutos <= 45) return `${minutos}'`;
+  if (minutos <= 60) return "HT";
+  if (minutos <= 105) return `${minutos - 15}'`;
+  if (minutos > 105) return "90+'";
+
+  return "";
+}
 /* =========================
    API PARTIDOS
 ========================= */
@@ -370,7 +389,39 @@ async function cargarPartidosAPI() {
 
         pronostico: "Pendiente",
 
-        minuto: p.minuto || "",
+       function calcularMinutoPartido(utcDate, estado) {
+  if (estado !== "LIVE") return "";
+
+  const inicio = new Date(utcDate);
+  const ahora = new Date();
+
+  let minutos = Math.floor((ahora - inicio) / 60000);
+
+  if (minutos < 1) minutos = 1;
+
+  // Primer tiempo
+  if (minutos <= 45) {
+    return `${minutos}'`;
+  }
+
+  // Descanso
+  if (minutos > 45 && minutos <= 60) {
+    return "MT";
+    // o return "DESCANSO";
+  }
+
+  // Segundo tiempo
+  if (minutos > 60 && minutos <= 105) {
+    return `${minutos - 15}'`;
+  }
+
+  // Tiempo añadido
+  if (minutos > 105) {
+    return "90+'";
+  }
+
+  return "";
+}
         ht: p.ht || "",
         corners: p.corners || "",
         rojaLocal: p.rojaLocal || 0,
