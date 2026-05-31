@@ -531,4 +531,33 @@ footer{
   border-radius:8px;
   padding:4px 6px;
 }
+
+      /* =========================
+   Alertas 
+========================= */
+
+   .gol-alerta{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#ff0050;
+  color:white;
+  padding:18px 22px;
+  border-radius:14px;
+  font-weight:900;
+  z-index:9999;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  animation:golEntrada .4s ease;
+}
+
+@keyframes golEntrada{
+  from{
+    transform:translateX(120%);
+    opacity:0;
+  }
+  to{
+    transform:translateX(0);
+    opacity:1;
+  }
+}
 }
