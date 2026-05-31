@@ -1,18 +1,20 @@
 [
- {
-  "hora": "15:00",
-  "liga": "Liga 1",
-  "local": "Alianza Lima",
-  "visitante": "Universitario",
-  "escudoLocal": "alianzalima.png",
-  "escudoVisitante": "universitario.png",
-  "pronostico": "Over 1.5"
-}
+  {
+    "hora": "15:00",
+    "liga": "Liga 1",
+    "local": "Alianza Lima",
+    "visitante": "Universitario",
+    "escudoLocal": "alianzalima.png",
+    "escudoVisitante": "universitario.png",
+    "pronostico": "Over 1.5"
+  },
   {
     "hora": "18:00",
     "liga": "Argentina",
     "local": "Boca Juniors",
     "visitante": "Racing Club",
+    "escudoLocal": "boca.png",
+    "escudoVisitante": "racing.png",
     "pronostico": "Ambos marcan"
   },
   {
@@ -20,8 +22,8 @@
     "liga": "Brasil",
     "local": "Flamengo",
     "visitante": "Palmeiras",
+    "escudoLocal": "flamengo.png",
+    "escudoVisitante": "palmeiras.png",
     "pronostico": "Over 2.5"
   }
 ]
-  "escudoLocal": "alianzalima.png",
-"escudoVisitante": "universitario.png"
