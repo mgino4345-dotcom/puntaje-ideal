@@ -287,6 +287,10 @@ function mostrarPartidos(partidos) {
     contenedor.innerHTML += `
       <div class="match">
         <div class="teams">
+            <div class="time">
+  <div>📅 ${p.fecha}</div>
+  <div>🕒 ${p.hora}</div>
+</div>
           <div class="mini-league">${p.pais || ''} ${p.liga || ''}</div>
 
           <div class="team">
@@ -404,10 +408,6 @@ async function cargarPartidosAPI() {
     }));
 
     mostrarPartidos(partidosGlobal);
-    <div class="time">
-  <div>📅 ${p.fecha}</div>
-  <div>🕒 ${p.hora}</div>
-</div>
     actualizarContadoresLiga();
 
   } catch (error) {
