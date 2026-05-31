@@ -483,5 +483,13 @@ footer{
   font-size:14px;
   text-align:center;
 }
-  
+  .minuto-live{
+  color:#ff004f;
+  font-weight:700;
+}
+
+.minuto-descanso{
+  color:#ffb300;
+  font-weight:700;
+}
 }
