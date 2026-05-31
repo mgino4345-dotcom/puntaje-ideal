@@ -1,8 +1,27 @@
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+/* =====================================
+   RESET
+===================================== */
 
-body{background:#0f1115;color:#e8e8e8}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
 
-header{background:#101820;border-bottom:1px solid #252b33}
+body{
+  background:#0f1115;
+  color:#e8e8e8;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+header{
+  background:#101820;
+  border-bottom:1px solid #252b33;
+}
 
 .topbar{
   max-width:1200px;
@@ -13,51 +32,73 @@ header{background:#101820;border-bottom:1px solid #252b33}
   gap:14px;
 }
 
-.logo-img{width:46px;border-radius:8px}
+.logo-img{
+  width:46px;
+  border-radius:8px;
+}
 
-.brand h1{font-size:22px;color:#fff}
-.brand p{font-size:11px;color:#9ca3af}
+.brand h1{
+  font-size:22px;
+  color:#fff;
+}
 
-.search{margin-left:auto}
+.brand p{
+  font-size:11px;
+  color:#9ca3af;
+}
+
+/* =====================================
+   BUSCADOR
+===================================== */
+
+.search{
+  margin-left:auto;
+}
 
 .search input{
   width:300px;
-  max-width:100%;
   background:#1f2937;
   border:1px solid #374151;
   color:white;
   border-radius:8px;
   padding:10px;
-  outline:none;
 }
 
-nav{background:#161b22}
+/* =====================================
+   MENÚ
+===================================== */
+
+nav{
+  background:#161b22;
+}
 
 nav ul{
   max-width:1200px;
   margin:auto;
   display:flex;
-  list-style:none;
-  overflow-x:auto;
   gap:6px;
+  list-style:none;
   padding:8px;
 }
 
 nav a{
   display:block;
-  color:#d1d5db;
   text-decoration:none;
+  color:#d1d5db;
   font-weight:bold;
-  font-size:13px;
   padding:9px 14px;
   border-radius:20px;
 }
 
-nav a.active,
-nav a:hover{
+nav a:hover,
+nav a.active{
   background:#0d47a1;
   color:white;
 }
+
+/* =====================================
+   CONTENEDOR
+===================================== */
 
 .container{
   max-width:1200px;
@@ -68,38 +109,17 @@ nav a:hover{
 .section-title{
   font-size:18px;
   margin:16px 0 10px;
-  color:white;
 }
 
-.scorebar{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  margin-bottom:14px;
-}
-
-.day{
-  background:#1f2937;
-  border:1px solid #374151;
-  color:#d1d5db;
-  padding:9px 14px;
-  border-radius:20px;
-  font-size:13px;
-  font-weight:bold;
-  white-space:nowrap;
-  cursor:pointer;
-}
-
-.day.active{
-  background:#0d47a1;
-  color:white;
-}
+/* =====================================
+   FILTROS
+===================================== */
 
 .barra-filtros{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin:10px 0 20px;
+  margin-bottom:20px;
   flex-wrap:wrap;
   gap:15px;
 }
@@ -118,15 +138,16 @@ nav a:hover{
   color:#1f2937;
   font-weight:900;
   cursor:pointer;
-  transition:.2s;
 }
-
-.tab-estado:hover{transform:translateY(-2px)}
 
 .tab-estado.active{
   background:#ff0050;
   color:white;
 }
+
+/* =====================================
+   SELECTOR FECHA
+===================================== */
 
 .selector-fecha{
   display:flex;
@@ -137,48 +158,26 @@ nav a:hover{
 .selector-fecha button{
   width:52px;
   height:44px;
+  border:none;
   border-radius:12px;
-  border:1px solid #374151;
   background:#1f2937;
   color:white;
   cursor:pointer;
-  font-weight:bold;
-  font-size:16px;
 }
 
 .selector-fecha span{
-  padding:12px 24px;
-  border-radius:14px;
   background:#111827;
   border:1px solid #374151;
   color:#facc15;
+  padding:12px 24px;
+  border-radius:14px;
   font-weight:900;
 }
 
-.league-card{
-  background:#181c23;
-  border:1px solid #2a303a;
-  border-radius:12px;
-  overflow:hidden;
-  margin-bottom:14px;
-}
+/* =====================================
+   LIGA
+===================================== */
 
-.league-head{
-  background:#202632;
-  padding:11px 14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-weight:bold;
-  color:#fff;
-}
-
-.league-head span{
-  font-size:12px;
-  color:#9ca3af;
-}
-
-/* MARCADOR TIPO SOFASCORE */
 .scoreline-league{
   background:#fff3cd;
   color:#374151;
@@ -186,37 +185,27 @@ nav a:hover{
   padding:10px 12px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  font-size:14px;
-  border-bottom:1px solid #e5e7eb;
 }
+
+/* =====================================
+   PARTIDOS
+===================================== */
 
 .scoreline-match{
   background:#f8fafc;
   color:#111827;
   display:grid;
-  grid-template-columns:30px 75px 1fr 60px 1fr 120px;
+  grid-template-columns:
+    30px
+    80px
+    1fr
+    80px
+    1fr
+    120px;
   align-items:center;
   gap:10px;
   padding:10px 12px;
   border-bottom:1px solid #e5e7eb;
-  font-size:13px;
-}
-
-.scoreline-star{
-  font-size:20px;
-  color:#cbd5e1;
-  text-align:center;
-}
-
-.scoreline-time{
-  color:#6b7280;
-  font-weight:800;
-  font-size:13px;
-}
-
-.scoreline-time.live-text{
-  color:#ff0050;
 }
 
 .scoreline-home,
@@ -224,24 +213,13 @@ nav a:hover{
   display:flex;
   align-items:center;
   gap:8px;
-  font-weight:800;
-  font-size:14px;
-}
-
-.scoreline-home{
-  justify-content:flex-end;
-}
-
-.scoreline-away{
-  justify-content:flex-start;
+  font-weight:700;
 }
 
 .scoreline-home img,
 .scoreline-away img{
-  width:22px !important;
-  height:22px !important;
-  max-width:22px !important;
-  max-height:22px !important;
+  width:22px;
+  height:22px;
   object-fit:contain;
 }
 
@@ -252,254 +230,42 @@ nav a:hover{
   color:#dc2626;
 }
 
-.live-result{
-  color:#ff0050;
-}
+/* =====================================
+   ESTADOS
+===================================== */
 
-.scoreline-extra{
-  color:#9ca3af;
-  font-weight:800;
-  display:flex;
-  gap:10px;
-  justify-content:flex-end;
-}
-
-.red-card{
+.live{
   background:#dc2626;
   color:white;
-  font-size:10px;
-  padding:2px 5px;
-  border-radius:4px;
-  font-weight:900;
 }
 
-/* MENSAJE SIN PARTIDOS */
-.sin-partidos{
-  padding:40px;
-  text-align:center;
-  color:#9ca3af;
-  font-size:18px;
-  font-weight:bold;
-  background:#111827;
-  border-radius:12px;
-  margin:15px;
+.next{
+  background:#374151;
+  color:#d1d5db;
 }
 
-/* PICKS */
-.picks{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:12px;
-  margin-top:12px;
-}
-
-.pick-card{
-  background:#181c23;
-  border:1px solid #2a303a;
-  border-radius:12px;
-  padding:14px;
-}
-
-.pick-card h3{
-  font-size:15px;
-  margin-bottom:8px;
+.end{
+  background:#16a34a;
   color:white;
 }
 
-.pick-card p{
-  font-size:13px;
-  color:#cbd5e1;
-  margin-bottom:10px;
-}
-
-.badge{
-  display:inline-block;
-  background:#0d47a1;
-  color:white;
-  padding:5px 10px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:bold;
-}
-
-.badge.gold{background:#ca8a04}
-.badge.red{background:#dc2626}
-
-/* HISTORIAL / BANKROLL */
-.match{
-  display:grid;
-  grid-template-columns:70px 1fr 60px 90px;
-  align-items:center;
-  gap:10px;
-  padding:12px 14px;
-  border-top:1px solid #2a303a;
-}
-
-.match:hover{background:#202632}
-
-.time{
-  font-size:12px;
-  color:#9ca3af;
-  font-weight:bold;
-}
-
-.teams{line-height:1.7}
-
-.team{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.score{
-  font-size:20px;
-  font-weight:900;
-  text-align:center;
-  color:#fff;
-}
-
-.status{
-  text-align:center;
-  font-size:11px;
-  font-weight:bold;
-  padding:6px;
-  border-radius:14px;
-}
-
-.live{background:#dc2626;color:white}
-.next{background:#374151;color:#d1d5db}
-.end{background:#16a34a;color:white}
-
-.prediction{
-  margin-top:6px;
-  font-size:12px;
-  color:#facc15;
-  font-weight:bold;
-}
-
-/* ALERTA GOL */
-.gol-alerta{
-  position:fixed;
-  top:20px;
-  right:20px;
-  background:#ff0050;
-  color:white;
-  padding:18px 22px;
-  border-radius:14px;
-  font-weight:900;
-  z-index:9999;
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-  animation:golEntrada .4s ease;
-}
-
-@keyframes golEntrada{
-  from{
-    transform:translateX(120%);
-    opacity:0;
-  }
-  to{
-    transform:translateX(0);
-    opacity:1;
-  }
-}
-
-footer{
-  margin-top:30px;
-  background:#101820;
-  border-top:1px solid #252b33;
-  text-align:center;
-  color:#9ca3af;
-  padding:18px;
-  font-size:13px;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .topbar{flex-wrap:wrap}
-
-  .search{
-    width:100%;
-    margin-left:0;
-  }
-
-  .search input{width:100%}
-
-  .brand h1{font-size:20px}
-
-  .barra-filtros{
-    align-items:flex-start;
-  }
-
-  .selector-fecha{
-    width:100%;
-    justify-content:center;
-  }
-
-  .tab-estado{
-    padding:10px 14px;
-    font-size:12px;
-  }
-
-  .scoreline-match{
-    grid-template-columns:25px 60px 1fr 45px;
-    gap:6px;
-    padding:9px 8px;
-  }
-
-  .scoreline-away,
-  .scoreline-extra{
-    grid-column:3 / span 2;
-  }
-
-  .scoreline-home,
-  .scoreline-away{
-    font-size:12px;
-  }
-
-  .scoreline-home img,
-  .scoreline-away img{
-    width:20px !important;
-    height:20px !important;
-  }
-
-  .scoreline-result{
-    font-size:15px;
-  }
-
-  .match{
-    grid-template-columns:50px 1fr 45px 70px;
-    gap:6px;
-    padding:11px 9px;
-  }
-
-  .score{
-    font-size:22px;
-    line-height:1.4;
-  }
-
-  .scoreline-time{
-  color:#64748b;
-  font-weight:700;
-  font-size:14px;
-  text-align:center;
-}
-  .minuto-live{
-  color:#ff004f;
+.minuto-live{
+  color:#ff0050;
   font-weight:700;
 }
 
 .minuto-descanso{
-  color:#ffb300;
+  color:#facc15;
   font-weight:700;
 }
-   }
-/* ==========================
+
+/* =====================================
    TABLA DE POSICIONES
-========================== */
+===================================== */
 
 .tabla-flash{
   width:100%;
-  background:#f8fafc;
+  background:white;
   color:#111827;
   border-radius:10px;
   overflow:hidden;
@@ -507,33 +273,47 @@ footer{
 
 .tabla-header{
   display:grid;
-  grid-template-columns:40px 1fr 50px 50px 50px 50px 60px 60px;
-  align-items:center;
+  grid-template-columns:
+    50px
+    1fr
+    50px
+    50px
+    50px
+    50px
+    60px
+    60px;
   background:#ececec;
-  font-weight:700;
-  padding:10px;
   font-size:12px;
+  font-weight:700;
+  padding:12px;
 }
 
 .tabla-row{
   display:grid;
-  grid-template-columns:40px 1fr 50px 50px 50px 50px 60px 60px;
+  grid-template-columns:
+    50px
+    1fr
+    50px
+    50px
+    50px
+    50px
+    60px
+    60px;
   align-items:center;
-  padding:10px;
-  border-bottom:1px solid #ddd;
-  background:white;
+  padding:12px;
+  border-bottom:1px solid #e5e7eb;
 }
 
 .tabla-row:hover{
-  background:#f5f5f5;
+  background:#f8fafc;
 }
 
 .tabla-pos{
-  background:#0b57d0;
-  color:white;
   width:28px;
   height:28px;
   border-radius:6px;
+  background:#0d47a1;
+  color:white;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -543,25 +323,106 @@ footer{
 .tabla-equipo{
   display:flex;
   align-items:center;
-  gap:8px;
-}
-
-.tabla-equipo strong{
-  color:#111827;
-  font-size:14px;
+  gap:10px;
 }
 
 .tabla-equipo img{
   width:22px !important;
   height:22px !important;
-  min-width:22px !important;
-  min-height:22px !important;
-  max-width:22px !important;
-  max-height:22px !important;
   object-fit:contain;
 }
 
 .tabla-puntos{
   font-weight:900;
 }
+
+/* =====================================
+   PICKS
+===================================== */
+
+.picks{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:12px;
+}
+
+.pick-card{
+  background:#181c23;
+  border:1px solid #2a303a;
+  border-radius:12px;
+  padding:14px;
+}
+
+/* =====================================
+   ALERTA GOL
+===================================== */
+
+.gol-alerta{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#ff0050;
+  color:white;
+  padding:18px 22px;
+  border-radius:14px;
+  z-index:9999;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer{
+  margin-top:30px;
+  background:#101820;
+  border-top:1px solid #252b33;
+  text-align:center;
+  color:#9ca3af;
+  padding:18px;
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(max-width:768px){
+
+  .topbar{
+    flex-wrap:wrap;
+  }
+
+  .search{
+    width:100%;
+    margin-left:0;
+  }
+
+  .search input{
+    width:100%;
+  }
+
+  .scoreline-match{
+    grid-template-columns:
+      25px
+      60px
+      1fr
+      50px;
+  }
+
+  .tabla-header,
+  .tabla-row{
+    grid-template-columns:
+      35px
+      1fr
+      40px
+      40px
+      40px
+      40px
+      45px
+      45px;
+  }
+
+  .tabla-equipo img{
+    width:18px !important;
+    height:18px !important;
+  }
 }
