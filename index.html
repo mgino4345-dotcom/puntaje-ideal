@@ -280,6 +280,27 @@ color:#9ca3af;
     font-size:12px;
   }
 }
+  .tabs-live{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  margin:10px 0 15px;
+}
+
+.tab-estado{
+  border:0;
+  padding:10px 18px;
+  border-radius:10px;
+  background:#e5e7eb;
+  color:#374151;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.tab-estado.active{
+  background:#ff0050;
+  color:white;
+}
 </style>
 </head>
 
@@ -322,18 +343,18 @@ color:#9ca3af;
 
   <h2 class="section-title">⚽ Partidos de hoy</h2>
 
+  <div class="tabs-live">
+  <button class="tab-estado active" data-estado="TODOS">TODOS</button>
+  <button class="tab-estado" data-estado="LIVE">EN VIVO</button>
+  <button class="tab-estado" data-estado="FINAL">FINALIZADOS</button>
+  <button class="tab-estado" data-estado="PROXIMO">PRÓXIMOS</button>
+</div>
+
 <section class="league-card">
   <div class="league-head">
     ⚽ Marcadores y partidos
     <span>Automático</span>
   </div>
-  
-<div class="tabs-live">
-  <button class="tab active" data-estado="TODOS">TODOS</button>
-  <button class="tab" data-estado="LIVE">EN VIVO</button>
-  <button class="tab" data-estado="FINAL">FINALIZADOS</button>
-  <button class="tab" data-estado="PROXIMO">PRÓXIMOS</button>
-</div>
   
   <div id="partidos-json"></div>
 </section>
@@ -392,6 +413,7 @@ color:#9ca3af;
 <script>
 let partidosGlobal = [];
 let ligaSeleccionada = "TODOS";
+let estadoSeleccionado = "TODOS";
 
 function mostrarPartidos(partidos) {
   const contenedor = document.getElementById("partidos-json");
@@ -493,7 +515,10 @@ function aplicarFiltros() {
     const coincideLiga =
       ligaSeleccionada === "TODOS" || p.liga === ligaSeleccionada;
 
-    return coincideTexto && coincideLiga;
+    const coincideEstado =
+      estadoSeleccionado === "TODOS" || p.estado === estadoSeleccionado;
+
+    return coincideTexto && coincideLiga && coincideEstado;
   });
 
   mostrarPartidos(filtrados);
@@ -572,7 +597,7 @@ async function cargarPartidosAPI() {
 }
 
 document.getElementById("buscador").addEventListener("input", aplicarFiltros);
-
+  
 document.querySelectorAll(".filtro-liga").forEach(boton => {
   boton.addEventListener("click", function() {
     document.querySelectorAll(".filtro-liga")
@@ -584,6 +609,19 @@ document.querySelectorAll(".filtro-liga").forEach(boton => {
     aplicarFiltros();
   });
 });
+
+  document.querySelectorAll(".tab-estado").forEach(tab => {
+  tab.addEventListener("click", function() {
+    document.querySelectorAll(".tab-estado")
+      .forEach(t => t.classList.remove("active"));
+
+    this.classList.add("active");
+    estadoSeleccionado = this.dataset.estado;
+
+    aplicarFiltros();
+  });
+});
+  
 
 cargarPartidosAPI();
 
