@@ -125,6 +125,41 @@ let partidosGlobal = [];
 let ligaSeleccionada = "TODOS";
 let estadoSeleccionado = "TODOS";
 let fechaSeleccionada = new Date();
+let marcadoresAnteriores = {};
+
+  function verificarGoles(partidos) {
+  partidos.forEach(p => {
+    const id = `${p.local}-${p.visitante}`;
+    const marcadorActual = `${p.golesLocal}-${p.golesVisitante}`;
+
+    if (
+      p.golesLocal !== null &&
+      p.golesVisitante !== null &&
+      marcadoresAnteriores[id] &&
+      marcadoresAnteriores[id] !== marcadorActual
+    ) {
+      mostrarNotificacionGol(p);
+    }
+
+    marcadoresAnteriores[id] = marcadorActual;
+  });
+}
+  function mostrarNotificacionGol(p) {
+  const alerta = document.createElement("div");
+  alerta.className = "gol-alerta";
+
+  alerta.innerHTML = `
+    ⚽ GOOOOOL<br>
+    <strong>${p.local} ${p.golesLocal} - ${p.golesVisitante} ${p.visitante}</strong>
+  `;
+
+  document.body.appendChild(alerta);
+
+  setTimeout(() => {
+    alerta.remove();
+  }, 6000);
+}
+  
 
 function mostrarPartidos(partidos) {
   const contenedor = document.getElementById("partidos-json");
@@ -339,6 +374,7 @@ const response = await fetch(`https://puntaje-api.mgino4345.workers.dev/partidos
     mostrarPartidos(partidosGlobal);
     actualizarContadoresLiga();
     actualizarContadoresEstado();
+    verificarGoles(partidosGlobal);
 
   } catch (error) {
     console.error("Error cargando API:", error);
