@@ -272,8 +272,23 @@ function mostrarPartidos(partidos) {
 </div>
           <div class="prediction">Pronóstico: ${p.pronostico}</div>
         </div>
-        <div class="score">-<br>-</div>
-        <div class="status next">PRÓXIMO</div>
+<div class="score">
+  ${
+    p.golesLocal !== null && p.golesVisitante !== null
+    ? `${p.golesLocal}<br>${p.golesVisitante}`
+    : 'VS'
+  }
+</div>
+
+<div class="status ${
+  p.estado === 'LIVE' ? 'live' :
+  p.estado === 'FINAL' ? 'end' : 'next'
+}">
+  ${
+    p.estado === 'LIVE' ? 'EN VIVO' :
+    p.estado === 'FINAL' ? 'FINAL' : 'PRÓXIMO'
+  }
+</div>
       </div>
     `;
   });
