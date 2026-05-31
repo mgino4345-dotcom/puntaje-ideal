@@ -228,7 +228,7 @@ function buscarEscudosAPI(){
   buscarEscudoEquipo(visitante, "escudoVisitante", "previewVisitante");
 }
 
-function normalizarTexto(texto){
+  function normalizarTexto(texto){
   return texto
     .toLowerCase()
     .normalize("NFD")
@@ -243,6 +243,13 @@ function buscarEscudoEquipo(nombreEquipo, campoDestino, previewDestino){
   fetch(url)
     .then(response => response.json())
     .then(data => {
+
+      const campo = document.getElementById(campoDestino);
+      const preview = document.getElementById(previewDestino);
+
+      campo.value = "";
+      preview.src = "";
+
       if(data.teams && data.teams.length > 0){
 
         const nombreBuscado = normalizarTexto(nombreEquipo);
@@ -253,10 +260,12 @@ function buscarEscudoEquipo(nombreEquipo, campoDestino, previewDestino){
 
         const equipoElegido = equipoExacto || data.teams[0];
 
-        const escudo = equipoElegido.strBadge;
-
-        document.getElementById(campoDestino).value = escudo;
-        document.getElementById(previewDestino).src = escudo;
+        if(equipoElegido && equipoElegido.strBadge){
+          campo.value = equipoElegido.strBadge;
+          preview.src = equipoElegido.strBadge;
+        } else {
+          alert(`No se encontró escudo para: ${nombreEquipo}`);
+        }
 
       } else {
         alert(`No se encontró escudo para: ${nombreEquipo}`);
@@ -264,7 +273,11 @@ function buscarEscudoEquipo(nombreEquipo, campoDestino, previewDestino){
     })
     .catch(error => {
       console.error(error);
-      alert("Error consultando TheSportsDB");
+
+      document.getElementById(campoDestino).value = "";
+      document.getElementById(previewDestino).src = "";
+
+      alert(`Error consultando TheSportsDB para: ${nombreEquipo}`);
     });
 }
 </script>
