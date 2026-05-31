@@ -1,0 +1,20 @@
+[
+  {
+    "fecha": "30/05/2026",
+    "partido": "Flamengo vs Palmeiras",
+    "pick": "Over 2.5",
+    "resultado": "GANADO"
+  },
+  {
+    "fecha": "29/05/2026",
+    "partido": "Boca Juniors vs Racing",
+    "pick": "Over 1.5",
+    "resultado": "GANADO"
+  },
+  {
+    "fecha": "28/05/2026",
+    "partido": "River Plate vs San Lorenzo",
+    "pick": "Ambos marcan",
+    "resultado": "PERDIDO"
+  }
+]
