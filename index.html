@@ -266,11 +266,38 @@ fetch('partidos.json')
   });
 })
 .catch(error => console.error('Error cargando partidos:', error));
-  fetch('historial.json')
+ fetch('historial.json')
 .then(response => response.json())
 .then(historial => {
 
+  const estadisticas = document.getElementById('estadisticas-historial');
   const contenedor = document.getElementById('historial-picks');
+
+  const ganados = historial.filter(item => item.resultado === 'GANADO').length;
+  const perdidos = historial.filter(item => item.resultado === 'PERDIDO').length;
+  const total = historial.length;
+  const efectividad = total > 0 ? ((ganados / total) * 100).toFixed(1) : 0;
+
+  estadisticas.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:15px">
+      <div style="background:#111827;padding:15px;border-radius:10px">
+        <strong>✅ Ganados</strong><br>
+        <span style="font-size:24px;color:#22c55e">${ganados}</span>
+      </div>
+
+      <div style="background:#111827;padding:15px;border-radius:10px">
+        <strong>❌ Perdidos</strong><br>
+        <span style="font-size:24px;color:#ef4444">${perdidos}</span>
+      </div>
+
+      <div style="background:#111827;padding:15px;border-radius:10px">
+        <strong>🎯 Efectividad</strong><br>
+        <span style="font-size:24px;color:#facc15">${efectividad}%</span>
+      </div>
+    </div>
+  `;
+
+  contenedor.innerHTML = '';
 
   historial.forEach(item => {
 
@@ -302,6 +329,7 @@ fetch('partidos.json')
       </div>
     `;
   });
+
 });
   fetch('bankroll.json')
 .then(response => response.json())
