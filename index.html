@@ -7,6 +7,17 @@
 <title>Puntaje Ideal</title>
 
 <style>
+  .team-name{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.team-logo{
+  width:24px;
+  height:24px;
+  object-fit:contain;
+}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#0f1115;color:#e8e8e8}
 
@@ -235,8 +246,19 @@ function mostrarPartidos(partidos) {
       <div class="match">
         <div class="time">${p.hora}</div>
         <div class="teams">
-          <div class="team"><span>${p.local}</span></div>
-          <div class="team"><span>${p.visitante}</span></div>
+<div class="team">
+  <span class="team-name">
+    <img src="${p.escudoLocal}" class="team-logo" alt="${p.local}">
+    ${p.local}
+  </span>
+</div>
+
+<div class="team">
+  <span class="team-name">
+    <img src="${p.escudoVisitante}" class="team-logo" alt="${p.visitante}">
+    ${p.visitante}
+  </span>
+</div>
           <div class="prediction">Pronóstico: ${p.pronostico}</div>
         </div>
         <div class="score">-<br>-</div>
