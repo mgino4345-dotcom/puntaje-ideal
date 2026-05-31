@@ -1,16 +1,16 @@
 [
   {
-  "hora": "15:00",
-  "liga": "Liga 1",
-  "local": "Alianza Lima",
-  "visitante": "Universitario",
-  "escudoLocal": "escudos/alianzalima.png",
-  "escudoVisitante": "escudos/universitario.png",
-  "golesLocal": 2,
-  "golesVisitante": 1,
-  "estado": "live",
-  "pronostico": "Over 1.5"
-},
+    "hora": "15:00",
+    "liga": "Liga 1",
+    "local": "Alianza Lima",
+    "visitante": "Universitario",
+    "escudoLocal": "escudos/alianzalima.png",
+    "escudoVisitante": "escudos/universitario.png",
+    "golesLocal": 2,
+    "golesVisitante": 1,
+    "estado": "LIVE",
+    "pronostico": "Over 1.5"
+  },
   {
     "hora": "18:00",
     "liga": "Argentina",
@@ -18,6 +18,9 @@
     "visitante": "Racing Club",
     "escudoLocal": "escudos/boca.png",
     "escudoVisitante": "escudos/racing.png",
+    "golesLocal": null,
+    "golesVisitante": null,
+    "estado": "PROXIMO",
     "pronostico": "Ambos marcan"
   },
   {
@@ -27,6 +30,9 @@
     "visitante": "Palmeiras",
     "escudoLocal": "escudos/flamengo.png",
     "escudoVisitante": "escudos/palmeiras.png",
+    "golesLocal": null,
+    "golesVisitante": null,
+    "estado": "PROXIMO",
     "pronostico": "Over 2.5"
   }
 ]
