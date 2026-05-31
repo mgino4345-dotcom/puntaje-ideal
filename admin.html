@@ -228,6 +228,14 @@ function buscarEscudosAPI(){
   buscarEscudoEquipo(visitante, "escudoVisitante", "previewVisitante");
 }
 
+function normalizarTexto(texto){
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
 function buscarEscudoEquipo(nombreEquipo, campoDestino, previewDestino){
   const equipo = encodeURIComponent(nombreEquipo);
   const url = `https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=${equipo}`;
@@ -236,10 +244,20 @@ function buscarEscudoEquipo(nombreEquipo, campoDestino, previewDestino){
     .then(response => response.json())
     .then(data => {
       if(data.teams && data.teams.length > 0){
-        const escudo = data.teams[0].strBadge;
+
+        const nombreBuscado = normalizarTexto(nombreEquipo);
+
+        const equipoExacto = data.teams.find(team =>
+          normalizarTexto(team.strTeam) === nombreBuscado
+        );
+
+        const equipoElegido = equipoExacto || data.teams[0];
+
+        const escudo = equipoElegido.strBadge;
 
         document.getElementById(campoDestino).value = escudo;
         document.getElementById(previewDestino).src = escudo;
+
       } else {
         alert(`No se encontró escudo para: ${nombreEquipo}`);
       }
