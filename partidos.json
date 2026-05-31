@@ -8,7 +8,7 @@
   "escudoVisitante": "escudos/universitario.png",
   "golesLocal": 2,
   "golesVisitante": 1,
-  "estado": "PROXIMO",
+  "estado": "live",
   "pronostico": "Over 1.5"
 },
   {
