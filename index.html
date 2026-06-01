@@ -840,36 +840,45 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(cargarPartidosAPI, 60000);
 });
 
-  function actualizarPicksIA(){
-  const fuerte = partidosGlobal.find(p => 
+ function actualizarPicksIA(){
+  const fechaAPI = formatoFechaAPI(fechaSeleccionada);
+
+  const partidosDelDia = partidosGlobal.filter(p =>
+    !p.fechaFiltro || p.fechaFiltro === fechaAPI
+  );
+
+  const fuerte = partidosDelDia.find(p =>
     (p.nivelPick || p.pickIA || "").includes("FUERTE")
   );
 
-  const medio = partidosGlobal.find(p => 
+  const medio = partidosDelDia.find(p =>
     (p.nivelPick || p.pickIA || "").includes("MEDIO")
   );
 
-  const evitar = partidosGlobal.find(p => 
+  const evitar = partidosDelDia.find(p =>
     (p.nivelPick || p.pickIA || "").includes("EVITAR")
   );
 
-  document.getElementById("pick-fuerte").innerHTML = fuerte
-    ? `<strong>${fuerte.local} vs ${fuerte.visitante}</strong><br>
-       <span>${fuerte.pronostico || fuerte.mercadoIA || "Over 1.5"}</span><br>
-       <span>Confianza: ${fuerte.confianza || "-"}%</span>`
-    : "Sin pick fuerte";
+  pintarPick("pick-fuerte", fuerte, "Sin pick fuerte");
+  pintarPick("pick-medio", medio, "Sin pick medio");
+  pintarPick("pick-evitar", evitar, "Sin pick a evitar");
+}
 
-  document.getElementById("pick-medio").innerHTML = medio
-    ? `<strong>${medio.local} vs ${medio.visitante}</strong><br>
-       <span>${medio.pronostico || medio.mercadoIA || "Over 1.5"}</span><br>
-       <span>Confianza: ${medio.confianza || "-"}%</span>`
-    : "Sin pick medio";
+function pintarPick(id, p, textoVacio){
+  const box = document.getElementById(id);
+  if(!box) return;
 
-  document.getElementById("pick-evitar").innerHTML = evitar
-    ? `<strong>${evitar.local} vs ${evitar.visitante}</strong><br>
-       <span>${evitar.pronostico || evitar.mercadoIA || "Sin entrada"}</span><br>
-       <span>Confianza: ${evitar.confianza || "-"}%</span>`
-    : "Sin pick a evitar";
+  if(!p){
+    box.innerHTML = textoVacio;
+    return;
+  }
+
+  box.innerHTML = `
+    <strong>${p.local} vs ${p.visitante}</strong><br>
+    <span>${p.pronostico || p.mercadoIA || "Over 1.5"}</span><br>
+    <small>${p.liga || ""}</small><br>
+    <small>Confianza: ${p.confianza || p.puntosIA || "-"}%</small>
+  `;
 }
 </script>
 
