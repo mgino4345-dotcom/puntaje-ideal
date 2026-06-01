@@ -96,6 +96,12 @@ nav a.active{
   font-size:18px;
   margin:16px 0 10px;
 }
+.picks{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
+  margin:20px 0;
+}
 
 /* FILTROS */
 .barra-filtros{
@@ -406,6 +412,31 @@ nav a.active{
 
 .badge.red{
   background:#dc2626;
+}
+.pick-card{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:16px;
+  padding:18px;
+  color:#f8fafc;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+  transition:.2s;
+}
+
+.pick-card:hover{
+  border-color:#3b82f6;
+  transform:translateY(-2px);
+}
+.pick-card{
+  overflow:hidden;
+}
+
+.pick-card::before{
+  content:"";
+  display:block;
+  height:4px;
+  background:linear-gradient(90deg,#2563eb,#06b6d4);
+  margin:-18px -18px 14px -18px;
 }
 
 /* HISTORIAL */
