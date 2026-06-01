@@ -92,25 +92,22 @@
     </div>
 
     <div class="section-card-body">
-      <section class="picks">
-        <div class="pick-card">
-          <h3>🟢 Pick fuerte</h3>
-          <p>Selección con mejor señal del motor Puntaje Ideal.</p>
-          <span class="badge">IA</span>
-        </div>
+   <section class="picks">
+  <div class="pick-card">
+    <h3>🟢 Pick fuerte</h3>
+    <div id="pick-fuerte">Sin pick fuerte</div>
+  </div>
 
-        <div class="pick-card">
-          <h3>🟡 Pick medio</h3>
-          <p>Entrada moderada según ritmo, liga y marcador.</p>
-          <span class="badge gold">Moderado</span>
-        </div>
+  <div class="pick-card">
+    <h3>🟡 Pick medio</h3>
+    <div id="pick-medio">Sin pick medio</div>
+  </div>
 
-        <div class="pick-card">
-          <h3>🔴 Evitar</h3>
-          <p>Partido sin señal clara para apostar.</p>
-          <span class="badge red">Riesgo</span>
-        </div>
-      </section>
+  <div class="pick-card">
+    <h3>🔴 Evitar</h3>
+    <div id="pick-evitar">Sin pick a evitar</div>
+  </div>
+</section>
     </div>
   </section>
 
@@ -564,6 +561,7 @@ async function cargarPartidosAPI(){
   verificarGoles(partidosGlobal);
   actualizarContadoresEstado();
   aplicarFiltros();
+  actualizarPicksIA();
 }
 
 async function cargarTablaPosiciones(competencia = "BSA"){
@@ -841,6 +839,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setInterval(cargarPartidosAPI, 60000);
 });
+
+  function actualizarPicksIA(){
+  const fuerte = partidosGlobal.find(p => 
+    (p.nivelPick || p.pickIA || "").includes("FUERTE")
+  );
+
+  const medio = partidosGlobal.find(p => 
+    (p.nivelPick || p.pickIA || "").includes("MEDIO")
+  );
+
+  const evitar = partidosGlobal.find(p => 
+    (p.nivelPick || p.pickIA || "").includes("EVITAR")
+  );
+
+  document.getElementById("pick-fuerte").innerHTML = fuerte
+    ? `<strong>${fuerte.local} vs ${fuerte.visitante}</strong><br>
+       <span>${fuerte.pronostico || fuerte.mercadoIA || "Over 1.5"}</span><br>
+       <span>Confianza: ${fuerte.confianza || "-"}%</span>`
+    : "Sin pick fuerte";
+
+  document.getElementById("pick-medio").innerHTML = medio
+    ? `<strong>${medio.local} vs ${medio.visitante}</strong><br>
+       <span>${medio.pronostico || medio.mercadoIA || "Over 1.5"}</span><br>
+       <span>Confianza: ${medio.confianza || "-"}%</span>`
+    : "Sin pick medio";
+
+  document.getElementById("pick-evitar").innerHTML = evitar
+    ? `<strong>${evitar.local} vs ${evitar.visitante}</strong><br>
+       <span>${evitar.pronostico || evitar.mercadoIA || "Sin entrada"}</span><br>
+       <span>Confianza: ${evitar.confianza || "-"}%</span>`
+    : "Sin pick a evitar";
+}
 </script>
 
 </body>
