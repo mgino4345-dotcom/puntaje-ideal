@@ -313,21 +313,25 @@ function mostrarPartidos(partidos) {
             ${tiempo}
           </div>
 
-          <div class="scoreline-home">
-            ${p.rojaLocal > 0 ? `<span class="red-card">${p.rojaLocal}</span>` : ""}
-            <span>${p.local}</span>
-            <img src="${p.escudoLocal}" alt="${p.local}">
-          </div>
+         <div class="scoreline-teams">
 
-          <div class="scoreline-result ${p.estado === "LIVE" ? "live-result" : ""}">
-            ${resultado}
-          </div>
+  <div class="scoreline-team-line">
+    ${p.rojaLocal > 0 ? `<span class="red-card">${p.rojaLocal}</span>` : ""}
+    <img src="${p.escudoLocal}" alt="${p.local}">
+    <span>${p.local}</span>
+  </div>
 
-          <div class="scoreline-away">
-            <img src="${p.escudoVisitante}" alt="${p.visitante}">
-            <span>${p.visitante}</span>
-            ${p.rojaVisitante > 0 ? `<span class="red-card">${p.rojaVisitante}</span>` : ""}
-          </div>
+  <div class="scoreline-team-line">
+    ${p.rojaVisitante > 0 ? `<span class="red-card">${p.rojaVisitante}</span>` : ""}
+    <img src="${p.escudoVisitante}" alt="${p.visitante}">
+    <span>${p.visitante}</span>
+  </div>
+
+</div>
+
+<div class="scoreline-result ${p.estado === "LIVE" ? "live-result" : ""}">
+  ${resultado}
+</div>
 
           <div class="scoreline-extra">
             ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
