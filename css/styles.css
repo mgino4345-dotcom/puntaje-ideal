@@ -438,7 +438,9 @@ nav a.active{
   background:linear-gradient(90deg,#2563eb,#06b6d4);
   margin:-18px -18px 14px -18px;
 }
-
+.pick-card{
+  border:none;
+}
 /* HISTORIAL */
 #estadisticas-historial,
 #estadisticas-generales,
