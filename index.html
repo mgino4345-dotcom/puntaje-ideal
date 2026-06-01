@@ -107,7 +107,6 @@
       📈 Historial de Picks
       <span>Últimos resultados</span>
     </div>
-
     <div id="estadisticas-historial"></div>
     <div id="historial-picks"></div>
   </section>
@@ -117,7 +116,6 @@
       📊 Estadísticas Generales
       <span>Resumen</span>
     </div>
-
     <div id="estadisticas-generales"></div>
   </section>
 
@@ -126,7 +124,6 @@
       💰 Bankroll Challenge
       <span>Progreso</span>
     </div>
-
     <div id="bankroll-box"></div>
   </section>
 
@@ -146,7 +143,6 @@ function formatoFechaAPI(fecha) {
   const year = fecha.getFullYear();
   const month = String(fecha.getMonth() + 1).padStart(2, "0");
   const day = String(fecha.getDate()).padStart(2, "0");
-
   return `${year}-${month}-${day}`;
 }
 
@@ -393,34 +389,30 @@ async function cargarPartidosAPI() {
   try {
     const fechaAPI = formatoFechaAPI(fechaSeleccionada);
 
-let response = await fetch(
-  `https://puntaje-api.mgino4345.workers.dev/partidos?fecha=${fechaAPI}`
-);
+    let response = await fetch(
+      `https://puntaje-api.mgino4345.workers.dev/partidos?fecha=${fechaAPI}`
+    );
 
-let data = await response.json();
+    let data = await response.json();
 
-let listaPartidos =
-  Array.isArray(data.matches)
-    ? data.matches
-    : Array.isArray(data.partidos)
-    ? data.partidos
-    : [];
+    let listaPartidos =
+      Array.isArray(data.matches)
+        ? data.matches
+        : Array.isArray(data.partidos)
+        ? data.partidos
+        : [];
 
-// Si no encuentra por fecha, prueba sin fecha
-if (listaPartidos.length === 0) {
-  response = await fetch(
-    "https://puntaje-api.mgino4345.workers.dev/partidos"
-  );
+    if (listaPartidos.length === 0) {
+      response = await fetch("https://puntaje-api.mgino4345.workers.dev/partidos");
+      data = await response.json();
 
-  data = await response.json();
-
-  listaPartidos =
-    Array.isArray(data.matches)
-      ? data.matches
-      : Array.isArray(data.partidos)
-      ? data.partidos
-      : [];
-}
+      listaPartidos =
+        Array.isArray(data.matches)
+          ? data.matches
+          : Array.isArray(data.partidos)
+          ? data.partidos
+          : [];
+    }
 
     partidosGlobal = listaPartidos.map(p => {
       const estadoAPI = p.status || p.estado || "";
@@ -749,9 +741,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  setInterval(() => {
-    cargarPartidosAPI();
-  }, 60000);
+  setInterval(cargarPartidosAPI, 60000);
 });
 </script>
 
