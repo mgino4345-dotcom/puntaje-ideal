@@ -182,7 +182,7 @@ nav a.active{
 }
 
 .section-card-body{
-  background:#111827;
+  background:#ffffff;
   padding:0;
 }
 
@@ -283,20 +283,9 @@ nav a.active{
   white-space:nowrap;
 }
 
-.pick-fuerte{
-  background:#16a34a;
-  color:white;
-}
-
-.pick-medio{
-  background:#ca8a04;
-  color:white;
-}
-
-.pick-evitar{
-  background:#dc2626;
-  color:white;
-}
+.pick-fuerte{ background:#16a34a; color:white; }
+.pick-medio{ background:#ca8a04; color:white; }
+.pick-evitar{ background:#dc2626; color:white; }
 
 /* SIN PARTIDOS */
 .sin-partidos{
@@ -308,18 +297,22 @@ nav a.active{
   background:#111827;
 }
 
-/* TABLA DE POSICIONES */
+/* TABLA */
 .tabla-flash{
   width:100%;
   background:white;
   color:#111827;
-  border-radius:10px;
   overflow:hidden;
 }
 
-.tabla-header{
+.tabla-header,
+.tabla-row{
   display:grid;
   grid-template-columns:50px 1fr 50px 50px 50px 50px 60px 60px;
+  align-items:center;
+}
+
+.tabla-header{
   background:#ececec;
   font-size:12px;
   font-weight:700;
@@ -327,9 +320,6 @@ nav a.active{
 }
 
 .tabla-row{
-  display:grid;
-  grid-template-columns:50px 1fr 50px 50px 50px 50px 60px 60px;
-  align-items:center;
   padding:12px;
   border-bottom:1px solid #e5e7eb;
   background:white;
@@ -382,7 +372,6 @@ nav a.active{
   border-radius:12px;
   padding:18px;
   color:#111827;
-  box-shadow:none;
 }
 
 .pick-card h3{
@@ -408,26 +397,75 @@ nav a.active{
   font-weight:bold;
 }
 
-.badge.gold{
-  background:#ca8a04;
+.badge.gold{ background:#ca8a04; }
+.badge.red{ background:#dc2626; }
+
+/* ESTADISTICAS */
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:15px;
+  padding:18px;
+  background:#ffffff;
 }
 
-.badge.red{
-  background:#dc2626;
+.stat-card{
+  background:#ffffff;
+  border:1px solid #d1d5db;
+  border-radius:12px;
+  padding:14px;
+  min-height:120px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
 
-/* HISTORIAL / ESTADISTICAS / BANKROLL */
+.stat-card strong{
+  color:#111827;
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+.stat-value{
+  font-size:28px;
+  font-weight:800;
+  line-height:1.2;
+}
+
+.texto-mediano{
+  font-size:18px;
+  font-weight:700;
+}
+
+.total{ background:#eff6ff; border-color:#3b82f6; }
+.ganados{ background:#ecfdf5; border-color:#22c55e; }
+.perdidos{ background:#fef2f2; border-color:#ef4444; }
+.efectividad{ background:#fffbeb; border-color:#f59e0b; }
+.mercado{ background:#fefce8; border-color:#eab308; }
+.bankroll{ background:#ecfdf5; border-color:#22c55e; }
+
+.azul{ color:#2563eb; }
+.verde{ color:#22c55e; }
+.rojo{ color:#ef4444; }
+.amarillo{ color:#f59e0b; }
+
+.mercado .stat-value{
+  font-size:18px;
+}
+
+.bankroll .stat-value{
+  font-size:24px;
+}
+
+/* HISTORIAL */
 #estadisticas-historial,
 #historial-picks,
 #estadisticas-generales,
 #bankroll-box{
   background:#ffffff;
-  color:#111827;
-}
-
-#estadisticas-historial strong,
-#estadisticas-generales strong,
-#bankroll-box strong{
   color:#111827;
 }
 
@@ -483,20 +521,9 @@ nav a.active{
   color:white;
 }
 
-.live{
-  background:#dc2626;
-  color:white;
-}
-
-.next{
-  background:#374151;
-  color:#d1d5db;
-}
-
-.end{
-  background:#16a34a;
-  color:white;
-}
+.live{ background:#dc2626; color:white; }
+.next{ background:#374151; color:#d1d5db; }
+.end{ background:#16a34a; color:white; }
 
 .prediction{
   margin-top:6px;
@@ -531,23 +558,16 @@ footer{
 
 /* RESPONSIVE */
 @media(max-width:768px){
-
-  .topbar{
-    flex-wrap:wrap;
-  }
+  .topbar{ flex-wrap:wrap; }
 
   .search{
     width:100%;
     margin-left:0;
   }
 
-  .search input{
-    width:100%;
-  }
+  .search input{ width:100%; }
 
-  .barra-filtros{
-    align-items:flex-start;
-  }
+  .barra-filtros{ align-items:flex-start; }
 
   .selector-fecha{
     width:100%;
@@ -565,9 +585,7 @@ footer{
     padding:8px;
   }
 
-  .scoreline-extra{
-    font-size:11px;
-  }
+  .scoreline-extra{ font-size:11px; }
 
   .tabla-header,
   .tabla-row{
@@ -585,216 +603,7 @@ footer{
     gap:6px;
     padding:11px 9px;
   }
-  /* TARJETAS DE ESTADISTICAS */
 
-.stats-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-  padding:18px;
-}
-
-.stat-card{
-  background:#ffffff;
-  border:1px solid #e5e7eb;
-  border-radius:12px;
-  padding:20px;
-  text-align:left;
-}
-
-.stat-card h3{
-  color:#475569;
-  font-size:14px;
-  margin-bottom:8px;
-}
-
-.stat-card .valor{
-  font-size:36px;
-  font-weight:800;
-}
-  /* ESTADISTICAS */
-
-.stats-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
-  padding:15px;
-}
-
-.stat-card{
-  padding:18px;
-  border-radius:12px;
-  border:1px solid #e5e7eb;
-}
-
-.stat-card strong{
-  display:block;
-  margin-bottom:8px;
-  color:#111827;
-}
-
-.stat-value{
-  font-size:30px;
-  font-weight:800;
-}
-
-/* COLORES */
-
-.ganados{
-  background:#ecfdf5;
-  border-color:#22c55e;
-}
-
-.perdidos{
-  background:#fef2f2;
-  border-color:#ef4444;
-}
-
-.efectividad{
-  background:#fffbeb;
-  border-color:#f59e0b;
-}
-
-.verde{
-  color:#22c55e;
-}
-
-.rojo{
-  color:#ef4444;
-}
-
-.amarillo{
-  color:#f59e0b;
-}
-  .stats-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-  gap:15px;
-  padding:18px;
-  background:#ffffff;
-}
-
-.stat-card{
-  padding:16px;
-  border-radius:12px;
-  border:1px solid #e5e7eb;
-  background:#ffffff;
-}
-
-.stat-card strong{
-  display:block;
-  color:#111827;
-  font-size:14px;
-  margin-bottom:8px;
-}
-
-.stat-value{
-  display:block;
-  font-size:28px;
-  font-weight:900;
-}
-
-.texto-mediano{
-  font-size:22px;
-}
-
-.total{
-  background:#eff6ff;
-  border-color:#3b82f6;
-}
-
-.ganados{
-  background:#ecfdf5;
-  border-color:#22c55e;
-}
-
-.perdidos{
-  background:#fef2f2;
-  border-color:#ef4444;
-}
-
-.efectividad{
-  background:#fffbeb;
-  border-color:#f59e0b;
-}
-
-.mercado{
-  background:#fefce8;
-  border-color:#eab308;
-}
-
-.bankroll{
-  background:#ecfdf5;
-  border-color:#22c55e;
-}
-
-.azul{ color:#2563eb; }
-.verde{ color:#22c55e; }
-.rojo{ color:#ef4444; }
-.amarillo{ color:#f59e0b; }
-}
-.stats-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-  gap:15px;
-  padding:18px;
-  background:#ffffff;
-}
-
-.stat-card{
-  padding:16px;
-  border-radius:12px;
-  border:1px solid #e5e7eb;
-  background:#ffffff;
-}
-
-.stat-card strong{
-  display:block;
-  color:#111827;
-  font-size:14px;
-  margin-bottom:8px;
-}
-
-.stat-value{
-  display:block;
-  font-size:28px;
-  font-weight:900;
-}
-
-.texto-mediano{
-  font-size:20px;
-}
-
-.azul{ color:#2563eb; }
-.verde{ color:#22c55e; }
-.rojo{ color:#ef4444; }
-.amarillo{ color:#f59e0b; }
-
-.stat-card{
-  padding:16px;
-  border-radius:12px;
-  border:1px solid #d1d5db;
-  background:#ffffff;
-
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-.stat-value{
-  display:block;
-  font-size:42px;
-  font-weight:800;
-  margin-top:12px;
-  text-align:center;
-}
-.stat-card strong{
-  display:block;
-  width:100%;
-  text-align:center;
-  color:#111827;
-  font-size:16px;
-  margin-bottom:10px;
-}
+  .stat-value{ font-size:24px; }
+  .texto-mediano{ font-size:16px; }
 }
