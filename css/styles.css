@@ -665,4 +665,70 @@ footer{
   color:#fff !important;
   text-decoration:none !important;
 }
+  /* ==============================
+   UNIFICAR BLOQUES INFERIORES
+============================== */
+
+.picks{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:14px;
+  margin-bottom:24px;
+}
+
+.pick-card{
+  background:#ffffff !important;
+  color:#111827 !important;
+  border:1px solid #d9e1ea !important;
+  border-radius:14px;
+  padding:18px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.pick-card h3,
+.pick-card p{
+  color:#111827 !important;
+}
+
+#estadisticas-historial,
+#estadisticas-generales,
+#bankroll-box{
+  background:#ffffff !important;
+  color:#111827 !important;
+}
+
+#estadisticas-historial strong,
+#estadisticas-generales strong,
+#bankroll-box strong{
+  color:#111827 !important;
+}
+
+#historial-picks .match{
+  background:#ffffff !important;
+  color:#111827 !important;
+  border-top:1px solid #e5e7eb;
+}
+
+#historial-picks .match:hover{
+  background:#f8fafc !important;
+}
+
+#historial-picks .team span,
+#historial-picks .teams,
+#historial-picks .time{
+  color:#111827 !important;
+}
+
+#historial-picks .time{
+  font-weight:800;
+  color:#475569 !important;
+}
+
+#historial-picks .prediction{
+  color:#f59e0b !important;
+}
+
+#historial-picks .score{
+  color:#111827 !important;
+}
 }
