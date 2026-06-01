@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Puntaje Ideal</title>
+
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="logo.png">
- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -57,74 +58,65 @@
     </div>
   </div>
 
-<section class="section-card">
-  <div class="league-head">
-    <span>⚽ Marcadores y partidos</span>
-    <span>Automático</span>
-  </div>
-  <div class="section-card-body">
-    <div id="partidos-json"></div>
-  </div>
-</section>
-  
- <section class="section-card">
-
-  <div class="league-head">
-    <span>🏆 Tabla de Posiciones</span>
-
-    <select id="selectorTabla">
-          <option value="BSA">Serie A Brasil</option>
-          <option value="PL">Premier League</option>
-          <option value="PD">LaLiga</option>
-          <option value="SA">Serie A Italia</option>
-          <option value="BL1">Bundesliga</option>
-        </select>
-  </div>
-
-  <div class="section-card-body">
-    <div id="tabla-posiciones"></div>
-  </div>
-
-</section>
-
-<section class="section-card">
-
-  <div class="league-head">
-    <span>🔥 Picks de Puntaje Ideal</span>
-    <span>Motor IA</span>
-  </div>
-
-  <div class="section-card-body">
-
-    <section class="picks">
-
-      <div class="pick-card">
-        <h3>🟢 Pick fuerte</h3>
-        <p>Selección con mejor señal del motor Puntaje Ideal.</p>
-        <span class="badge">IA</span>
-      </div>
-
-      <div class="pick-card">
-        <h3>🟡 Pick medio</h3>
-        <p>Entrada moderada según ritmo, liga y marcador.</p>
-        <span class="badge gold">Moderado</span>
-      </div>
-
-      <div class="pick-card">
-        <h3>🔴 Evitar</h3>
-        <p>Partido sin señal clara para apostar.</p>
-        <span class="badge red">Riesgo</span>
-      </div>
-
-    </section>
-
-  </div>
-
-</section>
-
- <section class="section-card">
+  <section class="section-card">
     <div class="league-head">
-      📈 Historial de Picks
+      <span>⚽ Marcadores y partidos</span>
+      <span>Automático</span>
+    </div>
+    <div class="section-card-body">
+      <div id="partidos-json"></div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <div class="league-head">
+      <span>🏆 Tabla de Posiciones</span>
+      <select id="selectorTabla">
+        <option value="BSA">Serie A Brasil</option>
+        <option value="PL">Premier League</option>
+        <option value="PD">LaLiga</option>
+        <option value="SA">Serie A Italia</option>
+        <option value="BL1">Bundesliga</option>
+      </select>
+    </div>
+
+    <div class="section-card-body">
+      <div id="tabla-posiciones"></div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <div class="league-head">
+      <span>🔥 Picks de Puntaje Ideal</span>
+      <span>Motor IA</span>
+    </div>
+
+    <div class="section-card-body">
+      <section class="picks">
+        <div class="pick-card">
+          <h3>🟢 Pick fuerte</h3>
+          <p>Selección con mejor señal del motor Puntaje Ideal.</p>
+          <span class="badge">IA</span>
+        </div>
+
+        <div class="pick-card">
+          <h3>🟡 Pick medio</h3>
+          <p>Entrada moderada según ritmo, liga y marcador.</p>
+          <span class="badge gold">Moderado</span>
+        </div>
+
+        <div class="pick-card">
+          <h3>🔴 Evitar</h3>
+          <p>Partido sin señal clara para apostar.</p>
+          <span class="badge red">Riesgo</span>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <div class="league-head">
+      <span>📈 Historial de Picks</span>
       <span>Últimos resultados</span>
     </div>
     <div id="estadisticas-historial"></div>
@@ -133,7 +125,7 @@
 
   <section class="section-card">
     <div class="league-head">
-      📊 Estadísticas Generales
+      <span>📊 Estadísticas Generales</span>
       <span>Resumen</span>
     </div>
     <div id="estadisticas-generales"></div>
@@ -141,7 +133,7 @@
 
   <section class="section-card">
     <div class="league-head">
-      💰 Bankroll Challenge
+      <span>💰 Bankroll Challenge</span>
       <span>Progreso</span>
     </div>
     <div id="bankroll-box"></div>
@@ -159,14 +151,14 @@ let estadoSeleccionado = "TODOS";
 let fechaSeleccionada = new Date();
 let marcadoresAnteriores = {};
 
-function formatoFechaAPI(fecha) {
+function formatoFechaAPI(fecha){
   const year = fecha.getFullYear();
   const month = String(fecha.getMonth() + 1).padStart(2, "0");
   const day = String(fecha.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
 
-function formatoFechaVista(fecha) {
+function formatoFechaVista(fecha){
   return fecha.toLocaleDateString("es-PE", {
     day: "2-digit",
     month: "short",
@@ -174,62 +166,69 @@ function formatoFechaVista(fecha) {
   }).toUpperCase();
 }
 
-function actualizarFechaVista() {
+function actualizarFechaVista(){
   const fechaActual = document.getElementById("fechaActual");
-  if (fechaActual) fechaActual.textContent = formatoFechaVista(fechaSeleccionada);
+  if(fechaActual) fechaActual.textContent = formatoFechaVista(fechaSeleccionada);
 }
 
-function calcularMinutoPartido(utcDate, estado) {
-  if (estado !== "LIVE") return "";
+function convertirFechaJSON(fechaTexto){
+  if(!fechaTexto) return "";
+
+  if(fechaTexto.includes("/")){
+    const [dia, mes, anio] = fechaTexto.split("/");
+    return `${anio}-${mes}-${dia}`;
+  }
+
+  return fechaTexto;
+}
+
+function calcularMinutoPartido(utcDate, estado){
+  if(estado !== "LIVE" || !utcDate) return "";
 
   const inicio = new Date(utcDate);
   const ahora = new Date();
   let minutos = Math.floor((ahora - inicio) / 60000);
 
-  if (minutos < 1) minutos = 1;
-  if (minutos <= 45) return `1T ${minutos}'`;
-  if (minutos <= 60) return "MT";
-  if (minutos <= 105) return `2T ${minutos - 15}'`;
+  if(minutos < 1) minutos = 1;
+  if(minutos <= 45) return `1T ${minutos}'`;
+  if(minutos <= 60) return "MT";
+  if(minutos <= 105) return `2T ${minutos - 15}'`;
 
   return "90+'";
 }
 
-function generarPronosticoIA(p) {
+function generarPronosticoIA(p){
   let puntos = 0;
   let mercado = "Over 1.5";
   let etiqueta = "🔴 EVITAR";
 
   const liga = (p.liga || "").toLowerCase();
 
-  if (
+  if(
     liga.includes("brasileiro") ||
     liga.includes("premier") ||
     liga.includes("bundesliga") ||
     liga.includes("eredivisie") ||
     liga.includes("liga")
-  ) {
+  ){
     puntos += 2;
   }
 
-  if (p.estado === "LIVE") puntos += 2;
+  if(p.estado === "LIVE") puntos += 2;
 
-  if (
+  if(
     p.golesLocal !== null &&
     p.golesVisitante !== null &&
     p.golesLocal + p.golesVisitante >= 1
-  ) {
+  ){
     puntos += 3;
   }
 
-  if (
-    p.estado === "LIVE" &&
-    p.golesLocal === 0 &&
-    p.golesVisitante === 0
-  ) {
+  if(p.estado === "LIVE" && p.golesLocal === 0 && p.golesVisitante === 0){
     puntos -= 1;
   }
 
-  if (p.estado === "FINAL") {
+  if(p.estado === "FINAL"){
     return {
       etiqueta: "⚫ FINALIZADO",
       mercado: "Sin pick",
@@ -237,11 +236,11 @@ function generarPronosticoIA(p) {
     };
   }
 
-  if (puntos >= 5) {
+  if(puntos >= 5){
     etiqueta = "🟢 PICK FUERTE";
-  } else if (puntos >= 3) {
+  }else if(puntos >= 3){
     etiqueta = "🟡 PICK MEDIO";
-  } else {
+  }else{
     etiqueta = "🔴 EVITAR";
     mercado = "Sin entrada clara";
   }
@@ -249,17 +248,105 @@ function generarPronosticoIA(p) {
   return { etiqueta, mercado, puntos };
 }
 
-function verificarGoles(partidos) {
+function normalizarPartido(p){
+  const estadoAPI = p.status || p.estado || "";
+
+  const estadoNormalizado =
+    estadoAPI === "FINISHED" || estadoAPI === "TERMINADO" || estadoAPI === "FINAL"
+      ? "FINAL"
+      : estadoAPI === "IN_PLAY" || estadoAPI === "PAUSED" || estadoAPI === "LIVE"
+      ? "LIVE"
+      : "PROXIMO";
+
+  const liga = p.competition?.name || p["competencia"]?.nombre || p.liga || "";
+  const pais = p.area?.code || p["área"]?.codigo || p.pais || "";
+
+  const local = p.homeTeam?.name || p["equipo local"]?.nombre || p.local || "";
+  const visitante = p.awayTeam?.name || p["equipo visitante"]?.nombre || p.visitante || "";
+
+  const escudoLocal = p.homeTeam?.crest || p["equipo local"]?.crest || p.escudoLocal || "";
+  const escudoVisitante = p.awayTeam?.crest || p["equipo visitante"]?.crest || p.escudoVisitante || "";
+
+  const golesLocal =
+    p.score?.fullTime?.home ??
+    p["puntaje"]?.fullTime?.home ??
+    p.golesLocal ??
+    null;
+
+  const golesVisitante =
+    p.score?.fullTime?.away ??
+    p["puntaje"]?.fullTime?.away ??
+    p.golesVisitante ??
+    null;
+
+  const pronosticoIA = generarPronosticoIA({
+    liga,
+    estado: estadoNormalizado,
+    golesLocal,
+    golesVisitante
+  });
+
+  const fecha =
+    p.fecha ||
+    (p.utcDate
+      ? new Date(p.utcDate).toLocaleDateString("es-PE", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric"
+        })
+      : "");
+
+  const hora =
+    p.hora ||
+    (p.utcDate
+      ? new Date(p.utcDate).toLocaleTimeString("es-PE", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false
+        })
+      : "");
+
+  const nivelPick = p.nivelPick || p.pickIA || pronosticoIA.etiqueta;
+  const mercadoIA = p.mercadoIA || pronosticoIA.mercado;
+  const confianza = p.confianza ?? pronosticoIA.puntos;
+
+  return {
+    fecha,
+    fechaFiltro: convertirFechaJSON(fecha),
+    hora,
+    pais,
+    liga,
+    local,
+    visitante,
+    escudoLocal,
+    escudoVisitante,
+    golesLocal,
+    golesVisitante,
+    estado: estadoNormalizado,
+    minuto: p.minuto || calcularMinutoPartido(p.utcDate, estadoNormalizado),
+    ht: p.ht || "",
+    corners: p.corners || "",
+    rojaLocal: Number(p.rojaLocal || 0),
+    rojaVisitante: Number(p.rojaVisitante || 0),
+    canal: p.canal || "",
+    pronostico: p.pronostico || `${nivelPick} · ${mercadoIA}`,
+    nivelPick,
+    mercadoIA,
+    confianza
+  };
+}
+
+function verificarGoles(partidos){
   partidos.forEach(p => {
-    const id = `${p.local}-${p.visitante}`;
+    const id = `${p.fecha}-${p.local}-${p.visitante}`;
     const marcadorActual = `${p.golesLocal}-${p.golesVisitante}`;
 
-    if (
+    if(
       p.golesLocal !== null &&
       p.golesVisitante !== null &&
       marcadoresAnteriores[id] &&
       marcadoresAnteriores[id] !== marcadorActual
-    ) {
+    ){
       mostrarNotificacionGol(p);
     }
 
@@ -267,7 +354,7 @@ function verificarGoles(partidos) {
   });
 }
 
-function mostrarNotificacionGol(p) {
+function mostrarNotificacionGol(p){
   const alerta = document.createElement("div");
   alerta.className = "gol-alerta";
 
@@ -280,11 +367,11 @@ function mostrarNotificacionGol(p) {
   setTimeout(() => alerta.remove(), 6000);
 }
 
-function mostrarPartidos(partidos) {
+function mostrarPartidos(partidos){
   const contenedor = document.getElementById("partidos-json");
   contenedor.innerHTML = "";
 
-  if (partidos.length === 0) {
+  if(partidos.length === 0){
     contenedor.innerHTML = `
       <div class="sin-partidos">
         ⚽ No hay partidos programados hoy para esta competición
@@ -297,7 +384,7 @@ function mostrarPartidos(partidos) {
 
   partidos.forEach(p => {
     const liga = `${p.pais || ""} ${p.liga || "Sin liga"}`;
-    if (!grupos[liga]) grupos[liga] = [];
+    if(!grupos[liga]) grupos[liga] = [];
     grupos[liga].push(p);
   });
 
@@ -315,11 +402,6 @@ function mostrarPartidos(partidos) {
         p.estado === "FINAL" ? "FINAL" :
         p.hora;
 
-      const resultado =
-        p.golesLocal !== null && p.golesVisitante !== null
-          ? `${p.golesLocal}-${p.golesVisitante}`
-          : "VS";
-
       const clasePick =
         p.nivelPick && p.nivelPick.includes("FUERTE") ? "pick-fuerte" :
         p.nivelPick && p.nivelPick.includes("MEDIO") ? "pick-medio" :
@@ -333,31 +415,27 @@ function mostrarPartidos(partidos) {
             ${tiempo}
           </div>
 
-<div class="scoreline-teams">
+          <div class="scoreline-teams">
+            <div class="scoreline-team-line">
+              ${p.rojaLocal > 0 ? `<span class="red-card">${p.rojaLocal}</span>` : ""}
+              <img src="${p.escudoLocal}" alt="${p.local}">
+              <span>${p.local}</span>
+              <strong class="team-goal">${p.golesLocal !== null ? p.golesLocal : "-"}</strong>
+            </div>
 
-  <div class="scoreline-team-line">
-    <img src="${p.escudoLocal}" alt="${p.local}">
-    <span>${p.local}</span>
-    <strong class="team-goal">
-      ${p.golesLocal !== null ? p.golesLocal : "-"}
-    </strong>
-  </div>
-
-  <div class="scoreline-team-line">
-    <img src="${p.escudoVisitante}" alt="${p.visitante}">
-    <span>${p.visitante}</span>
-    <strong class="team-goal">
-      ${p.golesVisitante !== null ? p.golesVisitante : "-"}
-    </strong>
-  </div>
-</div>
-
+            <div class="scoreline-team-line">
+              ${p.rojaVisitante > 0 ? `<span class="red-card">${p.rojaVisitante}</span>` : ""}
+              <img src="${p.escudoVisitante}" alt="${p.visitante}">
+              <span>${p.visitante}</span>
+              <strong class="team-goal">${p.golesVisitante !== null ? p.golesVisitante : "-"}</strong>
+            </div>
+          </div>
 
           <div class="scoreline-extra">
             ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
             ${p.corners ? `<span>⚑ ${p.corners}</span>` : ""}
             <span class="pick-ia ${clasePick}">
-              ${p.pronostico}
+              ${p.nivelPick || p.pronostico || ""}
             </span>
           </div>
         </div>
@@ -366,42 +444,50 @@ function mostrarPartidos(partidos) {
   });
 }
 
-function aplicarFiltros() {
+function aplicarFiltros(){
   const buscador = document.getElementById("buscador");
   const texto = buscador ? buscador.value.toLowerCase() : "";
+  const fechaAPI = formatoFechaAPI(fechaSeleccionada);
 
   const filtrados = partidosGlobal.filter(p => {
     const coincideTexto =
-      p.local.toLowerCase().includes(texto) ||
-      p.visitante.toLowerCase().includes(texto) ||
-      p.liga.toLowerCase().includes(texto) ||
-      p.pronostico.toLowerCase().includes(texto);
+      (p.local || "").toLowerCase().includes(texto) ||
+      (p.visitante || "").toLowerCase().includes(texto) ||
+      (p.liga || "").toLowerCase().includes(texto) ||
+      (p.pronostico || "").toLowerCase().includes(texto) ||
+      (p.nivelPick || "").toLowerCase().includes(texto);
 
     const coincideEstado =
       estadoSeleccionado === "TODOS" || p.estado === estadoSeleccionado;
 
-    return coincideTexto && coincideEstado;
+    const coincideFecha =
+      !p.fechaFiltro || p.fechaFiltro === fechaAPI;
+
+    return coincideTexto && coincideEstado && coincideFecha;
   });
 
   mostrarPartidos(filtrados);
 }
 
-function actualizarContadoresEstado() {
-  const total = partidosGlobal.length;
-  const live = partidosGlobal.filter(p => p.estado === "LIVE").length;
-  const finalizados = partidosGlobal.filter(p => p.estado === "FINAL").length;
-  const proximos = partidosGlobal.filter(p => p.estado === "PROXIMO").length;
+function actualizarContadoresEstado(){
+  const fechaAPI = formatoFechaAPI(fechaSeleccionada);
+  const listaFecha = partidosGlobal.filter(p => !p.fechaFiltro || p.fechaFiltro === fechaAPI);
+
+  const total = listaFecha.length;
+  const live = listaFecha.filter(p => p.estado === "LIVE").length;
+  const finalizados = listaFecha.filter(p => p.estado === "FINAL").length;
+  const proximos = listaFecha.filter(p => p.estado === "PROXIMO").length;
 
   document.querySelectorAll(".tab-estado").forEach(tab => {
     const estado = tab.dataset.estado;
     let cantidad = 0;
 
-    if (estado === "TODOS") cantidad = total;
-    if (estado === "LIVE") cantidad = live;
-    if (estado === "FINAL") cantidad = finalizados;
-    if (estado === "PROXIMO") cantidad = proximos;
+    if(estado === "TODOS") cantidad = total;
+    if(estado === "LIVE") cantidad = live;
+    if(estado === "FINAL") cantidad = finalizados;
+    if(estado === "PROXIMO") cantidad = proximos;
 
-    if (!tab.dataset.nombre) {
+    if(!tab.dataset.nombre){
       tab.dataset.nombre = tab.textContent.replace(/\s\(\d+\)$/, "");
     }
 
@@ -409,107 +495,79 @@ function actualizarContadoresEstado() {
   });
 }
 
-async function cargarPartidosAPI() {
-  try {
-    const fechaAPI = formatoFechaAPI(fechaSeleccionada);
-
+async function obtenerPartidosAPI(fechaAPI){
+  try{
     let response = await fetch(
       `https://puntaje-api.mgino4345.workers.dev/partidos?fecha=${fechaAPI}`
     );
 
     let data = await response.json();
 
-    let listaPartidos =
-      Array.isArray(data.matches)
-        ? data.matches
-        : Array.isArray(data.partidos)
-        ? data.partidos
-        : [];
+    let lista =
+      Array.isArray(data.matches) ? data.matches :
+      Array.isArray(data.partidos) ? data.partidos :
+      [];
 
-    if (listaPartidos.length === 0) {
+    if(lista.length === 0){
       response = await fetch("https://puntaje-api.mgino4345.workers.dev/partidos");
       data = await response.json();
 
-      listaPartidos =
-        Array.isArray(data.matches)
-          ? data.matches
-          : Array.isArray(data.partidos)
-          ? data.partidos
-          : [];
+      lista =
+        Array.isArray(data.matches) ? data.matches :
+        Array.isArray(data.partidos) ? data.partidos :
+        [];
     }
 
-    partidosGlobal = listaPartidos.map(p => {
-      const estadoAPI = p.status || p.estado || "";
-
-      const estadoNormalizado =
-        estadoAPI === "FINISHED" || estadoAPI === "TERMINADO"
-          ? "FINAL"
-          : estadoAPI === "IN_PLAY" || estadoAPI === "PAUSED"
-          ? "LIVE"
-          : "PROXIMO";
-
-      const liga = p.competition?.name || p["competencia"]?.nombre || "";
-      const golesLocal = p.score?.fullTime?.home ?? p["puntaje"]?.fullTime?.home ?? null;
-      const golesVisitante = p.score?.fullTime?.away ?? p["puntaje"]?.fullTime?.away ?? null;
-
-      const pronosticoIA = generarPronosticoIA({
-        liga,
-        estado: estadoNormalizado,
-        golesLocal,
-        golesVisitante
-      });
-
-      return {
-        fecha: new Date(p.utcDate).toLocaleDateString("es-PE", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric"
-        }),
-
-        hora: new Date(p.utcDate).toLocaleTimeString("es-PE", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false
-        }),
-
-        pais: p.area?.code || p["área"]?.codigo || "",
-        liga,
-
-        local: p.homeTeam?.name || p["equipo local"]?.nombre || "",
-        visitante: p.awayTeam?.name || p["equipo visitante"]?.nombre || "",
-
-        escudoLocal: p.homeTeam?.crest || p["equipo local"]?.crest || "",
-        escudoVisitante: p.awayTeam?.crest || p["equipo visitante"]?.crest || "",
-
-        golesLocal,
-        golesVisitante,
-
-        estado: estadoNormalizado,
-
-        pronostico: `${pronosticoIA.etiqueta} · ${pronosticoIA.mercado}`,
-        nivelPick: pronosticoIA.etiqueta,
-        puntosIA: pronosticoIA.puntos,
-
-        minuto: calcularMinutoPartido(p.utcDate, estadoNormalizado),
-
-        ht: p.ht || "",
-        corners: p.corners || "",
-        rojaLocal: p.rojaLocal || 0,
-        rojaVisitante: p.rojaVisitante || 0
-      };
-    });
-
-    verificarGoles(partidosGlobal);
-    actualizarContadoresEstado();
-    aplicarFiltros();
-
-  } catch (error) {
+    return lista;
+  }catch(error){
     console.error("Error cargando API:", error);
+    return [];
   }
 }
 
-async function cargarTablaPosiciones(competencia = "BSA") {
-  try {
+async function obtenerPartidosJSON(){
+  try{
+    const response = await fetch(`partidos.json?v=${Date.now()}`);
+    if(!response.ok) return [];
+
+    const data = await response.json();
+
+    if(Array.isArray(data)) return data;
+    if(Array.isArray(data.partidos)) return data.partidos;
+    if(Array.isArray(data.matches)) return data.matches;
+
+    return [];
+  }catch(error){
+    console.warn("No se pudo cargar partidos.json:", error);
+    return [];
+  }
+}
+
+async function cargarPartidosAPI(){
+  const fechaAPI = formatoFechaAPI(fechaSeleccionada);
+
+  const partidosAPI = await obtenerPartidosAPI(fechaAPI);
+  const partidosManuales = await obtenerPartidosJSON();
+
+  const combinados = [...partidosAPI, ...partidosManuales];
+
+  const mapa = new Map();
+
+  combinados.forEach(p => {
+    const partidoNormalizado = normalizarPartido(p);
+    const key = `${partidoNormalizado.fecha}-${partidoNormalizado.local}-${partidoNormalizado.visitante}`;
+    mapa.set(key, partidoNormalizado);
+  });
+
+  partidosGlobal = Array.from(mapa.values());
+
+  verificarGoles(partidosGlobal);
+  actualizarContadoresEstado();
+  aplicarFiltros();
+}
+
+async function cargarTablaPosiciones(competencia = "BSA"){
+  try{
     const response = await fetch(
       `https://puntaje-api.mgino4345.workers.dev/tabla?competencia=${competencia}`
     );
@@ -518,7 +576,7 @@ async function cargarTablaPosiciones(competencia = "BSA") {
     const tabla = data.standings?.[0]?.table || [];
 
     const contenedor = document.getElementById("tabla-posiciones");
-    if (!contenedor) return;
+    if(!contenedor) return;
 
     contenedor.innerHTML = `
       <div class="tabla-flash">
@@ -552,19 +610,19 @@ async function cargarTablaPosiciones(competencia = "BSA") {
         `).join("")}
       </div>
     `;
-  } catch (error) {
+  }catch(error){
     console.error("Error cargando tabla:", error);
   }
 }
 
-function cargarHistorial() {
+function cargarHistorial(){
   fetch("historial.json")
     .then(response => response.json())
     .then(historial => {
       const estadisticas = document.getElementById("estadisticas-historial");
       const contenedor = document.getElementById("historial-picks");
 
-      if (!estadisticas || !contenedor) return;
+      if(!estadisticas || !contenedor) return;
 
       const ganados = historial.filter(item => item.resultado === "GANADO").length;
       const perdidos = historial.filter(item => item.resultado === "PERDIDO").length;
@@ -572,25 +630,23 @@ function cargarHistorial() {
       const efectividad = total > 0 ? ((ganados / total) * 100).toFixed(1) : 0;
 
       estadisticas.innerHTML = `
-<div class="stats-grid">
+        <div class="stats-grid">
+          <div class="stat-card ganados">
+            <strong>✅ Ganados</strong>
+            <span class="stat-value verde">${ganados}</span>
+          </div>
 
-  <div class="stat-card ganados">
-    <strong>✅ Ganados</strong><br>
-    <span class="stat-value verde">${ganados}</span>
-  </div>
+          <div class="stat-card perdidos">
+            <strong>❌ Perdidos</strong>
+            <span class="stat-value rojo">${perdidos}</span>
+          </div>
 
-  <div class="stat-card perdidos">
-    <strong>❌ Perdidos</strong><br>
-    <span class="stat-value rojo">${perdidos}</span>
-  </div>
-
-  <div class="stat-card efectividad">
-    <strong>🎯 Efectividad</strong><br>
-    <span class="stat-value amarillo">${efectividad}%</span>
-  </div>
-
-</div>
-`;
+          <div class="stat-card efectividad">
+            <strong>🎯 Efectividad</strong>
+            <span class="stat-value amarillo">${efectividad}%</span>
+          </div>
+        </div>
+      `;
 
       contenedor.innerHTML = "";
 
@@ -611,34 +667,35 @@ function cargarHistorial() {
           </div>
         `;
       });
-    });
+    })
+    .catch(error => console.warn("No se pudo cargar historial:", error));
 }
 
-function cargarBankroll() {
+function cargarBankroll(){
   fetch("bankroll.json")
     .then(response => response.json())
     .then(bankroll => {
       const box = document.getElementById("bankroll-box");
-      if (!box) return;
+      if(!box) return;
 
-      const actual = bankroll.actual;
-      const objetivo1 = bankroll.objetivo1;
-      const objetivo2 = bankroll.objetivo2;
+      const actual = Number(bankroll.actual || 0);
+      const objetivo1 = Number(bankroll.objetivo1 || 40);
+      const objetivo2 = Number(bankroll.objetivo2 || 50);
       const progreso = Math.min((actual / objetivo2) * 100, 100).toFixed(0);
 
       let metaActual;
       let faltante;
       let mensajeNivel;
 
-      if (actual < objetivo1) {
+      if(actual < objetivo1){
         metaActual = objetivo1;
         faltante = objetivo1 - actual;
         mensajeNivel = `📌 Faltan S/ ${faltante.toFixed(2)} para llegar al Objetivo 1`;
-      } else if (actual < objetivo2) {
+      }else if(actual < objetivo2){
         metaActual = objetivo2;
         faltante = objetivo2 - actual;
         mensajeNivel = `✅ Objetivo 1 completado<br>🚀 Nuevo objetivo: S/ ${objetivo2.toFixed(2)}<br>📌 Faltan S/ ${faltante.toFixed(2)} para la meta final`;
-      } else {
+      }else{
         metaActual = objetivo2;
         mensajeNivel = "🎉 Objetivo final completado";
       }
@@ -649,32 +706,33 @@ function cargarBankroll() {
           <p><strong>Objetivo 1:</strong> S/ ${objetivo1.toFixed(2)}</p>
           <p><strong>Objetivo final:</strong> S/ ${objetivo2.toFixed(2)}</p>
 
-          <div style="margin:16px 0;color:#facc15;font-weight:bold">
+          <div style="margin:16px 0;color:#f59e0b;font-weight:bold">
             🚀 Objetivo actual: convertir S/${actual.toFixed(2)} → S/${metaActual.toFixed(2)}
           </div>
 
-          <div style="margin-bottom:14px;color:#38bdf8;font-weight:bold">
+          <div style="margin-bottom:14px;color:#2563eb;font-weight:bold">
             ${mensajeNivel}
           </div>
 
-          <div style="background:#374151;border-radius:20px;overflow:hidden;margin-top:12px">
-            <div style="width:${progreso}%;background:#16a34a;padding:8px;text-align:center;font-weight:bold">
+          <div style="background:#e5e7eb;border-radius:20px;overflow:hidden;margin-top:12px">
+            <div style="width:${progreso}%;background:#16a34a;padding:8px;text-align:center;font-weight:bold;color:white">
               ${progreso}%
             </div>
           </div>
         </div>
       `;
-    });
+    })
+    .catch(error => console.warn("No se pudo cargar bankroll:", error));
 }
 
-function cargarEstadisticasGenerales() {
+function cargarEstadisticasGenerales(){
   Promise.all([
     fetch("historial.json").then(response => response.json()),
     fetch("bankroll.json").then(response => response.json())
   ])
   .then(([historial, bankroll]) => {
     const box = document.getElementById("estadisticas-generales");
-    if (!box) return;
+    if(!box) return;
 
     const total = historial.length;
     const ganados = historial.filter(item => item.resultado === "GANADO").length;
@@ -690,43 +748,43 @@ function cargarEstadisticasGenerales() {
       ? Object.keys(mercados).reduce((a, b) => mercados[a] > mercados[b] ? a : b)
       : "Sin datos";
 
-box.innerHTML = `
-  <div class="stats-grid">
+    box.innerHTML = `
+      <div class="stats-grid">
+        <div class="stat-card total">
+          <strong>📋 Picks totales</strong>
+          <span class="stat-value azul">${total}</span>
+        </div>
 
-    <div class="stat-card total">
-      <strong>📋 Picks totales</strong>
-      <span class="stat-value azul">${total}</span>
-    </div>
+        <div class="stat-card ganados">
+          <strong>✅ Ganados</strong>
+          <span class="stat-value verde">${ganados}</span>
+        </div>
 
-    <div class="stat-card ganados">
-      <strong>✅ Ganados</strong>
-      <span class="stat-value verde">${ganados}</span>
-    </div>
+        <div class="stat-card perdidos">
+          <strong>❌ Perdidos</strong>
+          <span class="stat-value rojo">${perdidos}</span>
+        </div>
 
-    <div class="stat-card perdidos">
-      <strong>❌ Perdidos</strong>
-      <span class="stat-value rojo">${perdidos}</span>
-    </div>
+        <div class="stat-card efectividad">
+          <strong>🎯 Efectividad</strong>
+          <span class="stat-value amarillo">${efectividad}%</span>
+        </div>
 
-    <div class="stat-card efectividad">
-      <strong>🎯 Efectividad</strong>
-      <span class="stat-value amarillo">${efectividad}%</span>
-    </div>
+        <div class="stat-card mercado">
+          <strong>⚽ Mejor mercado</strong>
+          <span class="stat-value amarillo texto-mediano">${mejorMercado}</span>
+        </div>
 
-    <div class="stat-card mercado">
-      <strong>⚽ Mejor mercado</strong>
-      <span class="stat-value amarillo texto-mediano">${mejorMercado}</span>
-    </div>
-
-    <div class="stat-card bankroll">
-      <strong>💰 Bankroll actual</strong>
-      <span class="stat-value verde">S/ ${bankroll.actual.toFixed(2)}</span>
-    </div>
-
-  </div>
-`;
-  });
+        <div class="stat-card bankroll">
+          <strong>💰 Bankroll actual</strong>
+          <span class="stat-value verde">S/ ${Number(bankroll.actual || 0).toFixed(2)}</span>
+        </div>
+      </div>
+    `;
+  })
+  .catch(error => console.warn("No se pudo cargar estadísticas generales:", error));
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   actualizarFechaVista();
   cargarPartidosAPI();
@@ -736,22 +794,24 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarEstadisticasGenerales();
 
   const buscador = document.getElementById("buscador");
-  if (buscador) buscador.addEventListener("input", aplicarFiltros);
+  if(buscador) buscador.addEventListener("input", aplicarFiltros);
 
   document.querySelectorAll(".tab-estado").forEach(tab => {
-    tab.addEventListener("click", function() {
+    tab.addEventListener("click", function(){
       document.querySelectorAll(".tab-estado")
         .forEach(t => t.classList.remove("active"));
 
       this.classList.add("active");
       estadoSeleccionado = this.dataset.estado;
+
+      actualizarContadoresEstado();
       aplicarFiltros();
     });
   });
 
   const selectorTabla = document.getElementById("selectorTabla");
-  if (selectorTabla) {
-    selectorTabla.addEventListener("change", function() {
+  if(selectorTabla){
+    selectorTabla.addEventListener("change", function(){
       cargarTablaPosiciones(this.value);
     });
   }
@@ -759,25 +819,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const diaAnterior = document.getElementById("diaAnterior");
   const diaSiguiente = document.getElementById("diaSiguiente");
 
-  if (diaAnterior) {
+  if(diaAnterior){
     diaAnterior.addEventListener("click", () => {
       fechaSeleccionada.setDate(fechaSeleccionada.getDate() - 1);
       actualizarFechaVista();
+      actualizarContadoresEstado();
+      aplicarFiltros();
       cargarPartidosAPI();
     });
   }
 
-  if (diaSiguiente) {
+  if(diaSiguiente){
     diaSiguiente.addEventListener("click", () => {
       fechaSeleccionada.setDate(fechaSeleccionada.getDate() + 1);
       actualizarFechaVista();
+      actualizarContadoresEstado();
+      aplicarFiltros();
       cargarPartidosAPI();
     });
   }
 
   setInterval(cargarPartidosAPI, 60000);
 });
-  
 </script>
 
 </body>
