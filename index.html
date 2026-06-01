@@ -690,34 +690,41 @@ function cargarEstadisticasGenerales() {
       ? Object.keys(mercados).reduce((a, b) => mercados[a] > mercados[b] ? a : b)
       : "Sin datos";
 
-    box.innerHTML = `
-      <div style="padding:15px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">
-        <div style="background:#111827;padding:15px;border-radius:10px">
-          <strong>📋 Picks totales</strong><br>
-          <span style="font-size:24px;color:#38bdf8">${total}</span>
-        </div>
-        <div style="background:#111827;padding:15px;border-radius:10px">
-          <strong>✅ Ganados</strong><br>
-          <span style="font-size:24px;color:#22c55e">${ganados}</span>
-        </div>
-        <div style="background:#111827;padding:15px;border-radius:10px">
-          <strong>❌ Perdidos</strong><br>
-          <span style="font-size:24px;color:#ef4444">${perdidos}</span>
-        </div>
-        <div style="background:#111827;padding:15px;border-radius:10px">
-          <strong>🎯 Efectividad</strong><br>
-          <span style="font-size:24px;color:#facc15">${efectividad}%</span>
-        </div>
-        <div style="background:#111827;padding:15px;border-radius:10px">
-          <strong>⚽ Mejor mercado</strong><br>
-          <span style="font-size:20px;color:#facc15">${mejorMercado}</span>
-        </div>
-        <div style="background:#111827;padding:15px;border-radius:10px">
-          <strong>💰 Bankroll actual</strong><br>
-          <span style="font-size:24px;color:#22c55e">S/ ${bankroll.actual.toFixed(2)}</span>
-        </div>
-      </div>
-    `;
+box.innerHTML = `
+  <div class="stats-grid">
+
+    <div class="stat-card total">
+      <strong>📋 Picks totales</strong>
+      <span class="stat-value azul">${total}</span>
+    </div>
+
+    <div class="stat-card ganados">
+      <strong>✅ Ganados</strong>
+      <span class="stat-value verde">${ganados}</span>
+    </div>
+
+    <div class="stat-card perdidos">
+      <strong>❌ Perdidos</strong>
+      <span class="stat-value rojo">${perdidos}</span>
+    </div>
+
+    <div class="stat-card efectividad">
+      <strong>🎯 Efectividad</strong>
+      <span class="stat-value amarillo">${efectividad}%</span>
+    </div>
+
+    <div class="stat-card mercado">
+      <strong>⚽ Mejor mercado</strong>
+      <span class="stat-value amarillo texto-mediano">${mejorMercado}</span>
+    </div>
+
+    <div class="stat-card bankroll">
+      <strong>💰 Bankroll actual</strong>
+      <span class="stat-value verde">S/ ${bankroll.actual.toFixed(2)}</span>
+    </div>
+
+  </div>
+`;
   });
 }
 
