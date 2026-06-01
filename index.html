@@ -143,7 +143,11 @@ let fechaSeleccionada = new Date();
 let marcadoresAnteriores = {};
 
 function formatoFechaAPI(fecha) {
-  return fecha.toISOString().split("T")[0];
+  const year = fecha.getFullYear();
+  const month = String(fecha.getMonth() + 1).padStart(2, "0");
+  const day = String(fecha.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
 }
 
 function formatoFechaVista(fecha) {
@@ -389,18 +393,34 @@ async function cargarPartidosAPI() {
   try {
     const fechaAPI = formatoFechaAPI(fechaSeleccionada);
 
-    const response = await fetch(
-      `https://puntaje-api.mgino4345.workers.dev/partidos?fecha=${fechaAPI}`
-    );
+let response = await fetch(
+  `https://puntaje-api.mgino4345.workers.dev/partidos?fecha=${fechaAPI}`
+);
 
-    const data = await response.json();
+let data = await response.json();
 
-    const listaPartidos =
-      Array.isArray(data.matches)
-        ? data.matches
-        : Array.isArray(data.partidos)
-        ? data.partidos
-        : [];
+let listaPartidos =
+  Array.isArray(data.matches)
+    ? data.matches
+    : Array.isArray(data.partidos)
+    ? data.partidos
+    : [];
+
+// Si no encuentra por fecha, prueba sin fecha
+if (listaPartidos.length === 0) {
+  response = await fetch(
+    "https://puntaje-api.mgino4345.workers.dev/partidos"
+  );
+
+  data = await response.json();
+
+  listaPartidos =
+    Array.isArray(data.matches)
+      ? data.matches
+      : Array.isArray(data.partidos)
+      ? data.partidos
+      : [];
+}
 
     partidosGlobal = listaPartidos.map(p => {
       const estadoAPI = p.status || p.estado || "";
