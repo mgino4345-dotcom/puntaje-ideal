@@ -313,25 +313,25 @@ function mostrarPartidos(partidos) {
             ${tiempo}
           </div>
 
-         <div class="scoreline-teams">
+<div class="scoreline-teams">
 
   <div class="scoreline-team-line">
-    ${p.rojaLocal > 0 ? `<span class="red-card">${p.rojaLocal}</span>` : ""}
     <img src="${p.escudoLocal}" alt="${p.local}">
     <span>${p.local}</span>
+    <strong class="team-goal">
+      ${p.golesLocal !== null ? p.golesLocal : "-"}
+    </strong>
   </div>
 
   <div class="scoreline-team-line">
-    ${p.rojaVisitante > 0 ? `<span class="red-card">${p.rojaVisitante}</span>` : ""}
     <img src="${p.escudoVisitante}" alt="${p.visitante}">
     <span>${p.visitante}</span>
+    <strong class="team-goal">
+      ${p.golesVisitante !== null ? p.golesVisitante : "-"}
+    </strong>
   </div>
-
 </div>
 
-<div class="scoreline-result ${p.estado === "LIVE" ? "live-result" : ""}">
-  ${resultado}
-</div>
 
           <div class="scoreline-extra">
             ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
