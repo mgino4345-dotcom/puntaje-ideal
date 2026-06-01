@@ -5,77 +5,126 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin - Puntaje Ideal</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:'Inter',Arial,sans-serif;
+}
+
 body{
-  font-family:Arial;
   background:#0f1115;
-  color:white;
+  color:#e8e8e8;
   padding:20px;
 }
 
 .container{
-  max-width:900px;
+  max-width:1100px;
   margin:auto;
-  background:#181c23;
-  padding:20px;
-  border-radius:12px;
 }
 
-input,select,button,textarea{
-  width:100%;
-  padding:12px;
-  margin:8px 0;
-  border-radius:8px;
-  border:0;
-  box-sizing:border-box;
-}
-
-button{
-  background:#0d47a1;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-button.api{
-  background:#16a34a;
-}
-
-button.clean{
-  background:#374151;
-}
-
-textarea{
-  height:280px;
+.admin-card{
   background:#111827;
-  color:#facc15;
+  border:1px solid #334155;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 4px 18px rgba(0,0,0,.3);
 }
 
-h1{
-  color:#facc15;
+.admin-head{
+  background:#1f2937;
+  padding:18px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #334155;
 }
 
-a{
+.admin-head h1{
+  font-size:24px;
+  color:#fff;
+}
+
+.admin-head a{
   color:#facc15;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.admin-body{
+  padding:22px;
+}
+
+.section-title{
+  margin:18px 0 10px;
+  color:#facc15;
+  font-size:16px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #334155;
+  background:#0f172a;
+  color:#fff;
+  outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#3b82f6;
+}
+
+button{
+  border:0;
+  padding:12px 14px;
+  border-radius:10px;
+  color:#fff;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.btn-primary{ background:#0d47a1; }
+.btn-api{ background:#16a34a; }
+.btn-copy{ background:#ca8a04; }
+.btn-clean{ background:#374151; }
+
+.actions{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:18px 0;
 }
 
 .preview{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin:10px 0;
+  gap:12px;
+  margin-top:12px;
 }
 
 .preview-card{
-  background:#111827;
-  border-radius:10px;
-  padding:12px;
+  background:#0f172a;
+  border:1px solid #334155;
+  border-radius:14px;
+  padding:18px;
   text-align:center;
 }
 
@@ -83,11 +132,27 @@ a{
   max-width:80px;
   height:80px;
   object-fit:contain;
+  margin-top:10px;
 }
 
-@media(max-width:700px){
-  .grid,.preview{
+textarea{
+  min-height:300px;
+  color:#facc15;
+  font-family:monospace;
+}
+
+@media(max-width:800px){
+  .grid,
+  .grid-3,
+  .actions,
+  .preview{
     grid-template-columns:1fr;
+  }
+
+  .admin-head{
+    flex-direction:column;
+    gap:10px;
+    align-items:flex-start;
   }
 }
 </style>
@@ -97,77 +162,111 @@ a{
 
 <div class="container">
 
-<h1>Panel Admin - Puntaje Ideal</h1>
-<p>Generador completo para partidos.json</p>
+  <div class="admin-card">
 
-<div class="grid">
-  <input id="hora" placeholder="Hora: 15:00">
-  <input id="liga" placeholder="Liga: Liga 1">
-</div>
+    <div class="admin-head">
+      <h1>⚙️ Admin Puntaje Ideal</h1>
+      <a href="index.html">← Volver a la web</a>
+    </div>
 
-<div class="grid">
-  <input id="pais" placeholder="País/Bandera: 🇵🇪">
-  <input id="canal" placeholder="Canal TV: ESPN, L1 MAX, Disney+">
-</div>
+    <div class="admin-body">
 
-<div class="grid">
-  <input id="local" placeholder="Equipo local">
-  <input id="visitante" placeholder="Equipo visitante">
-</div>
+      <p>Generador limpio para partidos.json</p>
 
-<button type="button" class="api" onclick="buscarEscudosAPI()">
-  🔍 Buscar escudos con API
-</button>
+      <h2 class="section-title">📅 Datos del partido</h2>
 
-<div class="grid">
-  <input id="escudoLocal" placeholder="Escudo local: escudos/alianzalima.png">
-  <input id="escudoVisitante" placeholder="Escudo visitante: escudos/universitario.png">
-</div>
+      <div class="grid-3">
+        <input id="fecha" placeholder="Fecha: 31/05/2026">
+        <input id="hora" placeholder="Hora: 15:00">
+        <input id="liga" placeholder="Liga: Liga 1">
+      </div>
 
-<div class="preview">
-  <div class="preview-card">
-    <strong>Escudo local</strong><br>
-    <img id="previewLocal" src="" alt="">
+      <div class="grid">
+        <input id="pais" placeholder="País/Bandera: 🇵🇪">
+        <input id="canal" placeholder="Canal TV: ESPN, L1 MAX, Disney+">
+      </div>
+
+      <h2 class="section-title">⚽ Equipos</h2>
+
+      <div class="grid">
+        <input id="local" placeholder="Equipo local">
+        <input id="visitante" placeholder="Equipo visitante">
+      </div>
+
+      <button type="button" class="btn-api" onclick="buscarEscudosAPI()">
+        🔍 Buscar escudos con API
+      </button>
+
+      <div class="grid">
+        <input id="escudoLocal" placeholder="Escudo local">
+        <input id="escudoVisitante" placeholder="Escudo visitante">
+      </div>
+
+      <div class="preview">
+        <div class="preview-card">
+          <strong>Escudo local</strong><br>
+          <img id="previewLocal" src="" alt="">
+        </div>
+
+        <div class="preview-card">
+          <strong>Escudo visitante</strong><br>
+          <img id="previewVisitante" src="" alt="">
+        </div>
+      </div>
+
+      <h2 class="section-title">📊 Marcador y estado</h2>
+
+      <div class="grid-3">
+        <input id="golesLocal" type="number" placeholder="Goles local">
+        <input id="golesVisitante" type="number" placeholder="Goles visitante">
+
+        <select id="estado">
+          <option value="PROXIMO">PROXIMO</option>
+          <option value="LIVE">LIVE</option>
+          <option value="FINAL">FINAL</option>
+        </select>
+      </div>
+
+      <div class="grid-3">
+        <input id="minuto" placeholder="Minuto: 1T 34' / MT / 2T 67'">
+        <input id="ht" placeholder="HT: 0-0">
+        <input id="corners" placeholder="Corners: 3-2">
+      </div>
+
+      <div class="grid">
+        <input id="rojaLocal" type="number" placeholder="Rojas local">
+        <input id="rojaVisitante" type="number" placeholder="Rojas visitante">
+      </div>
+
+      <h2 class="section-title">🔥 Pronóstico</h2>
+
+      <div class="grid">
+        <input id="pronostico" placeholder="Pronóstico: Over 1.5">
+
+        <select id="pickIA">
+          <option value="🟢 PICK FUERTE">🟢 PICK FUERTE</option>
+          <option value="🟡 PICK MEDIO">🟡 PICK MEDIO</option>
+          <option value="🔴 EVITAR">🔴 EVITAR</option>
+        </select>
+      </div>
+
+      <div class="actions">
+        <button class="btn-primary" onclick="generarJSON()">Generar JSON</button>
+        <button class="btn-copy" onclick="copiarJSON()">Copiar JSON</button>
+        <button class="btn-clean" onclick="limpiar()">Limpiar</button>
+        <button class="btn-api" onclick="descargarJSON()">Descargar JSON</button>
+      </div>
+
+      <textarea id="resultado" readonly></textarea>
+
+    </div>
   </div>
-
-  <div class="preview-card">
-    <strong>Escudo visitante</strong><br>
-    <img id="previewVisitante" src="" alt="">
-  </div>
-</div>
-
-<div class="grid">
-  <input id="golesLocal" type="number" placeholder="Goles local">
-  <input id="golesVisitante" type="number" placeholder="Goles visitante">
-</div>
-
-<input id="pronostico" placeholder="Pronóstico: Over 1.5">
-
-<select id="estado">
-  <option value="PROXIMO">PROXIMO</option>
-  <option value="LIVE">LIVE</option>
-  <option value="FINAL">FINAL</option>
-</select>
-
-<button onclick="generarJSON()">Generar JSON</button>
-<button onclick="copiarJSON()">Copiar JSON</button>
-<button class="clean" onclick="limpiar()">Limpiar formulario</button>
-
-<textarea id="resultado" readonly></textarea>
-
-<p><a href="index.html">Volver a la web</a></p>
-
 </div>
 
 <script>
 function valorONull(id){
   const valor = document.getElementById(id).value;
-
-  if(valor === ""){
-    return null;
-  }
-
-  return Number(valor);
+  return valor === "" ? null : Number(valor);
 }
 
 function generarJSON(){
@@ -182,18 +281,31 @@ function generarJSON(){
   }
 
   const partido = {
+    fecha: document.getElementById("fecha").value,
     hora: document.getElementById("hora").value,
     pais: document.getElementById("pais").value,
     liga: document.getElementById("liga").value,
+
     local: document.getElementById("local").value,
     visitante: document.getElementById("visitante").value,
+
     escudoLocal: document.getElementById("escudoLocal").value,
     escudoVisitante: document.getElementById("escudoVisitante").value,
-    golesLocal: golesLocal,
-    golesVisitante: golesVisitante,
-    estado: estado,
+
+    golesLocal,
+    golesVisitante,
+    estado,
+
+    minuto: document.getElementById("minuto").value,
+    ht: document.getElementById("ht").value,
+    corners: document.getElementById("corners").value,
+
+    rojaLocal: Number(document.getElementById("rojaLocal").value || 0),
+    rojaVisitante: Number(document.getElementById("rojaVisitante").value || 0),
+
     canal: document.getElementById("canal").value,
-    pronostico: document.getElementById("pronostico").value
+    pronostico: document.getElementById("pronostico").value,
+    pickIA: document.getElementById("pickIA").value
   };
 
   document.getElementById("resultado").value =
@@ -207,9 +319,29 @@ function copiarJSON(){
   alert("JSON copiado");
 }
 
+function descargarJSON(){
+  const contenido = document.getElementById("resultado").value;
+
+  if(!contenido){
+    alert("Primero genera el JSON");
+    return;
+  }
+
+  const blob = new Blob([contenido], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "partido.json";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
 function limpiar(){
   document.querySelectorAll("input").forEach(input => input.value = "");
   document.getElementById("estado").value = "PROXIMO";
+  document.getElementById("pickIA").value = "🟢 PICK FUERTE";
   document.getElementById("resultado").value = "";
   document.getElementById("previewLocal").src = "";
   document.getElementById("previewVisitante").src = "";
@@ -228,7 +360,7 @@ function buscarEscudosAPI(){
   buscarEscudoEquipo(visitante, "escudoVisitante", "previewVisitante");
 }
 
-  function normalizarTexto(texto){
+function normalizarTexto(texto){
   return texto
     .toLowerCase()
     .normalize("NFD")
@@ -243,7 +375,6 @@ function buscarEscudoEquipo(nombreEquipo, campoDestino, previewDestino){
   fetch(url)
     .then(response => response.json())
     .then(data => {
-
       const campo = document.getElementById(campoDestino);
       const preview = document.getElementById(previewDestino);
 
@@ -251,7 +382,6 @@ function buscarEscudoEquipo(nombreEquipo, campoDestino, previewDestino){
       preview.src = "";
 
       if(data.teams && data.teams.length > 0){
-
         const nombreBuscado = normalizarTexto(nombreEquipo);
 
         const equipoExacto = data.teams.find(team =>
@@ -263,20 +393,15 @@ function buscarEscudoEquipo(nombreEquipo, campoDestino, previewDestino){
         if(equipoElegido && equipoElegido.strBadge){
           campo.value = equipoElegido.strBadge;
           preview.src = equipoElegido.strBadge;
-        } else {
+        }else{
           alert(`No se encontró escudo para: ${nombreEquipo}`);
         }
-
-      } else {
+      }else{
         alert(`No se encontró escudo para: ${nombreEquipo}`);
       }
     })
     .catch(error => {
       console.error(error);
-
-      document.getElementById(campoDestino).value = "";
-      document.getElementById(previewDestino).src = "";
-
       alert(`Error consultando TheSportsDB para: ${nombreEquipo}`);
     });
 }
