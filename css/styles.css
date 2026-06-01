@@ -370,12 +370,11 @@ nav a.active{
 
 /* PICKS */
 .picks{
+  padding:18px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:16px;
-  margin:20px 0;
 }
-
 .pick-card{
   background:#111827;
   border:1px solid #334155;
