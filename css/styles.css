@@ -1,7 +1,4 @@
-/* =====================================
-   RESET
-===================================== */
-
+/* RESET */
 *{
   margin:0;
   padding:0;
@@ -14,10 +11,7 @@ body{
   color:#e8e8e8;
 }
 
-/* =====================================
-   HEADER
-===================================== */
-
+/* HEADER */
 header{
   background:#101820;
   border-bottom:1px solid #252b33;
@@ -47,10 +41,6 @@ header{
   color:#9ca3af;
 }
 
-/* =====================================
-   BUSCADOR
-===================================== */
-
 .search{
   margin-left:auto;
 }
@@ -64,10 +54,7 @@ header{
   padding:10px;
 }
 
-/* =====================================
-   MENÚ
-===================================== */
-
+/* MENÚ */
 nav{
   background:#161b22;
 }
@@ -96,10 +83,7 @@ nav a.active{
   color:white;
 }
 
-/* =====================================
-   CONTENEDOR
-===================================== */
-
+/* CONTENEDOR */
 .container{
   max-width:1200px;
   margin:auto;
@@ -111,10 +95,7 @@ nav a.active{
   margin:16px 0 10px;
 }
 
-/* =====================================
-   FILTROS
-===================================== */
-
+/* FILTROS */
 .barra-filtros{
   display:flex;
   justify-content:space-between;
@@ -145,10 +126,7 @@ nav a.active{
   color:white;
 }
 
-/* =====================================
-   SELECTOR FECHA
-===================================== */
-
+/* SELECTOR FECHA */
 .selector-fecha{
   display:flex;
   align-items:center;
@@ -174,22 +152,55 @@ nav a.active{
   font-weight:900;
 }
 
-/* =====================================
-   LIGA
-===================================== */
+/* TARJETAS GENERALES */
+.section-card,
+.league-card{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:14px;
+  overflow:hidden;
+  margin-bottom:20px;
+  box-shadow:0 2px 10px rgba(0,0,0,.25);
+}
+
+.section-card:hover,
+.league-card:hover{
+  border-color:#475569;
+}
+
+.league-head{
+  background:#1f2937;
+  color:#fff;
+  padding:14px 18px;
+  font-size:18px;
+  font-weight:700;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #334155;
+}
+
+.section-card-body{
+  background:#111827;
+  padding:0;
+}
+
+/* PARTIDOS */
+#partidos-json{
+  background:#fff;
+}
 
 .scoreline-league{
-  background:#fff3cd;
+  background:#efe6bf;
   color:#374151;
   font-weight:800;
   padding:10px 12px;
   display:flex;
   justify-content:space-between;
+  border-top:1px solid #d9cf9c;
+  border-bottom:1px solid #d9cf9c;
 }
 
-/* =====================================
-   PARTIDOS
-===================================== */
 .scoreline-match{
   background:#fff;
   color:#111827;
@@ -200,6 +211,22 @@ nav a.active{
   padding:7px 12px;
   border-bottom:1px solid #e5e7eb;
   font-size:13px;
+}
+
+.scoreline-star{
+  color:#94a3b8;
+  font-size:20px;
+  text-align:center;
+}
+
+.scoreline-time{
+  color:#475569;
+  font-weight:700;
+  text-align:center;
+}
+
+.scoreline-time.live-text{
+  color:#ff0050;
 }
 
 .scoreline-teams{
@@ -232,42 +259,54 @@ nav a.active{
   font-size:12px;
   display:flex;
   justify-content:flex-end;
+  align-items:center;
   gap:8px;
 }
 
-/* =====================================
-   ESTADOS
-===================================== */
-
-.live{
+.red-card{
   background:#dc2626;
   color:white;
+  font-size:10px;
+  padding:2px 5px;
+  border-radius:4px;
+  font-weight:900;
 }
 
-.next{
-  background:#374151;
-  color:#d1d5db;
+/* PICK IA */
+.pick-ia{
+  padding:4px 8px;
+  border-radius:8px;
+  font-size:11px;
+  font-weight:900;
+  white-space:nowrap;
 }
 
-.end{
+.pick-fuerte{
   background:#16a34a;
   color:white;
 }
 
-.minuto-live{
-  color:#ff0050;
-  font-weight:700;
+.pick-medio{
+  background:#ca8a04;
+  color:white;
 }
 
-.minuto-descanso{
-  color:#facc15;
-  font-weight:700;
+.pick-evitar{
+  background:#dc2626;
+  color:white;
 }
 
-/* =====================================
-   TABLA DE POSICIONES
-===================================== */
+/* MENSAJE SIN PARTIDOS */
+.sin-partidos{
+  padding:35px;
+  text-align:center;
+  color:#9ca3af;
+  font-size:17px;
+  font-weight:bold;
+  background:#111827;
+}
 
+/* TABLA DE POSICIONES */
 .tabla-flash{
   width:100%;
   background:white;
@@ -278,15 +317,7 @@ nav a.active{
 
 .tabla-header{
   display:grid;
-  grid-template-columns:
-    50px
-    1fr
-    50px
-    50px
-    50px
-    50px
-    60px
-    60px;
+  grid-template-columns:50px 1fr 50px 50px 50px 50px 60px 60px;
   background:#ececec;
   font-size:12px;
   font-weight:700;
@@ -295,18 +326,11 @@ nav a.active{
 
 .tabla-row{
   display:grid;
-  grid-template-columns:
-    50px
-    1fr
-    50px
-    50px
-    50px
-    50px
-    60px
-    60px;
+  grid-template-columns:50px 1fr 50px 50px 50px 50px 60px 60px;
   align-items:center;
   padding:12px;
   border-bottom:1px solid #e5e7eb;
+  background:white;
 }
 
 .tabla-row:hover{
@@ -341,14 +365,12 @@ nav a.active{
   font-weight:900;
 }
 
-/* =====================================
-   PICKS
-===================================== */
-
+/* PICKS */
 .picks{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
   gap:12px;
+  margin-bottom:20px;
 }
 
 .pick-card{
@@ -358,10 +380,92 @@ nav a.active{
   padding:14px;
 }
 
-/* =====================================
-   ALERTA GOL
-===================================== */
+.badge{
+  display:inline-block;
+  background:#0d47a1;
+  color:white;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+}
 
+.badge.gold{
+  background:#ca8a04;
+}
+
+.badge.red{
+  background:#dc2626;
+}
+
+/* HISTORIAL */
+.match{
+  display:grid;
+  grid-template-columns:70px 1fr 60px 90px;
+  align-items:center;
+  gap:10px;
+  padding:12px 14px;
+  border-top:1px solid #2a303a;
+}
+
+.match:hover{
+  background:#202632;
+}
+
+.time{
+  font-size:12px;
+  color:#9ca3af;
+  font-weight:bold;
+}
+
+.teams{
+  line-height:1.7;
+}
+
+.team{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.score{
+  font-size:20px;
+  font-weight:900;
+  text-align:center;
+  color:#fff;
+}
+
+.status{
+  text-align:center;
+  font-size:11px;
+  font-weight:bold;
+  padding:6px;
+  border-radius:14px;
+}
+
+.live{
+  background:#dc2626;
+  color:white;
+}
+
+.next{
+  background:#374151;
+  color:#d1d5db;
+}
+
+.end{
+  background:#16a34a;
+  color:white;
+}
+
+.prediction{
+  margin-top:6px;
+  font-size:12px;
+  color:#facc15;
+  font-weight:bold;
+}
+
+/* ALERTA GOL */
 .gol-alerta{
   position:fixed;
   top:20px;
@@ -370,13 +474,12 @@ nav a.active{
   color:white;
   padding:18px 22px;
   border-radius:14px;
+  font-weight:900;
   z-index:9999;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
 
-/* =====================================
-   FOOTER
-===================================== */
-
+/* FOOTER */
 footer{
   margin-top:30px;
   background:#101820;
@@ -386,10 +489,7 @@ footer{
   padding:18px;
 }
 
-/* =====================================
-   RESPONSIVE
-===================================== */
-
+/* RESPONSIVE */
 @media(max-width:768px){
 
   .topbar{
@@ -405,25 +505,34 @@ footer{
     width:100%;
   }
 
+  .barra-filtros{
+    align-items:flex-start;
+  }
+
+  .selector-fecha{
+    width:100%;
+    justify-content:center;
+  }
+
+  .tab-estado{
+    padding:10px 14px;
+    font-size:12px;
+  }
+
   .scoreline-match{
-    grid-template-columns:
-      25px
-      60px
-      1fr
-      50px;
+    grid-template-columns:25px 60px 1fr 80px;
+    gap:6px;
+    padding:8px;
+  }
+
+  .scoreline-extra{
+    font-size:11px;
   }
 
   .tabla-header,
   .tabla-row{
-    grid-template-columns:
-      35px
-      1fr
-      40px
-      40px
-      40px
-      40px
-      45px
-      45px;
+    grid-template-columns:35px 1fr 40px 40px 40px 40px 45px 45px;
+    font-size:11px;
   }
 
   .tabla-equipo img{
@@ -431,106 +540,9 @@ footer{
     height:18px !important;
   }
 
-/// ANALISIS PICK ///
-
-.pick-ia{
-  padding:4px 8px;
-  border-radius:8px;
-  font-size:11px;
-  font-weight:900;
-  white-space:nowrap;
-}
-
-.pick-fuerte{
-  background:#16a34a;
-  color:white;
-}
-
-.pick-medio{
-  background:#ca8a04;
-  color:white;
-}
-
-.pick-evitar{
-  background:#dc2626;
-  color:white;
-}
-   /* CONTENEDOR GENERAL DE PARTIDOS */
-
-.partidos-card{
-  background:#ffffff;
-  border:1px solid #dbe2ea;
-  border-radius:12px;
-  overflow:hidden;
-  margin-bottom:20px;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
-}
-
-/* CABECERA */
-
-.league-head{
-  background:#182235;
-  color:#fff;
-  padding:14px 18px;
-  font-size:18px;
-  font-weight:700;
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  border-bottom:1px solid #253249;
-}
-
-/* CUERPO */
-
-#partidos-json{
-  border-top:0;
-  background:#fff;
-}
-
-/* LIGA */
-
-.scoreline-league{
-  background:#efe6bf;
-  border-top:1px solid #d9cf9c;
-  border-bottom:1px solid #d9cf9c;
-}
-   /* TARJETA GENERAL */
-
-.section-card{
-  background:#111827;
-  border:1px solid #253249;
-  border-radius:14px;
-  overflow:hidden;
-  margin-bottom:20px;
-  box-shadow:0 2px 10px rgba(0,0,0,.25);
-}
-
-/* CABECERA */
-
-.section-card .league-head{
-  background:#1f2937;
-  color:#fff;
-  padding:14px 18px;
-  font-weight:700;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #253249;
-}
-
-/* CUERPO */
-
-.section-card-body{
-  background:#111827;
-  padding:0;
-}
-   .section-card{
-  border:1px solid #334155;
-}
-
-.section-card:hover{
-  border-color:#475569;
-}
+  .match{
+    grid-template-columns:50px 1fr 45px 70px;
+    gap:6px;
+    padding:11px 9px;
+  }
 }
