@@ -1,26 +1,24 @@
 [
- {
-  "hora": "15:00",
-  "liga": "Serie A Brasil",
-  "local": "Palmeiras",
-  "visitante": "Flamengo",
-  "estado": "LIVE",
-
-  "pronostico": "Over 1.5",
-
-  "nivelPick": "🟢 PICK FUERTE",
-  "mercadoIA": "Over 1.5",
-  "confianza": 82
-}
 {
-  "hora": "18:00",
-  "liga": "Liga 1 Perú",
-  "local": "UTC",
-  "visitante": "Comerciantes Unidos",
-
-  "nivelPick": "🔴 EVITAR",
-  "mercadoIA": "Sin entrada clara",
-  "confianza": 48
+  "fecha": "01/06/2026",
+  "hora": "08:00",
+  "pais": "ASIATICO",
+  "liga": "CAMPEONATO JUVENIL AAFF U19",
+  "local": "INDONESIA (19)",
+  "visitante": "MYANMAR (19)",
+  "escudoLocal": "",
+  "escudoVisitante": "",
+  "golesLocal": 1,
+  "golesVisitante": 0,
+  "estado": "LIVE",
+  "minuto": "2T 76",
+  "ht": "",
+  "corners": "",
+  "rojaLocal": 0,
+  "rojaVisitante": 0,
+  "canal": "ESPN",
+  "pronostico": "OVER 1.5",
+  "pickIA": "🟢 PICK FUERTE"
 }
 
 ]
