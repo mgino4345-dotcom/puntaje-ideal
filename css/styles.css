@@ -634,4 +634,35 @@ footer{
   .pick-card{
   color:#111827;
 }
+  /* FIX HISTORIAL TEXTO OSCURO */
+
+#estadisticas-historial,
+#historial-picks,
+#historial-picks .match,
+#historial-picks .teams,
+#historial-picks .team,
+#historial-picks .team span{
+  color:#f8fafc !important;
+}
+
+#historial-picks .prediction{
+  color:#facc15 !important;
+}
+
+#historial-picks .time{
+  color:#bfdbfe !important;
+}
+
+#estadisticas-historial strong{
+  color:#f8fafc !important;
+}
+
+#historial-picks .score{
+  color:#f8fafc !important;
+}
+
+#historial-picks .status{
+  color:#fff !important;
+  text-decoration:none !important;
+}
 }
