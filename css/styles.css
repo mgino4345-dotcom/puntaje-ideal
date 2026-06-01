@@ -190,85 +190,36 @@ nav a.active{
 /* =====================================
    PARTIDOS
 ===================================== */
-
-.scoreline-league{
-  background:#eaf4ff;
-  color:#334155;
-  font-weight:900;
-  padding:8px 12px;
+.scoreline-teams{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:13px;
-  border-bottom:1px solid #e5e7eb;
+  flex-direction:column;
+  gap:6px;
 }
 
-.scoreline-match{
-  background:#ffffff;
-  color:#111827;
-  display:grid;
-  grid-template-columns:30px 70px 1fr 45px 170px;
+.scoreline-team-line{
+  display:flex;
   align-items:center;
   gap:8px;
-  padding:7px 12px;
-  border-bottom:1px solid #e5e7eb;
-  font-size:13px;
+  font-weight:600;
 }
 
-.scoreline-star{
-  color:#cbd5e1;
-  font-size:22px;
-  text-align:center;
-}
-
-.scoreline-time{
-  color:#475569;
-  font-size:13px;
-  text-align:center;
-}
-
-.scoreline-home,
-.scoreline-away{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  font-weight:500;
-}
-
-.scoreline-home{
-  justify-content:flex-start;
-}
-
-.scoreline-away{
-  justify-content:flex-start;
-}
-
-.scoreline-home img,
-.scoreline-away img{
-  width:20px !important;
-  height:20px !important;
+.scoreline-team-line img{
+  width:20px;
+  height:20px;
   object-fit:contain;
 }
-
-.scoreline-result{
-  text-align:center;
-  font-weight:900;
-  font-size:15px;
-  color:#111827;
-}
-
-.scoreline-extra{
-  color:#64748b;
-  font-size:12px;
-  display:flex;
-  gap:8px;
-  justify-content:flex-end;
+.scoreline-match{
+  display:grid;
+  grid-template-columns:
+      30px
+      70px
+      1fr
+      70px
+      140px;
   align-items:center;
+  gap:10px;
 }
 
-.pick-ia{
-  display:none;
-}
 /* =====================================
    ESTADOS
 ===================================== */
