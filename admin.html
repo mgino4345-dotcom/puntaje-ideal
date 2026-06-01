@@ -131,6 +131,28 @@ button{
   font-size:18px;
   font-weight:700;
 }
+  .ia-box{
+  background:#0f172a;
+  border:1px solid #334155;
+  border-radius:14px;
+  padding:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  margin-top:10px;
+}
+
+.ia-box strong{
+  font-size:20px;
+  color:#22c55e;
+}
+
+.ia-box p{
+  margin-top:6px;
+  color:#cbd5e1;
+  font-weight:700;
+}
 
 .preview-card{
   background:#0f172a;
@@ -269,6 +291,19 @@ textarea{
       </div>
 
       <h2 class="section-title">🔥 Pronóstico</h2>
+      <h2 class="section-title">🤖 Pronóstico IA</h2>
+
+<div class="ia-box">
+  <div>
+    <strong id="iaNivel">🟢 PICK FUERTE</strong>
+    <p id="iaMercado">Mercado: Over 1.5</p>
+    <p id="iaConfianza">Confianza: 82%</p>
+  </div>
+
+  <button class="btn-api" onclick="calcularIA()">
+    Calcular IA
+  </button>
+</div>
       <div id="previewPartido"></div>
 
       <div class="grid">
