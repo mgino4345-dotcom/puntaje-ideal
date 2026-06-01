@@ -190,6 +190,18 @@ nav a.active{
 /* =====================================
    PARTIDOS
 ===================================== */
+.scoreline-match{
+  background:#fff;
+  color:#111827;
+  display:grid;
+  grid-template-columns:35px 90px 1fr 160px;
+  align-items:center;
+  gap:10px;
+  padding:7px 12px;
+  border-bottom:1px solid #e5e7eb;
+  font-size:13px;
+}
+
 .scoreline-teams{
   display:flex;
   flex-direction:column;
@@ -197,27 +209,30 @@ nav a.active{
 }
 
 .scoreline-team-line{
-  display:flex;
+  display:grid;
+  grid-template-columns:22px 1fr 30px;
   align-items:center;
   gap:8px;
-  font-weight:600;
 }
 
 .scoreline-team-line img{
-  width:20px;
-  height:20px;
+  width:20px !important;
+  height:20px !important;
   object-fit:contain;
 }
-.scoreline-match{
-  display:grid;
-  grid-template-columns:
-      30px
-      70px
-      1fr
-      70px
-      140px;
-  align-items:center;
-  gap:10px;
+
+.team-goal{
+  text-align:center;
+  font-weight:900;
+  color:#111827;
+}
+
+.scoreline-extra{
+  color:#9ca3af;
+  font-size:12px;
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
 }
 
 /* =====================================
