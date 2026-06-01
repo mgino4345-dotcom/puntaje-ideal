@@ -612,4 +612,58 @@ footer{
   font-size:36px;
   font-weight:800;
 }
+  /* ESTADISTICAS */
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+  padding:15px;
+}
+
+.stat-card{
+  padding:18px;
+  border-radius:12px;
+  border:1px solid #e5e7eb;
+}
+
+.stat-card strong{
+  display:block;
+  margin-bottom:8px;
+  color:#111827;
+}
+
+.stat-value{
+  font-size:30px;
+  font-weight:800;
+}
+
+/* COLORES */
+
+.ganados{
+  background:#ecfdf5;
+  border-color:#22c55e;
+}
+
+.perdidos{
+  background:#fef2f2;
+  border-color:#ef4444;
+}
+
+.efectividad{
+  background:#fffbeb;
+  border-color:#f59e0b;
+}
+
+.verde{
+  color:#22c55e;
+}
+
+.rojo{
+  color:#ef4444;
+}
+
+.amarillo{
+  color:#f59e0b;
+}
 }
