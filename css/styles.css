@@ -1,17 +1,30 @@
 /* RESET */
 *{
-  font-family:'Roboto',sans-serif;
-}
-*{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial,sans-serif;
+  font-family:'Inter',sans-serif;
 }
 
 body{
-  background:#0f1115;
-  color:#e8e8e8;
+  font-family:'Inter',sans-serif;
+  letter-spacing:-0.2px;
+}
+
+.brand h1{
+  font-weight:800;
+}
+
+.scoreline-team-line{
+  font-weight:600;
+}
+
+.team-goal{
+  font-weight:800;
+}
+
+.scoreline-league{
+  font-weight:700;
 }
 
 /* HEADER */
