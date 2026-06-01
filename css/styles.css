@@ -526,4 +526,11 @@ footer{
   background:#111827;
   padding:0;
 }
+   .section-card{
+  border:1px solid #334155;
+}
+
+.section-card:hover{
+  border-color:#475569;
+}
 }
