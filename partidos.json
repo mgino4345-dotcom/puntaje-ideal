@@ -1,41 +1,26 @@
 [
-  {
-    "hora": "15:00",
-    "pais": "🇵🇪",
-    "liga": "Liga 1",
-    "local": "Alianza Lima",
-    "visitante": "Universitario",
-    "escudoLocal": "escudos/alianzalima.png",
-    "escudoVisitante": "escudos/universitario.png",
-    "golesLocal": 2,
-    "golesVisitante": 1,
-    "estado": "LIVE",
-    "pronostico": "Over 1.5"
-  },
-  {
-    "hora": "18:00",
-    "pais": "🇦🇷",
-    "liga": "Primera División",
-    "local": "Boca Juniors",
-    "visitante": "Racing Club",
-    "escudoLocal": "escudos/boca.png",
-    "escudoVisitante": "escudos/racing.png",
-    "golesLocal": null,
-    "golesVisitante": null,
-    "estado": "PROXIMO",
-    "pronostico": "Ambos marcan"
-  },
-  {
-    "hora": "20:00",
-    "pais": "🇧🇷",
-    "liga": "Serie A",
-    "local": "Flamengo",
-    "visitante": "Palmeiras",
-    "escudoLocal": "escudos/flamengo.png",
-    "escudoVisitante": "escudos/palmeiras.png",
-    "golesLocal": null,
-    "golesVisitante": null,
-    "estado": "PROXIMO",
-    "pronostico": "Over 2.5"
-  }
+ {
+  "hora": "15:00",
+  "liga": "Serie A Brasil",
+  "local": "Palmeiras",
+  "visitante": "Flamengo",
+  "estado": "LIVE",
+
+  "pronostico": "Over 1.5",
+
+  "nivelPick": "🟢 PICK FUERTE",
+  "mercadoIA": "Over 1.5",
+  "confianza": 82
+}
+{
+  "hora": "18:00",
+  "liga": "Liga 1 Perú",
+  "local": "UTC",
+  "visitante": "Comerciantes Unidos",
+
+  "nivelPick": "🔴 EVITAR",
+  "mercadoIA": "Sin entrada clara",
+  "confianza": 48
+}
+
 ]
