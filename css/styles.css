@@ -1,4 +1,3 @@
-/* RESET */
 *{
   margin:0;
   padding:0;
@@ -56,7 +55,7 @@ header{
   padding:10px;
 }
 
-/* MENÚ */
+/* MENU */
 nav{
   background:#161b22;
 }
@@ -275,7 +274,7 @@ nav a.active{
   font-weight:900;
 }
 
-/* PICK IA EN PARTIDOS */
+/* PICK IA */
 .pick-ia{
   padding:4px 8px;
   border-radius:8px;
@@ -374,25 +373,27 @@ nav a.active{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:16px;
+  background:#ffffff;
 }
+
 .pick-card{
-  background:#111827;
-  border:1px solid #334155;
-  border-radius:14px;
+  background:#ffffff;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
   padding:18px;
-  color:#fff;
-  box-shadow:0 2px 10px rgba(0,0,0,.25);
+  color:#111827;
+  box-shadow:none;
 }
 
 .pick-card h3{
-  color:#fff;
+  color:#111827;
   font-size:18px;
   font-weight:700;
   margin-bottom:8px;
 }
 
 .pick-card p{
-  color:#cbd5e1;
+  color:#475569;
   line-height:1.5;
   margin-bottom:12px;
 }
@@ -415,18 +416,19 @@ nav a.active{
   background:#dc2626;
 }
 
-/* HISTORIAL / ESTADÍSTICAS / BANKROLL */
+/* HISTORIAL / ESTADISTICAS / BANKROLL */
 #estadisticas-historial,
+#historial-picks,
 #estadisticas-generales,
 #bankroll-box{
-  background:#111827;
-  color:#f8fafc;
+  background:#ffffff;
+  color:#111827;
 }
 
 #estadisticas-historial strong,
 #estadisticas-generales strong,
 #bankroll-box strong{
-  color:#f8fafc;
+  color:#111827;
 }
 
 .match{
@@ -435,24 +437,24 @@ nav a.active{
   align-items:center;
   gap:10px;
   padding:12px 14px;
-  border-top:1px solid #334155;
-  background:#111827;
-  color:#f8fafc;
+  border-top:1px solid #e5e7eb;
+  background:#ffffff;
+  color:#111827;
 }
 
 .match:hover{
-  background:#172033;
+  background:#f8fafc;
 }
 
 .time{
   font-size:12px;
-  color:#93c5fd;
+  color:#475569;
   font-weight:700;
 }
 
 .teams{
   line-height:1.7;
-  color:#f8fafc;
+  color:#111827;
 }
 
 .team{
@@ -462,14 +464,14 @@ nav a.active{
 }
 
 .team span{
-  color:#f8fafc;
+  color:#111827;
 }
 
 .score{
   font-size:20px;
   font-weight:900;
   text-align:center;
-  color:#fff;
+  color:#111827;
 }
 
 .status{
@@ -499,7 +501,7 @@ nav a.active{
 .prediction{
   margin-top:6px;
   font-size:12px;
-  color:#facc15;
+  color:#f59e0b;
   font-weight:bold;
 }
 
@@ -583,64 +585,4 @@ footer{
     gap:6px;
     padding:11px 9px;
   }
-  /* UNIFICAR PICKS / HISTORIAL CON PARTIDOS Y TABLA */
-
-.section-card-body,
-.picks,
-#estadisticas-historial,
-#historial-picks,
-#estadisticas-generales,
-#bankroll-box{
-  background:#ffffff;
-  color:#111827;
-}
-
-.picks{
-  padding:18px;
-}
-
-.pick-card{
-  background:#ffffff;
-  color:#111827;
-  border:1px solid #e5e7eb;
-  border-radius:12px;
-  box-shadow:none;
-}
-
-.pick-card h3,
-.pick-card p{
-  color:#111827;
-}
-
-#historial-picks .match,
-.match{
-  background:#ffffff;
-  color:#111827;
-  border-top:1px solid #e5e7eb;
-}
-
-#historial-picks .match:hover,
-.match:hover{
-  background:#f8fafc;
-}
-
-#historial-picks .team span,
-#historial-picks .teams,
-#historial-picks .score,
-.team span,
-.teams,
-.score{
-  color:#111827;
-}
-
-#historial-picks .time,
-.time{
-  color:#475569;
-}
-
-#estadisticas-historial strong,
-#estadisticas-generales strong,
-#bankroll-box strong{
-  color:#111827;
-}
 }
