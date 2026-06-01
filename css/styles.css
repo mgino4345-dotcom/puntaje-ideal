@@ -455,4 +455,45 @@ footer{
   background:#dc2626;
   color:white;
 }
+   /* CONTENEDOR GENERAL DE PARTIDOS */
+
+.partidos-card{
+  background:#ffffff;
+  border:1px solid #dbe2ea;
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:20px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+/* CABECERA */
+
+.league-head{
+  background:#182235;
+  color:#fff;
+  padding:14px 18px;
+  font-size:18px;
+  font-weight:700;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  border-bottom:1px solid #253249;
+}
+
+/* CUERPO */
+
+#partidos-json{
+  border-top:0;
+  background:#fff;
+}
+
+/* LIGA */
+
+.scoreline-league{
+  background:#efe6bf;
+  border-top:1px solid #d9cf9c;
+  border-bottom:1px solid #d9cf9c;
+}
 }
