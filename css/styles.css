@@ -585,4 +585,31 @@ footer{
     gap:6px;
     padding:11px 9px;
   }
+  /* TARJETAS DE ESTADISTICAS */
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  padding:18px;
+}
+
+.stat-card{
+  background:#ffffff;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:20px;
+  text-align:left;
+}
+
+.stat-card h3{
+  color:#475569;
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+.stat-card .valor{
+  font-size:36px;
+  font-weight:800;
+}
 }
