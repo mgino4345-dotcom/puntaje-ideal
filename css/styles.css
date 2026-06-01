@@ -583,4 +583,64 @@ footer{
     gap:6px;
     padding:11px 9px;
   }
+  /* UNIFICAR PICKS / HISTORIAL CON PARTIDOS Y TABLA */
+
+.section-card-body,
+.picks,
+#estadisticas-historial,
+#historial-picks,
+#estadisticas-generales,
+#bankroll-box{
+  background:#ffffff;
+  color:#111827;
+}
+
+.picks{
+  padding:18px;
+}
+
+.pick-card{
+  background:#ffffff;
+  color:#111827;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  box-shadow:none;
+}
+
+.pick-card h3,
+.pick-card p{
+  color:#111827;
+}
+
+#historial-picks .match,
+.match{
+  background:#ffffff;
+  color:#111827;
+  border-top:1px solid #e5e7eb;
+}
+
+#historial-picks .match:hover,
+.match:hover{
+  background:#f8fafc;
+}
+
+#historial-picks .team span,
+#historial-picks .teams,
+#historial-picks .score,
+.team span,
+.teams,
+.score{
+  color:#111827;
+}
+
+#historial-picks .time,
+.time{
+  color:#475569;
+}
+
+#estadisticas-historial strong,
+#estadisticas-generales strong,
+#bankroll-box strong{
+  color:#111827;
+}
 }
