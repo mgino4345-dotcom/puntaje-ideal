@@ -329,7 +329,8 @@ function normalizarPartido(p){
     pronostico: p.pronostico || `${nivelPick} · ${mercadoIA}`,
     nivelPick,
     mercadoIA,
-    confianza
+    confianza,
+    cuota: p.cuota || ""
   };
 }
 
@@ -874,10 +875,12 @@ function pintarPick(id, p, textoVacio){
   }
 
   box.innerHTML = `
-    <strong>${p.local} vs ${p.visitante}</strong><br>
-    <span>${p.pronostico || p.mercadoIA || "Over 1.5"}</span><br>
-    <small>${p.liga || ""}</small><br>
-    <small>Confianza: ${p.confianza || p.puntosIA || "-"}%</small>
+    <strong>${p.nivelPick || ""}</strong><br>
+    <span>${p.local} vs ${p.visitante}</span><br>
+    <small>🏆 Liga: ${p.liga || "-"}</small><br>
+    <small>🎯 Mercado: ${p.mercadoIA || p.pronostico || "-"}</small><br>
+    <small>📊 Confianza: ${p.confianza || "-"}%</small><br>
+    <small>💵 Cuota sugerida: ${p.cuota || "-"}</small>
   `;
 }
 </script>
