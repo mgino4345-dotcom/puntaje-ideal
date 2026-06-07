@@ -924,26 +924,45 @@ function pintarTopPick(partidos){
   const box = document.getElementById("top-pick-dia");
   if(!box) return;
 
+  const fechaAPI = formatoFechaAPI(fechaSeleccionada);
+
   const picks = partidos.filter(p =>
+    (!p.fechaFiltro || p.fechaFiltro === fechaAPI) &&
     Number(p.confianza || 0) > 0
   );
 
-  if(!picks.length){
+  if(picks.length === 0){
     box.innerHTML = `
-      <div class="top-pick">
-        No hay Top Pick disponible
+      <div class="top-pick-card">
+        <div class="top-pick-header">
+          🏆 TOP PICK DEL DÍA
+        </div>
+
+        <div class="top-pick-match">
+          No hay picks disponibles
+        </div>
       </div>
     `;
     return;
   }
 
-  const top = picks.sort((a,b) =>
+  const top = picks.sort((a,b)=>
     Number(b.confianza || 0) - Number(a.confianza || 0)
   )[0];
 
+  let color = "#22c55e";
+
+  if((top.nivelPick || "").includes("MEDIO")){
+    color = "#f59e0b";
+  }
+
+  if((top.nivelPick || "").includes("EVITAR")){
+    color = "#ef4444";
+  }
+
   box.innerHTML = `
-    <div class="top-pick-card">
-      <div class="top-pick-header">
+    <div class="top-pick-card" style="border:2px solid ${color}">
+      <div class="top-pick-header" style="color:${color}">
         🏆 TOP PICK DEL DÍA
       </div>
 
@@ -952,10 +971,21 @@ function pintarTopPick(partidos){
       </div>
 
       <div class="top-pick-data">
-        <p>${top.nivelPick}</p>
+        <p><strong>${top.nivelPick}</strong></p>
+        <p>🏆 ${top.liga}</p>
         <p>🎯 ${top.mercadoIA}</p>
         <p>📊 Confianza: ${top.confianza}%</p>
         <p>💵 Cuota: ${top.cuota || "No aplica"}</p>
+      </div>
+
+      <div class="confianza-bar">
+        <div
+          class="confianza-fill"
+          style="
+            width:${top.confianza}%;
+            background:${color};
+          ">
+        </div>
       </div>
     </div>
   `;
