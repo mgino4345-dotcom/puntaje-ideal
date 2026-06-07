@@ -85,13 +85,13 @@
     </div>
   </section>
 
-  <section class="section-card">
-  <div class="league-head">
+<section class="section-card">
+  <div class="section-header">
     <span>🏆 Top Pick del Día</span>
     <span>IA</span>
   </div>
 
-  <div class="section-card-body">
+  <div class="section-body">
     <div id="top-pick-dia"></div>
   </div>
 </section>
@@ -883,11 +883,12 @@ function pintarTopPick(partidos){
 
   const fechaAPI = formatoFechaAPI(fechaSeleccionada);
 
-  const picks = partidos.filter(p =>
-    (!p.fechaFiltro || p.fechaFiltro === fechaAPI) &&
-    Number(p.confianza || 0) > 0 &&
-    (p.nivelPick || p.pickIA)
-  );
+const picks = partidos.filter(p =>
+  (!p.fechaFiltro || p.fechaFiltro === fechaAPI) &&
+  Number(p.confianza || 0) > 0 &&
+  (p.nivelPick || "").includes("FUERTE")
+);
+  console.log("TOP PICK", picks);
 
   if(!picks.length){
     box.innerHTML = `
