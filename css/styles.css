@@ -377,16 +377,71 @@ nav a.active{
   background:#ffffff;
 }
 
+/* TARJETA INTERNA PREMIUM */
+
 .pick-card{
-  position:relative;
-  background:linear-gradient(180deg,#ffffff,#f8fafc);
-  border:1px solid #dbe3ee;
+  background:#ffffff;
   border-radius:16px;
-  padding:22px;
-  color:#111827;
-  box-shadow:0 8px 22px rgba(15,23,42,.08);
-  overflow:hidden;
+  padding:18px;
+  margin-top:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
   transition:.3s;
+}
+
+.pick-card:hover{
+  transform:translateY(-2px);
+}
+
+/* PICK FUERTE */
+.pick-card.fuerte{
+  border:2px solid #22c55e;
+  border-top:5px solid #22c55e;
+}
+
+/* PICK MEDIO */
+.pick-card.medio{
+  border:2px solid #f59e0b;
+  border-top:5px solid #f59e0b;
+}
+
+/* EVITAR */
+.pick-card.evitar{
+  border:2px solid #ef4444;
+  border-top:5px solid #ef4444;
+}
+
+.pick-card .pick-nivel{
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.pick-card.fuerte .pick-nivel{
+  color:#16a34a;
+}
+
+.pick-card.medio .pick-nivel{
+  color:#ca8a04;
+}
+
+.pick-card.evitar .pick-nivel{
+  color:#dc2626;
+}
+
+.pick-partido{
+  font-size:18px;
+  font-weight:800;
+  color:#0f172a;
+  margin:10px 0;
+}
+
+.pick-info{
+  color:#334155;
+  line-height:1.8;
+}
+
+.pick-confianza{
+  margin-top:12px;
+  font-weight:800;
 }
 
 .pick-card::before{
