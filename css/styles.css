@@ -861,4 +861,66 @@ footer{
 .top-pick-card{
   background:#ffffff !important;
 }
+  /* FIX TOP PICK DEL DÍA */
+.top-pick-card,
+.top-pick-body,
+#topPickDia,
+.top-pick-dia {
+  background: #ffffff !important;
+  color: #111827 !important;
+}
+
+.top-pick-card * ,
+.top-pick-body * ,
+#topPickDia * ,
+.top-pick-dia * {
+  color: #111827 !important;
+  opacity: 1 !important;
+}
+
+.top-pick-card .titulo,
+.top-pick-body .titulo,
+#topPickDia .titulo {
+  color: #22c55e !important;
+  font-weight: 800 !important;
+}
+
+/* FIX PICK DE PUNTAJE IDEAL EN RECUADROS */
+.picks-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 18px;
+  background: #ffffff;
+  border-radius: 0 0 10px 10px;
+}
+
+.pick-card {
+  background: #ffffff !important;
+  border: 1px solid #dbeafe !important;
+  border-top: 5px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  padding: 18px !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+  color: #111827 !important;
+}
+
+.pick-card * {
+  color: #111827 !important;
+  opacity: 1 !important;
+}
+
+.pick-card h3 {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+.pick-card strong {
+  color: #020617 !important;
+}
+
+.pick-card small,
+.pick-card p {
+  color: #111827 !important;
+}
 }
