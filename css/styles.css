@@ -714,3 +714,72 @@ footer{
 .confianza-fill.evitar{
   background:#ef4444;
 }
+/* CORRECCIÓN VISUAL PICKS IA */
+
+.pick-card{
+  background:#ffffff;
+  color:#111827;
+}
+
+.pick-card h3{
+  color:#111827;
+  opacity:1;
+}
+
+.pick-card strong,
+.pick-card span,
+.pick-card small,
+.pick-card div{
+  opacity:1;
+}
+
+.pick-partido{
+  color:#0f172a;
+  font-weight:900;
+}
+
+.pick-info{
+  color:#334155;
+  font-weight:600;
+}
+
+.pick-confianza{
+  color:#334155;
+  font-weight:800;
+}
+
+.pick-confianza strong{
+  color:#2563eb;
+}
+
+/* Bolitas de colores */
+.pick-card h3::first-letter{
+  opacity:1;
+}
+
+/* Indicadores */
+.pick-card.fuerte h3::before{
+  content:"🟢 ";
+}
+
+.pick-card.medio h3::before{
+  content:"🟡 ";
+}
+
+.pick-card.evitar h3::before{
+  content:"🔴 ";
+}
+
+/* Evita doble bolita si ya la tienes en el HTML */
+.pick-card h3{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* Tarjeta activa */
+.pick-card.activo{
+  background:#ffffff;
+  border:1px solid #dbe2ea;
+  box-shadow:0 4px 16px rgba(15,23,42,.08);
+}
