@@ -806,50 +806,65 @@ footer{
   .texto-mediano{
     font-size:16px;
   }
-/* TOP PICK DEL DIA */
+}
 
-#top-pick-dia{
+
+/* ==========================
+   TOP PICK DEL DIA
+========================== */
+
+#top-pick-dia,
+#topPickDia,
+.top-pick-dia,
+.top-pick-body{
+  background:#ffffff !important;
+  color:#111827 !important;
+}
+
+#top-pick-dia,
+#topPickDia,
+.top-pick-dia{
   padding:15px;
 }
 
 .top-pick-card{
-  background:#ffffff;
+  background:#ffffff !important;
+  border:1px solid #22c55e;
   border-radius:14px;
   padding:20px;
-  color:#111827;
+  color:#111827 !important;
+  box-shadow:0 8px 22px rgba(15,23,42,.08);
 }
 
-.top-pick-header{
+.top-pick-card *,
+.top-pick-body *,
+#topPickDia *,
+.top-pick-dia *{
+  color:#111827 !important;
+  opacity:1 !important;
+}
+
+.top-pick-header,
+.top-pick-card .titulo,
+.top-pick-body .titulo,
+#topPickDia .titulo{
+  color:#16a34a !important;
   font-size:20px;
   font-weight:900;
   margin-bottom:12px;
 }
 
 .top-pick-match{
+  color:#0f172a !important;
   font-size:22px;
   font-weight:900;
   margin-bottom:15px;
 }
 
 .top-pick-data{
+  color:#111827 !important;
   line-height:1.8;
   font-size:14px;
-}
-  /* CORRECCIÓN TEXTO TOP PICK */
-
-.top-pick-card,
-.top-pick-card *{
-  color:#111827 !important;
-  opacity:1 !important;
-}
-
-.top-pick-header{
-  color:#16a34a !important;
-}
-
-.top-pick-match{
-  color:#0f172a !important;
-  font-weight:900;
 }
 
 .top-pick-data p,
@@ -858,69 +873,70 @@ footer{
   font-weight:800;
 }
 
-.top-pick-card{
-  background:#ffffff !important;
-}
-  /* FIX TOP PICK DEL DÍA */
-.top-pick-card,
-.top-pick-body,
-#topPickDia,
-.top-pick-dia {
-  background: #ffffff !important;
-  color: #111827 !important;
+/* ==========================
+   FIX FINAL PICKS PUNTAJE IDEAL
+========================== */
+
+.picks,
+.picks-grid{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:18px;
+  padding:20px;
+  background:#ffffff;
+  border-radius:0 0 14px 14px;
 }
 
-.top-pick-card * ,
-.top-pick-body * ,
-#topPickDia * ,
-.top-pick-dia * {
-  color: #111827 !important;
-  opacity: 1 !important;
+.pick-card{
+  position:relative;
+  background:linear-gradient(180deg,#ffffff,#f8fafc) !important;
+  border:1px solid #dbe3ee !important;
+  border-radius:16px !important;
+  padding:22px !important;
+  color:#111827 !important;
+  box-shadow:0 8px 22px rgba(15,23,42,.08) !important;
+  overflow:hidden;
 }
 
-.top-pick-card .titulo,
-.top-pick-body .titulo,
-#topPickDia .titulo {
-  color: #22c55e !important;
-  font-weight: 800 !important;
+.pick-card *{
+  color:#111827 !important;
+  opacity:1 !important;
 }
 
-/* FIX PICK DE PUNTAJE IDEAL EN RECUADROS */
-.picks-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 18px;
-  background: #ffffff;
-  border-radius: 0 0 10px 10px;
+.pick-card h3{
+  color:#0f172a !important;
+  font-weight:900 !important;
 }
 
-.pick-card {
-  background: #ffffff !important;
-  border: 1px solid #dbeafe !important;
-  border-top: 5px solid #e2e8f0 !important;
-  border-radius: 12px !important;
-  padding: 18px !important;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08) !important;
-  color: #111827 !important;
+.pick-card strong{
+  color:#020617 !important;
 }
 
-.pick-card * {
-  color: #111827 !important;
-  opacity: 1 !important;
+.pick-card p,
+.pick-card small{
+  color:#334155 !important;
 }
 
-.pick-card h3 {
-  color: #0f172a !important;
-  font-weight: 800 !important;
+.pick-card.fuerte{
+  border-left:5px solid #22c55e !important;
 }
 
-.pick-card strong {
-  color: #020617 !important;
+.pick-card.medio{
+  border-left:5px solid #f59e0b !important;
 }
 
-.pick-card small,
-.pick-card p {
-  color: #111827 !important;
+.pick-card.evitar{
+  border-left:5px solid #ef4444 !important;
 }
+
+.pick-card.fuerte::before{
+  background:#22c55e !important;
+}
+
+.pick-card.medio::before{
+  background:#f59e0b !important;
+}
+
+.pick-card.evitar::before{
+  background:#ef4444 !important;
 }
