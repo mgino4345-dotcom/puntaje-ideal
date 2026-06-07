@@ -35,6 +35,8 @@ button{height:46px;border:0;padding:12px 14px;border-radius:10px;color:#fff;font
 .ia-preview strong{color:#facc15}
 .preview-match{margin-top:15px;display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:700}
 textarea{min-height:300px;color:#facc15;font-family:monospace}
+.ia-preview{padding:20px;font-size:16px;line-height:1.8}
+.ia-preview .pick-title{font-size:22px;font-weight:900;color:#22c55e}
 @media(max-width:800px){
   .grid,.grid-3,.actions,.preview{grid-template-columns:1fr}
   .admin-head{flex-direction:column;gap:10px;align-items:flex-start}
@@ -43,6 +45,10 @@ textarea{min-height:300px;color:#facc15;font-family:monospace}
 </head>
 
 <body>
+
+  <div class="ia-bar">
+  <div style="width:82%"></div>
+</div>
 
 <div class="container">
   <div class="admin-card">
@@ -118,6 +124,13 @@ textarea{min-height:300px;color:#facc15;font-family:monospace}
         <input id="rojaLocal" type="number" placeholder="Rojas local">
         <input id="rojaVisitante" type="number" placeholder="Rojas visitante">
       </div>
+
+      <select id="plantillaIA">
+        <option>Over 1.5</option>
+        <option>Over 2.5</option>
+        <option>Ambos marcan</option>
+        <option>Under 3.5</option>
+      </select>
 
       <h2 class="section-title">🤖 Pronóstico IA</h2>
 
