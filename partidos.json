@@ -42,10 +42,10 @@
     "rojaLocal": 0,
     "rojaVisitante": 0,
     "canal": "AF SPORTS",
-    "pronostico": "",
+    "pronostico": "OVER 3.5",
     "pickIA": "ð¢ PICK FUERTE",
-    "nivelPick": "ð´ EVITAR",
-    "mercadoIA": "Sin entrada clara",
+    "nivelPick": "",
+    "mercadoIA": "",
     "confianza": 45,
     "cuota": 0
   },
