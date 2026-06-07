@@ -172,6 +172,7 @@ textarea{min-height:300px;color:#facc15;font-family:monospace}
         <button class="btn-copy" onclick="copiarJSON()">Copiar JSON</button>
         <button class="btn-clean" onclick="limpiar()">Limpiar</button>
         <button class="btn-api" onclick="descargarJSON()">Descargar JSON</button>
+        <button class="btn-api" onclick="publicarPartido()">💾 Publicar Partido</button>
       </div>
 
       <textarea id="resultado" readonly></textarea>
@@ -181,6 +182,35 @@ textarea{min-height:300px;color:#facc15;font-family:monospace}
 </div>
 
 <script>
+  async function publicarPartido(){
+  generarJSON();
+
+  const contenido = document.getElementById("resultado").value;
+
+  if(!contenido){
+    alert("Primero genera el JSON");
+    return;
+  }
+
+  const partido = JSON.parse(contenido);
+
+  const respuesta = await fetch("https://puntaje-api.mgino4345.workers.dev/guardar-partido", {
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify(partido)
+  });
+
+  const data = await respuesta.json();
+
+  if(data.ok){
+    alert("✅ Partido publicado en GitHub correctamente");
+  }else{
+    alert("❌ Error publicando partido");
+    console.log(data);
+  }
+}
 function valorONull(id){
   const valor = document.getElementById(id).value;
   return valor === "" ? null : Number(valor);
