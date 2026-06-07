@@ -900,9 +900,13 @@ function pintarPick(id, p, textoVacio){
       💵 Cuota: ${p.cuota || "No aplica"}
     </div>
 
-    <div class="pick-confianza">
-      📊 Confianza: <strong>${p.confianza || 0}%</strong>
-    </div>
+<div class="pick-confianza">
+  📊 Confianza: <strong>${p.confianza || 0}%</strong>
+</div>
+
+<div class="confianza-bar">
+  <div class="confianza-fill ${clase}" style="width:${p.confianza || 0}%"></div>
+</div>
   `;
 }
 </script>
