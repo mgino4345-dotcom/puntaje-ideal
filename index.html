@@ -86,12 +86,12 @@
   </section>
 
 <section class="section-card">
-  <div class="section-header">
+  <div class="league-head">
     <span>🏆 Top Pick del Día</span>
     <span>IA</span>
   </div>
 
-  <div class="section-body">
+  <div class="section-card-body">
     <div id="top-pick-dia"></div>
   </div>
 </section>
@@ -852,6 +852,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setInterval(cargarPartidosAPI, 60000);
 });
+
+  function pintarPick(id, p, textoVacio){
+  const box = document.getElementById(id);
+  if(!box) return;
+
+  if(!p){
+    box.innerHTML = textoVacio;
+    box.className = "";
+    return;
+  }
+
+  let clase = "medio";
+
+  if((p.nivelPick || p.pickIA || "").includes("FUERTE")){
+    clase = "fuerte";
+  }
+
+  if((p.nivelPick || p.pickIA || "").includes("EVITAR")){
+    clase = "evitar";
+  }
+
+  box.innerHTML = `
+    <div class="pick-nivel">${p.nivelPick || p.pickIA || "PICK"}</div>
+
+    <div class="pick-partido">
+      ⚽ ${p.local} vs ${p.visitante}
+    </div>
+
+    <div class="pick-info">
+      🏆 ${p.liga || "-"}<br>
+      🎯 Mercado: ${p.mercadoIA || p.pronostico || "-"}<br>
+      💵 Cuota: ${p.cuota || "No aplica"}
+    </div>
+
+    <div class="pick-confianza">
+      📊 Confianza: <strong>${p.confianza || 0}%</strong>
+    </div>
+
+    <div class="confianza-bar">
+      <div class="confianza-fill ${clase}" style="width:${p.confianza || 0}%"></div>
+    </div>
+  `;
+}
 
  function actualizarPicksIA(){
   const fechaAPI = formatoFechaAPI(fechaSeleccionada);
