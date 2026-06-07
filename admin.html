@@ -8,204 +8,36 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:'Inter',Arial,sans-serif;
-}
-
-body{
-  background:#0f1115;
-  color:#e8e8e8;
-  padding:20px;
-}
-
-.container{
-  max-width:1100px;
-  margin:auto;
-}
-
-.admin-card{
-  background:#111827;
-  border:1px solid #334155;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 4px 18px rgba(0,0,0,.3);
-}
-
-.admin-head{
-  background:#1f2937;
-  padding:18px 22px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #334155;
-}
-
-.admin-head h1{
-  font-size:24px;
-  color:#fff;
-}
-
-.admin-head a{
-  color:#facc15;
-  text-decoration:none;
-  font-weight:700;
-}
-
-.admin-body{
-  padding:22px;
-}
-
-.section-title{
-  margin:18px 0 10px;
-  color:#facc15;
-  font-size:16px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.grid-3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #334155;
-  background:#0f172a;
-  color:#fff;
-  outline:none;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-  border-color:#3b82f6;
-}
-
-button{
-  border:0;
-  padding:12px 14px;
-  border-radius:10px;
-  color:#fff;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.btn-primary{ background:#0d47a1; }
-.btn-api{ background:#16a34a; }
-.btn-copy{ background:#ca8a04; }
-.btn-clean{ background:#374151; }
-
-.actions{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin:18px 0;
-}
-
-.preview{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:12px;
-}
-  .preview-match{
-  margin-top:15px;
-  background:#0f172a;
-  border:1px solid #334155;
-  border-radius:12px;
-  padding:18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:18px;
-  font-weight:700;
-}
-  .ia-box{
-  background:#0f172a;
-  border:1px solid #334155;
-  border-radius:14px;
-  padding:18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:14px;
-  margin-top:10px;
-}
-
-.ia-box strong{
-  font-size:20px;
-  color:#22c55e;
-}
-
-.ia-box p{
-  margin-top:6px;
-  color:#cbd5e1;
-  font-weight:700;
-}
-
-.preview-card{
-  background:#0f172a;
-  border:1px solid #334155;
-  border-radius:14px;
-   min-height:120px;
-  padding:18px;
-  text-align:center;
-}
-
-.preview-card img{
-  max-width:60px;
-  height:60px;
-  object-fit:contain;
-  margin-top:10px;
-}
-  .section-title{
-  color:#facc15;
-  font-size:15px;
-  font-weight:800;
-  margin:22px 0 12px;
-  padding-bottom:8px;
-  border-bottom:1px solid #334155;
-}
-  button{
-  height:46px;
-  font-size:14px;
-  font-weight:800;
-}
-  .btn-api{
-  background:#16a34a;
-  box-shadow:0 0 15px rgba(34,197,94,.25);
-}
-
-textarea{
-  min-height:300px;
-  color:#facc15;
-  font-family:monospace;
-}
-
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',Arial,sans-serif}
+body{background:#0f1115;color:#e8e8e8;padding:20px}
+.container{max-width:1100px;margin:auto}
+.admin-card{background:#111827;border:1px solid #334155;border-radius:16px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.3)}
+.admin-head{background:#1f2937;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #334155}
+.admin-head h1{font-size:24px;color:#fff}
+.admin-head a{color:#facc15;text-decoration:none;font-weight:700}
+.admin-body{padding:22px}
+.section-title{color:#facc15;font-size:15px;font-weight:800;margin:22px 0 12px;padding-bottom:8px;border-bottom:1px solid #334155}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+input,select,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#fff;outline:none}
+input:focus,select:focus,textarea:focus{border-color:#3b82f6}
+button{height:46px;border:0;padding:12px 14px;border-radius:10px;color:#fff;font-size:14px;font-weight:800;cursor:pointer}
+.btn-primary{background:#0d47a1}
+.btn-api{background:#16a34a;box-shadow:0 0 15px rgba(34,197,94,.25)}
+.btn-copy{background:#ca8a04}
+.btn-clean{background:#374151}
+.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+.preview{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.preview-card,.ia-preview,.preview-match{background:#0f172a;border:1px solid #334155;border-radius:14px;padding:18px}
+.preview-card{min-height:120px;text-align:center}
+.preview-card img{max-width:60px;height:60px;object-fit:contain;margin-top:10px}
+.ia-preview{margin-top:12px;color:#fff;font-weight:800;line-height:1.6}
+.ia-preview strong{color:#facc15}
+.preview-match{margin-top:15px;display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:700}
+textarea{min-height:300px;color:#facc15;font-family:monospace}
 @media(max-width:800px){
-  .grid,
-  .grid-3,
-  .actions,
-  .preview{
-    grid-template-columns:1fr;
-  }
-
-  .admin-head{
-    flex-direction:column;
-    gap:10px;
-    align-items:flex-start;
-  }
+  .grid,.grid-3,.actions,.preview{grid-template-columns:1fr}
+  .admin-head{flex-direction:column;gap:10px;align-items:flex-start}
 }
 </style>
 </head>
@@ -213,7 +45,6 @@ textarea{
 <body>
 
 <div class="container">
-
   <div class="admin-card">
 
     <div class="admin-head">
@@ -228,7 +59,7 @@ textarea{
       <h2 class="section-title">📅 Datos del partido</h2>
 
       <div class="grid-3">
-        <input id="fecha" placeholder="Fecha: 31/05/2026">
+        <input id="fecha" placeholder="Fecha: 01/06/2026">
         <input id="hora" placeholder="Hora: 15:00">
         <input id="liga" placeholder="Liga: Liga 1">
       </div>
@@ -245,9 +76,7 @@ textarea{
         <input id="visitante" placeholder="Equipo visitante">
       </div>
 
-      <button type="button" class="btn-api" onclick="buscarEscudosAPI()">
-        🔍 Buscar escudos con API
-      </button>
+      <button type="button" class="btn-api" onclick="buscarEscudosAPI()">🔍 Buscar escudos con API</button>
 
       <div class="grid">
         <input id="escudoLocal" placeholder="Escudo local">
@@ -290,21 +119,28 @@ textarea{
         <input id="rojaVisitante" type="number" placeholder="Rojas visitante">
       </div>
 
-      <h2 class="section-title">🔥 Pronóstico</h2>
       <h2 class="section-title">🤖 Pronóstico IA</h2>
 
-<div class="ia-box">
-  <div>
-    <strong id="iaNivel">🟢 PICK FUERTE</strong>
-    <p id="iaMercado">Mercado: Over 1.5</p>
-    <p id="iaConfianza">Confianza: 82%</p>
-  </div>
+      <div class="grid-3">
+        <select id="nivelPick">
+          <option value="🟢 PICK FUERTE">🟢 PICK FUERTE</option>
+          <option value="🟡 PICK MEDIO">🟡 PICK MEDIO</option>
+          <option value="🔴 EVITAR">🔴 EVITAR</option>
+        </select>
 
-  <button class="btn-api" onclick="calcularIA()">
-    Calcular IA
-  </button>
-</div>
-      <div id="previewPartido"></div>
+        <input id="mercadoIA" placeholder="Mercado IA: Over 1.5">
+        <input id="confianza" type="number" placeholder="Confianza: 82">
+      </div>
+
+      <div class="grid">
+        <input id="cuota" type="number" step="0.01" placeholder="Cuota sugerida: 1.30">
+
+        <button class="btn-api" type="button" onclick="autocompletarIA()">🤖 Auto IA</button>
+      </div>
+
+      <div id="previewIA" class="ia-preview">🤖 Pronóstico IA pendiente</div>
+
+      <h2 class="section-title">🔥 Pronóstico manual</h2>
 
       <div class="grid">
         <input id="pronostico" placeholder="Pronóstico: Over 1.5">
@@ -315,6 +151,8 @@ textarea{
           <option value="🔴 EVITAR">🔴 EVITAR</option>
         </select>
       </div>
+
+      <div id="previewPartido"></div>
 
       <div class="actions">
         <button class="btn-primary" onclick="generarJSON()">Generar JSON</button>
@@ -335,6 +173,65 @@ function valorONull(id){
   return valor === "" ? null : Number(valor);
 }
 
+function autocompletarIA(){
+  const estado = document.getElementById("estado").value;
+  const liga = document.getElementById("liga").value.toLowerCase();
+  const golesLocal = Number(document.getElementById("golesLocal").value || 0);
+  const golesVisitante = Number(document.getElementById("golesVisitante").value || 0);
+  const totalGoles = golesLocal + golesVisitante;
+
+  let nivel = "🔴 EVITAR";
+  let mercado = "Sin entrada clara";
+  let confianza = 45;
+  let cuota = 0;
+
+  if(estado === "FINAL"){
+    nivel = "⚫ FINALIZADO";
+    mercado = "Sin pick";
+    confianza = 0;
+    cuota = 0;
+  }else if(estado === "LIVE" && totalGoles >= 1){
+    nivel = "🟢 PICK FUERTE";
+    mercado = "Over 1.5";
+    confianza = 82;
+    cuota = 1.30;
+  }else if(liga.includes("juvenil") || liga.includes("u19") || liga.includes("sub")){
+    nivel = "🟢 PICK FUERTE";
+    mercado = "Over 1.5";
+    confianza = 78;
+    cuota = 1.32;
+  }else if(liga.includes("brasil") || liga.includes("serie a")){
+    nivel = "🟡 PICK MEDIO";
+    mercado = "Over 1.5";
+    confianza = 68;
+    cuota = 1.35;
+  }
+
+  document.getElementById("nivelPick").value = nivel;
+  document.getElementById("mercadoIA").value = mercado;
+  document.getElementById("confianza").value = confianza;
+  document.getElementById("cuota").value = cuota;
+
+  mostrarPreviewIA();
+}
+
+function mostrarPreviewIA(){
+  const nivel = document.getElementById("nivelPick").value;
+  const mercado = document.getElementById("mercadoIA").value || "-";
+  const confianza = document.getElementById("confianza").value || "-";
+  const cuota = document.getElementById("cuota").value || "-";
+  const liga = document.getElementById("liga").value || "-";
+
+  document.getElementById("previewIA").innerHTML = `
+    <strong>🤖 Pronóstico IA Completo</strong><br>
+    ${nivel}<br>
+    Mercado: ${mercado}<br>
+    Confianza: ${confianza}%<br>
+    Liga: ${liga}<br>
+    Cuota sugerida: ${cuota}
+  `;
+}
+
 function generarJSON(){
   const estado = document.getElementById("estado").value;
 
@@ -346,14 +243,17 @@ function generarJSON(){
     golesVisitante = null;
   }
 
+  const local = document.getElementById("local").value;
+  const visitante = document.getElementById("visitante").value;
+
   const partido = {
     fecha: document.getElementById("fecha").value,
     hora: document.getElementById("hora").value,
     pais: document.getElementById("pais").value,
     liga: document.getElementById("liga").value,
 
-    local: document.getElementById("local").value,
-    visitante: document.getElementById("visitante").value,
+    local,
+    visitante,
 
     escudoLocal: document.getElementById("escudoLocal").value,
     escudoVisitante: document.getElementById("escudoVisitante").value,
@@ -371,11 +271,23 @@ function generarJSON(){
 
     canal: document.getElementById("canal").value,
     pronostico: document.getElementById("pronostico").value,
-    pickIA: document.getElementById("pickIA").value
+    pickIA: document.getElementById("pickIA").value,
+
+    nivelPick: document.getElementById("nivelPick").value,
+    mercadoIA: document.getElementById("mercadoIA").value,
+    confianza: Number(document.getElementById("confianza").value || 0),
+    cuota: Number(document.getElementById("cuota").value || 0)
   };
 
-  document.getElementById("resultado").value =
-    JSON.stringify(partido, null, 2);
+  document.getElementById("resultado").value = JSON.stringify(partido, null, 2);
+
+  document.getElementById("previewPartido").innerHTML = `
+    <div class="preview-match">
+      <span>${local || "Local"}</span>
+      <strong>${golesLocal ?? "-"} - ${golesVisitante ?? "-"}</strong>
+      <span>${visitante || "Visitante"}</span>
+    </div>
+  `;
 }
 
 function copiarJSON(){
@@ -408,7 +320,10 @@ function limpiar(){
   document.querySelectorAll("input").forEach(input => input.value = "");
   document.getElementById("estado").value = "PROXIMO";
   document.getElementById("pickIA").value = "🟢 PICK FUERTE";
+  document.getElementById("nivelPick").value = "🟢 PICK FUERTE";
   document.getElementById("resultado").value = "";
+  document.getElementById("previewIA").innerHTML = "🤖 Pronóstico IA pendiente";
+  document.getElementById("previewPartido").innerHTML = "";
   document.getElementById("previewLocal").src = "";
   document.getElementById("previewVisitante").src = "";
 }
