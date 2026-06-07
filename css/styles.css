@@ -835,4 +835,30 @@ footer{
   line-height:1.8;
   font-size:14px;
 }
+  /* CORRECCIÓN TEXTO TOP PICK */
+
+.top-pick-card,
+.top-pick-card *{
+  color:#111827 !important;
+  opacity:1 !important;
+}
+
+.top-pick-header{
+  color:#16a34a !important;
+}
+
+.top-pick-match{
+  color:#0f172a !important;
+  font-weight:900;
+}
+
+.top-pick-data p,
+.top-pick-data strong{
+  color:#111827 !important;
+  font-weight:800;
+}
+
+.top-pick-card{
+  background:#ffffff !important;
+}
 }
