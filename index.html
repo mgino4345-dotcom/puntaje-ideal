@@ -416,14 +416,14 @@ function mostrarPartidos(partidos){
           <div class="scoreline-teams">
             <div class="scoreline-team-line">
               ${p.rojaLocal > 0 ? `<span class="red-card">${p.rojaLocal}</span>` : ""}
-              <img src="${p.escudoLocal}" alt="${p.local}">
+              <img src="${p.escudoLocal || 'logo.png'}" alt="${p.local}">
               <span>${p.local}</span>
               <strong class="team-goal">${p.golesLocal !== null ? p.golesLocal : "-"}</strong>
             </div>
 
             <div class="scoreline-team-line">
               ${p.rojaVisitante > 0 ? `<span class="red-card">${p.rojaVisitante}</span>` : ""}
-              <img src="${p.escudoVisitante}" alt="${p.visitante}">
+              <img src="${p.escudoVisitante || 'logo.png'}" alt="${p.visitante}">
               <span>${p.visitante}</span>
               <strong class="team-goal">${p.golesVisitante !== null ? p.golesVisitante : "-"}</strong>
             </div>
