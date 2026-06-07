@@ -197,7 +197,7 @@ function calcularMinutoPartido(utcDate, estado){
 function generarPronosticoIA(p){
   let puntos = 0;
   let mercado = "Over 1.5";
-  let etiqueta = "🔴 EVITAR";
+  let etiqueta = "🟠 EVITAR";
 
   const liga = (p.liga || "").toLowerCase();
 
@@ -238,7 +238,7 @@ function generarPronosticoIA(p){
   }else if(puntos >= 3){
     etiqueta = "🟡 PICK MEDIO";
   }else{
-    etiqueta = "🔴 EVITAR";
+    etiqueta = "🟠 EVITAR";
     mercado = "Sin entrada clara";
   }
 
