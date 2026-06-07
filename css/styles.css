@@ -783,3 +783,10 @@ footer{
   border:1px solid #dbe2ea;
   box-shadow:0 4px 16px rgba(15,23,42,.08);
 }
+/* PICK NIVEL */
+.pick-nivel{
+  color:#111827;
+  font-size:15px;
+  font-weight:900;
+  margin-bottom:8px;
+}
