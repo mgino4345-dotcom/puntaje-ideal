@@ -429,6 +429,58 @@ function buscarEscudoEquipo(nombreEquipo, campoDestino, previewDestino){
       alert(`Error consultando TheSportsDB para: ${nombreEquipo}`);
     });
 }
+
+  function pintarTopPick(partidos){
+
+  const box = document.getElementById("top-pick-dia");
+
+  if(!box) return;
+
+  const picks = partidos.filter(p =>
+    p.confianza &&
+    p.nivelPick
+  );
+
+  if(!picks.length){
+    box.innerHTML = `
+      <div class="top-pick">
+        No hay Top Pick disponible
+      </div>
+    `;
+    return;
+  }
+
+  const top = picks.sort((a,b) =>
+    b.confianza - a.confianza
+  )[0];
+
+  box.innerHTML = `
+    <div class="top-pick">
+
+      <div class="top-pick-badge">
+        ${top.nivelPick}
+      </div>
+
+      <div class="top-pick-partido">
+        ⚽ ${top.local} vs ${top.visitante}
+      </div>
+
+      <div class="top-pick-info">
+        🏆 ${top.liga}<br>
+        🎯 ${top.mercadoIA || top.pronostico}<br>
+      </div>
+
+      <div class="top-pick-confianza">
+        ${top.confianza}%
+      </div>
+
+      <div class="top-pick-cuota">
+        💵 Cuota: ${top.cuota || "-"}
+      </div>
+
+    </div>
+  `;
+}
 </script>
 
 </body>
