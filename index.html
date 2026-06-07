@@ -888,7 +888,7 @@ function pintarPick(id, p, textoVacio){
   box.className = `pick-card activo ${clase}`;
 
   box.innerHTML = `
-    <div><strong>${p.nivelPick || "PICK"}</strong></div>
+    <div class="pick-nivel">${p.nivelPick || "PICK"}</div>
 
     <div class="pick-partido">
       ⚽ ${p.local} vs ${p.visitante}
