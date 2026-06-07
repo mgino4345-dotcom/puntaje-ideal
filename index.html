@@ -867,6 +867,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function pintarPick(id, p, textoVacio){
   const box = document.getElementById(id);
+
   if(!box) return;
 
   if(!p){
@@ -874,13 +875,34 @@ function pintarPick(id, p, textoVacio){
     return;
   }
 
+  let clase = "medio";
+
+  if((p.nivelPick || "").includes("FUERTE")){
+    clase = "fuerte";
+  }
+
+  if((p.nivelPick || "").includes("EVITAR")){
+    clase = "evitar";
+  }
+
+  box.className = `pick-card activo ${clase}`;
+
   box.innerHTML = `
-    <strong>${p.nivelPick || ""}</strong><br>
-    <span>${p.local} vs ${p.visitante}</span><br>
-    <small>🏆 Liga: ${p.liga || "-"}</small><br>
-    <small>🎯 Mercado: ${p.mercadoIA || p.pronostico || "-"}</small><br>
-    <small>📊 Confianza: ${p.confianza || "-"}%</small><br>
-    <small>💵 Cuota sugerida: ${p.cuota || "-"}</small>
+    <div><strong>${p.nivelPick || "PICK"}</strong></div>
+
+    <div class="pick-partido">
+      ⚽ ${p.local} vs ${p.visitante}
+    </div>
+
+    <div class="pick-info">
+      🏆 ${p.liga || "-"}<br>
+      🎯 Mercado: ${p.mercadoIA || p.pronostico || "-"}<br>
+      💵 Cuota: ${p.cuota || "No aplica"}
+    </div>
+
+    <div class="pick-confianza">
+      📊 Confianza: <strong>${p.confianza || 0}%</strong>
+    </div>
   `;
 }
 </script>
