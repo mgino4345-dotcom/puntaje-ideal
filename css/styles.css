@@ -849,4 +849,33 @@ footer{
   font-weight:800;
   margin-top:8px;
 }
+  /* TOP PICK DEL DIA */
+  #top-pick-dia{
+  padding:15px;
+}
+
+.top-pick-card{
+  background:#07142b;
+  border:2px solid #22c55e;
+  border-radius:12px;
+  padding:18px;
+  color:#fff;
+}
+
+.top-pick-header{
+  font-size:18px;
+  font-weight:700;
+  color:#22c55e;
+  margin-bottom:10px;
+}
+
+.top-pick-match{
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+.top-pick-data p{
+  margin:6px 0;
+}
 }
