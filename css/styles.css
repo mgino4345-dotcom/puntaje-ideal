@@ -640,3 +640,51 @@ footer{
   .stat-value{ font-size:24px; }
   .texto-mediano{ font-size:16px; }
 }
+/* PICK ACTIVO */
+.pick-card{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:14px;
+  padding:18px;
+  transition:.3s;
+}
+
+.pick-card.activo{
+  transform:translateY(-2px);
+  box-shadow:0 0 20px rgba(59,130,246,.20);
+}
+
+.pick-card.fuerte{
+  border-left:5px solid #22c55e;
+}
+
+.pick-card.medio{
+  border-left:5px solid #facc15;
+}
+
+.pick-card.evitar{
+  border-left:5px solid #ef4444;
+}
+
+.pick-partido{
+  font-size:15px;
+  font-weight:800;
+  color:#fff;
+  margin:10px 0;
+}
+
+.pick-info{
+  color:#cbd5e1;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.pick-confianza{
+  margin-top:10px;
+  font-size:14px;
+  font-weight:700;
+}
+
+.pick-confianza strong{
+  color:#60a5fa;
+}
