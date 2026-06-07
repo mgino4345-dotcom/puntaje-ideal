@@ -1,6 +1,31 @@
 [
   {
     "fecha": "07/06/2026",
+    "hora": "08:00",
+    "pais": "FIFA",
+    "liga": "AMISTOSO INTERNACIONAL",
+    "local": "OMAN",
+    "visitante": "MOZAMBIQUE",
+    "escudoLocal": "https://r2.thesportsdb.com/images/media/team/badge/93swiy1597934984.png",
+    "escudoVisitante": "https://r2.thesportsdb.com/images/media/team/badge/jpbvy51742102860.png",
+    "golesLocal": null,
+    "golesVisitante": null,
+    "estado": "PROXIMO",
+    "minuto": "",
+    "ht": "",
+    "corners": "",
+    "rojaLocal": 0,
+    "rojaVisitante": 0,
+    "canal": "OMAN TV SPORT",
+    "pronostico": "OVER 1.5",
+    "pickIA": "🟢 PICK FUERTE",
+    "nivelPick": "🔴 EVITAR",
+    "mercadoIA": "Sin entrada clara",
+    "confianza": 45,
+    "cuota": 0
+  },
+  {
+    "fecha": "07/06/2026",
     "hora": "06:00",
     "pais": "MUNDO",
     "liga": "AMISTOSO INTERNACIONAL",
@@ -18,8 +43,8 @@
     "rojaVisitante": 0,
     "canal": "AF SPORTS",
     "pronostico": "",
-    "pickIA": "🟢 PICK FUERTE",
-    "nivelPick": "🔴 EVITAR",
+    "pickIA": "ð¢ PICK FUERTE",
+    "nivelPick": "ð´ EVITAR",
     "mercadoIA": "Sin entrada clara",
     "confianza": 45,
     "cuota": 0
@@ -43,6 +68,6 @@
     "rojaVisitante": 0,
     "canal": "ESPN",
     "pronostico": "OVER 1.5",
-    "pickIA": "ð¢ PICK FUERTE"
+    "pickIA": "Ã°ÂÂÂ¢ PICK FUERTE"
   }
 ]
