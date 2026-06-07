@@ -688,3 +688,29 @@ footer{
 .pick-confianza strong{
   color:#60a5fa;
 }
+/*BARRA VISUAL DE CONFIANZA*/
+.confianza-bar{
+  width:100%;
+  height:10px;
+  background:#e5e7eb;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+.confianza-fill{
+  height:100%;
+  border-radius:999px;
+}
+
+.confianza-fill.fuerte{
+  background:#22c55e;
+}
+
+.confianza-fill.medio{
+  background:#facc15;
+}
+
+.confianza-fill.evitar{
+  background:#ef4444;
+}
