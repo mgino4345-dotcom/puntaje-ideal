@@ -767,7 +767,7 @@ footer{
 }
 
 .pick-card.evitar h3::before{
-  content:"🔴 ";
+  content:"🟠 ";
 }
 
 /* Evita doble bolita si ya la tienes en el HTML */
@@ -789,4 +789,11 @@ footer{
   font-size:15px;
   font-weight:900;
   margin-bottom:8px;
+}
+.pick-card.evitar{
+  border-left:5px solid #f97316;
+}
+
+.pick-card.evitar .pick-nivel{
+  color:#f97316;
 }
