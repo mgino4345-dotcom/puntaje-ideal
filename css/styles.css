@@ -366,7 +366,7 @@ nav a.active{
   background:#ffffff;
 }
 
-.pick-card{
+{
   position:relative;
   background:linear-gradient(180deg,#ffffff,#f8fafc);
   border:1px solid #dbe3ee;
@@ -377,7 +377,7 @@ nav a.active{
   overflow:hidden;
 }
 
-.pick-card::before{
+::before{
   content:"";
   position:absolute;
   left:0;
@@ -387,15 +387,15 @@ nav a.active{
   background:#0d47a1;
 }
 
-.pick-card:nth-child(1)::before{
+:nth-child(1)::before{
   background:#22c55e;
 }
 
-.pick-card:nth-child(2)::before{
+:nth-child(2)::before{
   background:#f59e0b;
 }
 
-.pick-card:nth-child(3)::before{
+:nth-child(3)::before{
   background:#ef4444;
 }
 
@@ -642,11 +642,11 @@ footer{
 }
 /* PICK ACTIVO */
 .pick-card{
-  background:#111827;
-  border:1px solid #334155;
+  background:#ffffff;
   border-radius:14px;
   padding:18px;
-  transition:.3s;
+  border:1px solid #dbe2ea;
+   transition:.3s;
 }
 
 .pick-card.activo{
@@ -654,15 +654,15 @@ footer{
   box-shadow:0 0 20px rgba(59,130,246,.20);
 }
 
-.pick-card.fuerte{
+.fuerte{
   border-left:5px solid #22c55e;
 }
 
-.pick-card.medio{
+.medio{
   border-left:5px solid #facc15;
 }
 
-.pick-card.evitar{
+.evitar{
   border-left:5px solid #ef4444;
 }
 
