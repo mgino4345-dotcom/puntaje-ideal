@@ -1,2 +1,25 @@
 [
+  {
+    "fecha": "2026-06-07",
+    "hora": "14:30",
+    "pais": "FIFA",
+    "liga": "FIFA AMISTOSO INTERNACIONAL",
+    "local": "AFGANISTAN",
+    "visitante": "PAKISTAN",
+    "escudoLocal": "https://media.api-sports.io/football/teams/1530.png",
+    "escudoVisitante": "https://media.api-sports.io/football/teams/1531.png",
+    "golesLocal": 0,
+    "golesVisitante": 1,
+    "estado": "LIVE",
+    "minuto": 38,
+    "ht": "",
+    "corners": "",
+    "rojaLocal": 0,
+    "rojaVisitante": 0,
+    "pronostico": "PICK FUERTE · Over 1.5",
+    "nivelPick": "PICK FUERTE",
+    "mercadoIA": "Over 1.5",
+    "confianza": 82,
+    "cuota": "1.30"
+  }
 ]
