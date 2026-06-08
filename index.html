@@ -266,24 +266,38 @@ function normalizarPartido(p){
       ? "LIVE"
       : "PROXIMO";
 
-  const liga = p.competition?.name || p["competencia"]?.nombre || p.liga || "";
-  const pais = p.area?.code || p["área"]?.codigo || p.pais || "";
+  const fechaISO = p.utcDate
+    ? p.utcDate.split("T")[0]
+    : p.fechaFiltro || convertirFechaJSON(p.fecha || "");
 
-  const local = p.homeTeam?.name || p["equipo local"]?.nombre || p.local || "";
-  const visitante = p.awayTeam?.name || p["equipo visitante"]?.nombre || p.visitante || "";
+  const fecha = p.fecha || fechaISO;
 
-  const escudoLocal = p.homeTeam?.crest || p["equipo local"]?.crest || p.escudoLocal || "";
-  const escudoVisitante = p.awayTeam?.crest || p["equipo visitante"]?.crest || p.escudoVisitante || "";
+  const hora = p.hora || (
+    p.utcDate
+      ? new Date(p.utcDate).toLocaleTimeString("es-PE", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false
+        })
+      : ""
+  );
+
+  const liga = p.competition?.name || p.liga || "";
+  const pais = p.area?.code || p.pais || "";
+
+  const local = p.homeTeam?.name || p.local || "";
+  const visitante = p.awayTeam?.name || p.visitante || "";
+
+  const escudoLocal = p.homeTeam?.crest || p.escudoLocal || "";
+  const escudoVisitante = p.awayTeam?.crest || p.escudoVisitante || "";
 
   const golesLocal =
     p.score?.fullTime?.home ??
-    p["puntaje"]?.fullTime?.home ??
     p.golesLocal ??
     null;
 
   const golesVisitante =
     p.score?.fullTime?.away ??
-    p["puntaje"]?.fullTime?.away ??
     p.golesVisitante ??
     null;
 
@@ -294,33 +308,13 @@ function normalizarPartido(p){
     golesVisitante
   });
 
-  const fecha =
-    p.fecha ||
-    (p.utcDate
-      ? new Date(p.utcDate).toLocaleDateString("es-PE", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric"
-        })
-      : "");
-
-  const hora =
-    p.hora ||
-    (p.utcDate
-      ? new Date(p.utcDate).toLocaleTimeString("es-PE", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false
-        })
-      : "");
-
   const nivelPick = p.nivelPick || p.pickIA || pronosticoIA.etiqueta;
   const mercadoIA = p.mercadoIA || pronosticoIA.mercado;
   const confianza = p.confianza ?? pronosticoIA.puntos;
 
   return {
     fecha,
-    fechaFiltro: convertirFechaJSON(fecha),
+    fechaFiltro: fechaISO,
     hora,
     pais,
     liga,
@@ -344,7 +338,6 @@ function normalizarPartido(p){
     cuota: p.cuota || ""
   };
 }
-
 function verificarGoles(partidos){
   partidos.forEach(p => {
     const id = `${p.fecha}-${p.local}-${p.visitante}`;
@@ -561,7 +554,7 @@ async function obtenerPartidosJSON(){
 }
 
 async function cargarPartidosAPI(){
-  const fechaAPI = "2026-06-07";
+  const fechaAPI = formatoFechaAPI(fechaSeleccionada);
 
   const partidosAPI = await obtenerPartidosAPI(fechaAPI);
   const partidosManuales = await obtenerPartidosJSON();
