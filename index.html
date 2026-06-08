@@ -152,12 +152,13 @@
 <footer>
   © 2026 Puntaje Ideal - Resultados, partidos y pronósticos deportivos
 </footer>
-
 <script>
 let partidosGlobal = [];
 let estadoSeleccionado = "TODOS";
 let fechaSeleccionada = new Date();
 let marcadoresAnteriores = {};
+
+const API_BASE = "https://puntaje-api.mgino4345.workers.dev";
 
 function formatoFechaAPI(fecha){
   const year = fecha.getFullYear();
@@ -184,7 +185,7 @@ function convertirFechaJSON(fechaTexto){
 
   if(fechaTexto.includes("/")){
     const [dia, mes, anio] = fechaTexto.split("/");
-    return `${anio}-${mes}-${dia}`;
+    return `${anio}-${mes.padStart(2, "0")}-${dia.padStart(2, "0")}`;
   }
 
   return fechaTexto;
@@ -217,7 +218,8 @@ function generarPronosticoIA(p){
     liga.includes("premier") ||
     liga.includes("bundesliga") ||
     liga.includes("eredivisie") ||
-    liga.includes("liga")
+    liga.includes("liga") ||
+    liga.includes("amistoso")
   ){
     puntos += 2;
   }
@@ -282,11 +284,11 @@ function normalizarPartido(p){
       : ""
   );
 
-  const liga = p.competition?.name || p.liga || "";
-  const pais = p.area?.code || p.pais || "";
+  const liga = p.competition?.name || p.liga || "Sin liga";
+  const pais = p.area?.code || p.pais || obtenerPaisPorLiga(liga);
 
-  const local = p.homeTeam?.name || p.local || "";
-  const visitante = p.awayTeam?.name || p.visitante || "";
+  const local = p.homeTeam?.name || p.local || "Local";
+  const visitante = p.awayTeam?.name || p.visitante || "Visitante";
 
   const escudoLocal = p.homeTeam?.crest || p.escudoLocal || "";
   const escudoVisitante = p.awayTeam?.crest || p.escudoVisitante || "";
@@ -338,6 +340,53 @@ function normalizarPartido(p){
     cuota: p.cuota || ""
   };
 }
+
+function obtenerPaisPorLiga(liga){
+  const l = (liga || "").toLowerCase();
+
+  if(l.includes("fifa") || l.includes("amistoso")) return "FIFA";
+  if(l.includes("mls") || l.includes("usl")) return "ESTADOS UNIDOS";
+  if(l.includes("peru") || l.includes("liga 1")) return "PERÚ";
+  if(l.includes("argentina") || l.includes("primera nacional")) return "ARGENTINA";
+  if(l.includes("brasil")) return "BRASIL";
+  if(l.includes("premier")) return "INGLATERRA";
+  if(l.includes("laliga")) return "ESPAÑA";
+
+  return "";
+}
+
+function formatearPais(pais){
+  const p = (pais || "").toUpperCase();
+
+  const mapa = {
+    "FIFA": "🌎 FIFA:",
+    "US": "🇺🇸 ESTADOS UNIDOS:",
+    "USA": "🇺🇸 ESTADOS UNIDOS:",
+    "ESTADOS UNIDOS": "🇺🇸 ESTADOS UNIDOS:",
+    "PERU": "🇵🇪 PERÚ:",
+    "PERÚ": "🇵🇪 PERÚ:",
+    "ARGENTINA": "🇦🇷 ARGENTINA:",
+    "BRASIL": "🇧🇷 BRASIL:",
+    "BRAZIL": "🇧🇷 BRASIL:",
+    "INGLATERRA": "🏴 INGLATERRA:",
+    "ENGLAND": "🏴 INGLATERRA:",
+    "ESPAÑA": "🇪🇸 ESPAÑA:",
+    "SPAIN": "🇪🇸 ESPAÑA:"
+  };
+
+  return mapa[p] || (pais ? `🌍 ${pais}:` : "🌍 Internacional:");
+}
+
+function obtenerClasePick(p){
+  const texto = (p.nivelPick || p.pickIA || p.pronostico || "").toUpperCase();
+
+  if(texto.includes("EVITAR")) return "pick-evitar";
+  if(texto.includes("MEDIO")) return "pick-medio";
+  if(texto.includes("FUERTE")) return "pick-fuerte";
+
+  return "pick-medio";
+}
+
 function verificarGoles(partidos){
   partidos.forEach(p => {
     const id = `${p.fecha}-${p.local}-${p.visitante}`;
@@ -371,9 +420,11 @@ function mostrarNotificacionGol(p){
 
 function mostrarPartidos(partidos){
   const contenedor = document.getElementById("partidos-json");
+  if(!contenedor) return;
+
   contenedor.innerHTML = "";
 
-  if(partidos.length === 0){
+  if(!Array.isArray(partidos) || partidos.length === 0){
     contenedor.innerHTML = `
       <div class="sin-partidos">
         ⚽ No hay partidos programados hoy para esta competición
@@ -385,63 +436,77 @@ function mostrarPartidos(partidos){
   const grupos = {};
 
   partidos.forEach(p => {
-    const liga = `${p.pais || ""} ${p.liga || "Sin liga"}`;
+    const liga = p.liga || "Sin liga";
     if(!grupos[liga]) grupos[liga] = [];
     grupos[liga].push(p);
   });
 
-Object.keys(grupos).forEach(liga => {
-  contenedor.innerHTML += `
-    <div class="scoreline-league">
-      <div class="league-left">
-        ⭐
-        <span class="league-country">${grupos[liga][0]?.pais || "FIFA"}:</span>
-        <span class="league-name">${liga}</span>
-      </div>
+  let html = "";
 
-      <div>Tabla En Directo ^</div>
-    </div>
-  `;
+  Object.keys(grupos).forEach(liga => {
+    const primerPartido = grupos[liga][0] || {};
+    const pais = formatearPais(primerPartido.pais);
 
-  grupos[liga].forEach(p => {
-    const tiempo =
-      p.estado === "FINAL" ? "Final" :
-      p.estado === "LIVE" ? (p.minuto || "EN VIVO") :
-      p.hora;
-
-    contenedor.innerHTML += `
-      <div class="scoreline-match">
-        <div class="scoreline-star">☆</div>
-
-        <div class="scoreline-time ${p.estado === "LIVE" ? "live-text" : ""}">
-          ${tiempo}
+    html += `
+      <div class="scoreline-league">
+        <div class="league-left">
+          ⭐
+          <span class="league-country">${pais}</span>
+          <span class="league-name">${liga}</span>
+          <span class="league-pin">📌</span>
         </div>
 
-        <div class="equipo-local">
-          <span>${p.local}</span>
-          <img src="${p.escudoLocal || 'logo.png'}" alt="${p.local}">
-        </div>
-
-        <div class="scoreline-score">
-          <strong>${p.golesLocal !== null ? p.golesLocal : "-"}</strong>
-          <span>-</span>
-          <strong>${p.golesVisitante !== null ? p.golesVisitante : "-"}</strong>
-        </div>
-
-        <div class="equipo-visitante">
-          <img src="${p.escudoVisitante || 'logo.png'}" alt="${p.visitante}">
-          <span>${p.visitante}</span>
-        </div>
-
-        <div class="scoreline-extra">
-          <span class="pick-ia ${clasePick}">
-            ${p.nivelPick || p.pronostico || ""}
-          </span>
-        </div>
+        <div>Tabla En Directo ^</div>
       </div>
     `;
+
+    grupos[liga].forEach(p => {
+      const tiempo =
+        p.estado === "FINAL" ? "Final" :
+        p.estado === "LIVE" ? (p.minuto || "EN VIVO") :
+        p.hora;
+
+      const clasePick = obtenerClasePick(p);
+
+      html += `
+        <div class="scoreline-match">
+          <div class="scoreline-star">☆</div>
+
+          <div class="scoreline-time ${p.estado === "LIVE" ? "live-text" : ""}">
+            ${tiempo}
+          </div>
+
+          <div class="equipo-local">
+            <span>${p.local}</span>
+            <img src="${p.escudoLocal || 'logo.png'}" alt="${p.local}">
+          </div>
+
+          <div class="scoreline-score">
+            <strong>${p.golesLocal !== null ? p.golesLocal : "-"}</strong>
+            <span>-</span>
+            <strong>${p.golesVisitante !== null ? p.golesVisitante : "-"}</strong>
+          </div>
+
+          <div class="equipo-visitante">
+            <img src="${p.escudoVisitante || 'logo.png'}" alt="${p.visitante}">
+            <span>${p.visitante}</span>
+          </div>
+
+          <div class="scoreline-extra">
+            ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
+            ${p.corners ? `<span>⚑ ${p.corners}</span>` : ""}
+            <span class="pick-ia ${clasePick}">
+              ${p.nivelPick || p.pronostico || ""}
+            </span>
+          </div>
+        </div>
+      `;
+    });
   });
-});
+
+  contenedor.innerHTML = html;
+}
+
 function aplicarFiltros(){
   const buscador = document.getElementById("buscador");
   const texto = buscador ? buscador.value.toLowerCase() : "";
@@ -495,28 +560,18 @@ function actualizarContadoresEstado(){
 
 async function obtenerPartidosAPI(fechaAPI){
   try{
-    let response = await fetch(
-      `https://puntaje-api.mgino4345.workers.dev/partidos?fecha=${fechaAPI}`
-    );
+    const response = await fetch(`${API_BASE}/partidos?fecha=${fechaAPI}`);
+    const data = await response.json();
 
-    let data = await response.json();
-
-    let lista =
-      Array.isArray(data.matches) ? data.matches :
-      Array.isArray(data.partidos) ? data.partidos :
-      [];
-
-    if(lista.length === 0){
-      response = await fetch("https://puntaje-api.mgino4345.workers.dev/partidos");
-      data = await response.json();
-
-      lista =
-        Array.isArray(data.matches) ? data.matches :
-        Array.isArray(data.partidos) ? data.partidos :
-        [];
+    if(data?.errors?.requests){
+      console.warn("Límite diario de API-Football alcanzado:", data.errors.requests);
+      return [];
     }
 
-    return lista;
+    if(Array.isArray(data.matches)) return data.matches;
+    if(Array.isArray(data.partidos)) return data.partidos;
+
+    return [];
   }catch(error){
     console.error("Error cargando API:", error);
     return [];
@@ -548,12 +603,11 @@ async function cargarPartidosAPI(){
   const partidosManuales = await obtenerPartidosJSON();
 
   const combinados = [...partidosAPI, ...partidosManuales];
-
   const mapa = new Map();
 
   combinados.forEach(p => {
     const partidoNormalizado = normalizarPartido(p);
-    const key = `${partidoNormalizado.fecha}-${partidoNormalizado.local}-${partidoNormalizado.visitante}`;
+    const key = `${partidoNormalizado.fechaFiltro}-${partidoNormalizado.local}-${partidoNormalizado.visitante}`;
     mapa.set(key, partidoNormalizado);
   });
 
@@ -568,10 +622,7 @@ async function cargarPartidosAPI(){
 
 async function cargarTablaPosiciones(competencia = "BSA"){
   try{
-    const response = await fetch(
-      `https://puntaje-api.mgino4345.workers.dev/tabla?competencia=${competencia}`
-    );
-
+    const response = await fetch(`${API_BASE}/tabla?competencia=${competencia}`);
     const data = await response.json();
     const tabla = data.standings?.[0]?.table || [];
 
@@ -684,16 +735,15 @@ function cargarBankroll(){
       const progreso = Math.min((actual / objetivo2) * 100, 100).toFixed(0);
 
       let metaActual;
-      let faltante;
       let mensajeNivel;
 
       if(actual < objetivo1){
         metaActual = objetivo1;
-        faltante = objetivo1 - actual;
+        const faltante = objetivo1 - actual;
         mensajeNivel = `📌 Faltan S/ ${faltante.toFixed(2)} para llegar al Objetivo 1`;
       }else if(actual < objetivo2){
         metaActual = objetivo2;
-        faltante = objetivo2 - actual;
+        const faltante = objetivo2 - actual;
         mensajeNivel = `✅ Objetivo 1 completado<br>🚀 Nuevo objetivo: S/ ${objetivo2.toFixed(2)}<br>📌 Faltan S/ ${faltante.toFixed(2)} para la meta final`;
       }else{
         metaActual = objetivo2;
@@ -785,107 +835,63 @@ function cargarEstadisticasGenerales(){
   .catch(error => console.warn("No se pudo cargar estadísticas generales:", error));
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  actualizarFechaVista();
-  cargarPartidosAPI();
-  cargarTablaPosiciones();
-  cargarHistorial();
-  cargarBankroll();
-  cargarEstadisticasGenerales();
-
-  const buscador = document.getElementById("buscador");
-  if(buscador) buscador.addEventListener("input", aplicarFiltros);
-
-  document.querySelectorAll(".tab-estado").forEach(tab => {
-    tab.addEventListener("click", function(){
-      document.querySelectorAll(".tab-estado")
-        .forEach(t => t.classList.remove("active"));
-
-      this.classList.add("active");
-      estadoSeleccionado = this.dataset.estado;
-
-      actualizarContadoresEstado();
-      aplicarFiltros();
-    });
-  });
-
-  const selectorTabla = document.getElementById("selectorTabla");
-  if(selectorTabla){
-    selectorTabla.addEventListener("change", function(){
-      cargarTablaPosiciones(this.value);
-    });
-  }
-
-  const diaAnterior = document.getElementById("diaAnterior");
-  const diaSiguiente = document.getElementById("diaSiguiente");
-
-  if(diaAnterior){
-    diaAnterior.addEventListener("click", () => {
-      fechaSeleccionada.setDate(fechaSeleccionada.getDate() - 1);
-      actualizarFechaVista();
-      actualizarContadoresEstado();
-      aplicarFiltros();
-      cargarPartidosAPI();
-    });
-  }
-
-  if(diaSiguiente){
-    diaSiguiente.addEventListener("click", () => {
-      fechaSeleccionada.setDate(fechaSeleccionada.getDate() + 1);
-      actualizarFechaVista();
-      actualizarContadoresEstado();
-      aplicarFiltros();
-      cargarPartidosAPI();
-    });
-  }
-
-  setInterval(cargarPartidosAPI, 60000);
-});
-
-  function pintarPick(id, p, textoVacio){
+function pintarPick(id, p, textoVacio){
   const box = document.getElementById(id);
   if(!box) return;
 
+  let clase = "medio";
+  let titulo = "🟡 PICK MEDIO";
+
+  if(id.includes("fuerte")){
+    clase = "fuerte";
+    titulo = "🟢 PICK FUERTE";
+  }
+
+  if(id.includes("evitar")){
+    clase = "evitar";
+    titulo = "🔴 EVITAR";
+  }
+
   if(!p){
-    box.innerHTML = textoVacio;
-    box.className = "";
+    box.innerHTML = `
+      <div class="pick-card ${clase}">
+        <div class="pick-nivel">${titulo}</div>
+        <div class="pick-partido">${textoVacio}</div>
+      </div>
+    `;
     return;
   }
 
-  let clase = "medio";
-
-  if((p.nivelPick || p.pickIA || "").includes("FUERTE")){
-    clase = "fuerte";
-  }
-
-  if((p.nivelPick || p.pickIA || "").includes("EVITAR")){
-    clase = "evitar";
-  }
+  if((p.nivelPick || p.pickIA || "").includes("FUERTE")) clase = "fuerte";
+  if((p.nivelPick || p.pickIA || "").includes("EVITAR")) clase = "evitar";
+  if((p.nivelPick || p.pickIA || "").includes("MEDIO")) clase = "medio";
 
   box.innerHTML = `
-    <div class="pick-nivel">${p.nivelPick || p.pickIA || "PICK"}</div>
+    <div class="pick-card ${clase}">
+      <div class="pick-nivel">${p.nivelPick || p.pickIA || "PICK"}</div>
 
-    <div class="pick-partido">
-      ⚽ ${p.local} vs ${p.visitante}
-    </div>
+      <div class="pick-partido">
+        ⚽ ${p.local} vs ${p.visitante}
+      </div>
 
-    <div class="pick-info">
-      🏆 ${p.liga || "-"}<br>
-      🎯 Mercado: ${p.mercadoIA || p.pronostico || "-"}<br>
-      💵 Cuota: ${p.cuota || "No aplica"}
-    </div>
+      <div class="pick-info">
+        🏆 ${p.liga || "-"}<br>
+        🎯 Mercado: ${p.mercadoIA || p.pronostico || "-"}<br>
+        💵 Cuota: ${p.cuota || "No aplica"}
+      </div>
 
-    <div class="pick-confianza">
-      📊 Confianza: <strong>${p.confianza || 0}%</strong>
-    </div>
+      <div class="pick-confianza">
+        📊 Confianza: <strong>${p.confianza || 0}%</strong>
+      </div>
 
-    <div class="confianza-bar">
-      <div class="confianza-fill ${clase}" style="width:${p.confianza || 0}%"></div>
+      <div class="confianza-bar">
+        <div class="confianza-fill ${clase}" style="width:${p.confianza || 0}%"></div>
+      </div>
     </div>
   `;
 }
 
- function actualizarPicksIA(){
+function actualizarPicksIA(){
   const fechaAPI = formatoFechaAPI(fechaSeleccionada);
 
   const partidosDelDia = partidosGlobal.filter(p =>
@@ -904,9 +910,9 @@ document.addEventListener("DOMContentLoaded", () => {
     (p.nivelPick || p.pickIA || "").includes("EVITAR")
   );
 
-  pintarPick("pick-fuerte", fuerte, "Sin pick fuerte");
-  pintarPick("pick-medio", medio, "Sin pick medio");
-  pintarPick("pick-evitar", evitar, "Sin pick a evitar");
+  pintarPick("pick-fuerte", fuerte, "No se encontró un pick fuerte para hoy");
+  pintarPick("pick-medio", medio, "No se encontró un pick medio para hoy");
+  pintarPick("pick-evitar", evitar, "No hay partidos con riesgo alto");
 }
 
 function pintarTopPick(partidos){
@@ -923,13 +929,8 @@ function pintarTopPick(partidos){
   if(picks.length === 0){
     box.innerHTML = `
       <div class="top-pick-card">
-        <div class="top-pick-header">
-          🏆 TOP PICK DEL DÍA
-        </div>
-
-        <div class="top-pick-match">
-          No hay picks disponibles
-        </div>
+        <div class="top-pick-header">🏆 TOP PICK DEL DÍA</div>
+        <div class="top-pick-match">No hay picks disponibles</div>
       </div>
     `;
     return;
@@ -941,13 +942,8 @@ function pintarTopPick(partidos){
 
   let color = "#22c55e";
 
-  if((top.nivelPick || "").includes("MEDIO")){
-    color = "#f59e0b";
-  }
-
-  if((top.nivelPick || "").includes("EVITAR")){
-    color = "#ef4444";
-  }
+  if((top.nivelPick || "").includes("MEDIO")) color = "#f59e0b";
+  if((top.nivelPick || "").includes("EVITAR")) color = "#ef4444";
 
   box.innerHTML = `
     <div class="top-pick-card" style="border:2px solid ${color}">
@@ -968,18 +964,72 @@ function pintarTopPick(partidos){
       </div>
 
       <div class="confianza-bar">
-        <div
-          class="confianza-fill"
-          style="
-            width:${top.confianza}%;
-            background:${color};
-          ">
-        </div>
+        <div class="confianza-fill" style="width:${top.confianza}%;background:${color};"></div>
       </div>
     </div>
   `;
 }
+
+function iniciarEventos(){
+  const buscador = document.getElementById("buscador");
+  if(buscador) buscador.addEventListener("input", aplicarFiltros);
+
+  document.querySelectorAll(".tab-estado").forEach(tab => {
+    tab.addEventListener("click", function(){
+      document.querySelectorAll(".tab-estado")
+        .forEach(t => t.classList.remove("active"));
+
+      this.classList.add("active");
+      estadoSeleccionado = this.dataset.estado;
+
+      actualizarContadoresEstado();
+      aplicarFiltros();
+      actualizarPicksIA();
+      pintarTopPick(partidosGlobal);
+    });
+  });
+
+  const selectorTabla = document.getElementById("selectorTabla");
+  if(selectorTabla){
+    selectorTabla.addEventListener("change", function(){
+      cargarTablaPosiciones(this.value);
+    });
+  }
+
+  const diaAnterior = document.getElementById("diaAnterior");
+  const diaSiguiente = document.getElementById("diaSiguiente");
+
+  if(diaAnterior){
+    diaAnterior.addEventListener("click", () => {
+      fechaSeleccionada.setDate(fechaSeleccionada.getDate() - 1);
+      actualizarFechaVista();
+      cargarPartidosAPI();
+    });
+  }
+
+  if(diaSiguiente){
+    diaSiguiente.addEventListener("click", () => {
+      fechaSeleccionada.setDate(fechaSeleccionada.getDate() + 1);
+      actualizarFechaVista();
+      cargarPartidosAPI();
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  actualizarFechaVista();
+  iniciarEventos();
+
+  cargarPartidosAPI();
+  cargarTablaPosiciones();
+  cargarHistorial();
+  cargarBankroll();
+  cargarEstadisticasGenerales();
+
+  setInterval(cargarPartidosAPI, 60000);
+});
 </script>
+
 
 </body>
 </html>
