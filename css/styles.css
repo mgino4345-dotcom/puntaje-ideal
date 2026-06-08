@@ -999,122 +999,40 @@ footer{
 .pick-card.evitar::before{
   background:#ef4444 !important;
 }
-/* DISEÑO TIPO PANEL CENTRAL - PUNTAJE IDEAL */
-
-.scoreline-match{
-  background:#0f172a !important;
-  color:#ffffff !important;
-  display:grid !important;
-  grid-template-columns:90px 1fr 90px 1fr 130px !important;
-  align-items:center !important;
-  gap:12px !important;
-  padding:14px 18px !important;
-  border-bottom:1px solid #334155 !important;
-}
-
-.scoreline-time{
-  color:#f8fafc !important;
-  font-weight:900 !important;
-  text-align:center !important;
-}
-
-.scoreline-teams{
-  display:contents !important;
-}
-
-.scoreline-team-line{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:flex-end !important;
-  gap:10px !important;
-  font-size:15px !important;
-  font-weight:900 !important;
-  color:#ffffff !important;
-}
-
-.scoreline-team-line:nth-child(2){
-  justify-content:flex-start !important;
-}
-
-.scoreline-team-line img{
-  width:28px !important;
-  height:28px !important;
-}
-
-.team-goal{
-  font-size:22px !important;
-  font-weight:900 !important;
-  color:#ffffff !important;
-  text-align:center !important;
-}
-
-.scoreline-extra{
-  justify-content:flex-end !important;
-}
-/* match*/
-.scoreline-match{
-  display:grid !important;
-  grid-template-columns:35px 70px 1fr 90px 1fr 120px !important;
-  align-items:center !important;
-  gap:12px !important;
-}
-
-.equipo-local,
-.equipo-visitante{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-weight:800;
-  color:#111827;
-}
-
-.equipo-local{
-  justify-content:flex-end;
-  text-align:right;
-}
-
-.equipo-visitante{
-  justify-content:flex-start;
-  text-align:left;
-}
-
-.equipo-local img,
-.equipo-visitante img{
-  width:24px !important;
-  height:24px !important;
-  object-fit:contain;
-}
-
-.scoreline-score{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  font-size:22px;
-  font-weight:900;
-  color:#111827;
-}
-/* FIX MARCADOR CENTRADO TIPO PUNTAJE IDEAL */
+/* MARCADOR CENTRADO FINAL */
 
 .scoreline-match{
   background:#ffffff !important;
   color:#111827 !important;
   display:grid !important;
-  grid-template-columns:35px 55px minmax(180px,1fr) 70px minmax(180px,1fr) 110px !important;
+  grid-template-columns:35px 55px 1fr 90px 1fr 115px !important;
   align-items:center !important;
   gap:10px !important;
   padding:8px 12px !important;
   border-bottom:1px solid #e5e7eb !important;
-  min-height:54px !important;
+  min-height:44px !important;
+}
+
+.scoreline-star{
+  color:#94a3b8 !important;
+  text-align:center !important;
+}
+
+.scoreline-time{
+  color:#ff0050 !important;
+  opacity:1 !important;
+  font-size:12px !important;
+  font-weight:900 !important;
+  text-align:center !important;
 }
 
 .equipo-local,
 .equipo-visitante{
   display:flex !important;
   align-items:center !important;
-  gap:8px !important;
-  font-size:13px !important;
-  font-weight:800 !important;
+  gap:7px !important;
+  font-size:12px !important;
+  font-weight:900 !important;
   color:#111827 !important;
   min-width:0 !important;
 }
@@ -1132,6 +1050,8 @@ footer{
 .equipo-local span,
 .equipo-visitante span{
   color:#111827 !important;
+  opacity:1 !important;
+  display:inline-block !important;
   white-space:nowrap !important;
   overflow:hidden !important;
   text-overflow:ellipsis !important;
@@ -1139,12 +1059,11 @@ footer{
 
 .equipo-local img,
 .equipo-visitante img{
-  width:24px !important;
-  height:24px !important;
-  max-width:24px !important;
-  max-height:24px !important;
+  width:22px !important;
+  height:22px !important;
+  max-width:22px !important;
+  max-height:22px !important;
   object-fit:contain !important;
-  flex-shrink:0 !important;
 }
 
 .scoreline-score{
@@ -1152,20 +1071,17 @@ footer{
   justify-content:center !important;
   align-items:center !important;
   gap:6px !important;
+  color:#111827 !important;
   font-size:18px !important;
   font-weight:900 !important;
-  color:#111827 !important;
   white-space:nowrap !important;
 }
 
 .scoreline-score strong,
 .scoreline-score span{
   color:#111827 !important;
-}
-
-.scoreline-time{
-  text-align:center !important;
-  font-size:12px !important;
+  opacity:1 !important;
+  font-size:18px !important;
   font-weight:900 !important;
 }
 
@@ -1174,60 +1090,3 @@ footer{
   justify-content:flex-end !important;
   align-items:center !important;
 }
-/* FIX FINAL - GOLES VISIBLES */
-
-.scoreline-match{
-  grid-template-columns:35px 55px 1fr 80px 1fr 120px !important;
-}
-
-.equipo-local,
-.equipo-visitante{
-  color:#ffffff !important;
-}
-
-.equipo-local span,
-.equipo-visitante span{
-  color:#ffffff !important;
-  display:inline-block !important;
-  opacity:1 !important;
-  font-size:13px !important;
-}
-
-.scoreline-score{
-  display:flex !important;
-  visibility:visible !important;
-  opacity:1 !important;
-  color:#ffffff !important;
-  font-size:20px !important;
-  font-weight:900 !important;
-  z-index:5 !important;
-}
-
-.scoreline-score strong,
-.scoreline-score span{
-  display:inline-block !important;
-  visibility:visible !important;
-  opacity:1 !important;
-  color:#ffffff !important;
-  font-size:20px !important;
-  font-weight:900 !important;
-}
-/* FIX TIEMPO VISIBLE */
-.scoreline-time{
-  color:#ff0050 !important;
-  opacity:1 !important;
-  visibility:visible !important;
-  font-size:12px !important;
-  font-weight:900 !important;
-  text-align:center !important;
-}
-
-.scoreline-time.live-text{
-  color:#ff0050 !important;
-}
-
-.scoreline-time:not(.live-text){
-  color:#475569 !important;
-}
-}
-
