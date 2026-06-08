@@ -192,14 +192,36 @@ nav a.active{
 }
 
 .scoreline-league{
-  background:#efe6bf;
-  color:#374151;
+  background:linear-gradient(90deg,#002b36,#012b38);
+  color:#ffffff;
   font-weight:800;
-  padding:10px 12px;
+  padding:12px 14px;
   display:flex;
   justify-content:space-between;
-  border-top:1px solid #d9cf9c;
-  border-bottom:1px solid #d9cf9c;
+  align-items:center;
+  border-top:1px solid #0f4c5c;
+  border-bottom:1px solid #0f4c5c;
+  font-size:15px;
+}
+
+.scoreline-league .league-left{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.scoreline-league .league-country{
+  color:#cbd5e1;
+  font-weight:700;
+}
+
+.scoreline-league .league-name{
+  color:#ffffff;
+  font-weight:900;
+}
+
+.scoreline-league .league-pin{
+  color:#94a3b8;
 }
 
 .scoreline-star{
