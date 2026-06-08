@@ -1212,5 +1212,22 @@ footer{
   font-size:20px !important;
   font-weight:900 !important;
 }
+/* FIX TIEMPO VISIBLE */
+.scoreline-time{
+  color:#ff0050 !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  font-size:12px !important;
+  font-weight:900 !important;
+  text-align:center !important;
+}
+
+.scoreline-time.live-text{
+  color:#ff0050 !important;
+}
+
+.scoreline-time:not(.live-text){
+  color:#475569 !important;
+}
 }
 
