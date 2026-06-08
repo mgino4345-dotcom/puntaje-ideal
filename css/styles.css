@@ -999,3 +999,55 @@ footer{
 .pick-card.evitar::before{
   background:#ef4444 !important;
 }
+/* DISEÑO TIPO PANEL CENTRAL - PUNTAJE IDEAL */
+
+.scoreline-match{
+  background:#0f172a !important;
+  color:#ffffff !important;
+  display:grid !important;
+  grid-template-columns:90px 1fr 90px 1fr 130px !important;
+  align-items:center !important;
+  gap:12px !important;
+  padding:14px 18px !important;
+  border-bottom:1px solid #334155 !important;
+}
+
+.scoreline-time{
+  color:#f8fafc !important;
+  font-weight:900 !important;
+  text-align:center !important;
+}
+
+.scoreline-teams{
+  display:contents !important;
+}
+
+.scoreline-team-line{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:10px !important;
+  font-size:15px !important;
+  font-weight:900 !important;
+  color:#ffffff !important;
+}
+
+.scoreline-team-line:nth-child(2){
+  justify-content:flex-start !important;
+}
+
+.scoreline-team-line img{
+  width:28px !important;
+  height:28px !important;
+}
+
+.team-goal{
+  font-size:22px !important;
+  font-weight:900 !important;
+  color:#ffffff !important;
+  text-align:center !important;
+}
+
+.scoreline-extra{
+  justify-content:flex-end !important;
+}
