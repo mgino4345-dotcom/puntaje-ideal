@@ -417,37 +417,37 @@ function mostrarPartidos(partidos){
         "pick-evitar";
 
       contenedor.innerHTML += `
-        <div class="scoreline-match">
-          <div class="scoreline-star">☆</div>
+       <div class="scoreline-match">
+  <div class="scoreline-star">☆</div>
 
-          <div class="scoreline-time ${p.estado === "LIVE" ? "live-text" : ""}">
-            ${tiempo}
-          </div>
+  <div class="scoreline-time ${p.estado === "LIVE" ? "live-text" : ""}">
+    ${tiempo}
+  </div>
 
-          <div class="scoreline-teams">
-            <div class="scoreline-team-line">
-              ${p.rojaLocal > 0 ? `<span class="red-card">${p.rojaLocal}</span>` : ""}
-              <img src="${p.escudoLocal || 'logo.png'}" alt="${p.local}">
-              <span>${p.local}</span>
-              <strong class="team-goal">${p.golesLocal !== null ? p.golesLocal : "-"}</strong>
-            </div>
+  <div class="equipo-local">
+    <span>${p.local}</span>
+    <img src="${p.escudoLocal || 'logo.png'}" alt="${p.local}">
+  </div>
 
-            <div class="scoreline-team-line">
-              ${p.rojaVisitante > 0 ? `<span class="red-card">${p.rojaVisitante}</span>` : ""}
-              <img src="${p.escudoVisitante || 'logo.png'}" alt="${p.visitante}">
-              <span>${p.visitante}</span>
-              <strong class="team-goal">${p.golesVisitante !== null ? p.golesVisitante : "-"}</strong>
-            </div>
-          </div>
+  <div class="scoreline-score">
+    <strong>${p.golesLocal !== null ? p.golesLocal : "-"}</strong>
+    <span>-</span>
+    <strong>${p.golesVisitante !== null ? p.golesVisitante : "-"}</strong>
+  </div>
 
-          <div class="scoreline-extra">
-            ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
-            ${p.corners ? `<span>⚑ ${p.corners}</span>` : ""}
-            <span class="pick-ia ${clasePick}">
-              ${p.nivelPick || p.pronostico || ""}
-            </span>
-          </div>
-        </div>
+  <div class="equipo-visitante">
+    <img src="${p.escudoVisitante || 'logo.png'}" alt="${p.visitante}">
+    <span>${p.visitante}</span>
+  </div>
+
+  <div class="scoreline-extra">
+    ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
+    ${p.corners ? `<span>⚑ ${p.corners}</span>` : ""}
+    <span class="pick-ia ${clasePick}">
+      ${p.nivelPick || p.pronostico || ""}
+    </span>
+  </div>
+</div>
       `;
     });
   });
