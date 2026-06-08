@@ -392,15 +392,12 @@ function mostrarPartidos(partidos){
 
   Object.keys(grupos).forEach(liga => {
     contenedor.innerHTML += `
-
-    let pais = grupo[0]?.pais || "";
     
 <div class="scoreline-league">
   <div class="league-left">
     ⭐
-    <span class="league-country">${pais}</span>
+    <span class="league-country">${grupo[0]?.pais || "FIFA"}:</span>
     <span class="league-name">${liga}</span>
-    <span class="league-pin">📌</span>
   </div>
 
   <div>
