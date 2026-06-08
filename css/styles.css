@@ -1094,3 +1094,85 @@ footer{
   font-weight:900;
   color:#111827;
 }
+/* FIX MARCADOR CENTRADO TIPO PUNTAJE IDEAL */
+
+.scoreline-match{
+  background:#ffffff !important;
+  color:#111827 !important;
+  display:grid !important;
+  grid-template-columns:35px 55px minmax(180px,1fr) 70px minmax(180px,1fr) 110px !important;
+  align-items:center !important;
+  gap:10px !important;
+  padding:8px 12px !important;
+  border-bottom:1px solid #e5e7eb !important;
+  min-height:54px !important;
+}
+
+.equipo-local,
+.equipo-visitante{
+  display:flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  font-size:13px !important;
+  font-weight:800 !important;
+  color:#111827 !important;
+  min-width:0 !important;
+}
+
+.equipo-local{
+  justify-content:flex-end !important;
+  text-align:right !important;
+}
+
+.equipo-visitante{
+  justify-content:flex-start !important;
+  text-align:left !important;
+}
+
+.equipo-local span,
+.equipo-visitante span{
+  color:#111827 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+.equipo-local img,
+.equipo-visitante img{
+  width:24px !important;
+  height:24px !important;
+  max-width:24px !important;
+  max-height:24px !important;
+  object-fit:contain !important;
+  flex-shrink:0 !important;
+}
+
+.scoreline-score{
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:6px !important;
+  font-size:18px !important;
+  font-weight:900 !important;
+  color:#111827 !important;
+  white-space:nowrap !important;
+}
+
+.scoreline-score strong,
+.scoreline-score span{
+  color:#111827 !important;
+}
+
+.scoreline-time{
+  text-align:center !important;
+  font-size:12px !important;
+  font-weight:900 !important;
+}
+
+.scoreline-extra{
+  display:flex !important;
+  justify-content:flex-end !important;
+  align-items:center !important;
+}
+}
+
