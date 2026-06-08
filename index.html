@@ -399,10 +399,18 @@ function mostrarPartidos(partidos){
 
   Object.keys(grupos).forEach(liga => {
     contenedor.innerHTML += `
-      <div class="scoreline-league">
-        <span>⭐ ${liga}</span>
-        <span>Tabla En Directo ^</span>
-      </div>
+<div class="scoreline-league">
+  <div class="league-left">
+    ⭐
+    <span class="league-country">🇺🇸 ESTADOS UNIDOS:</span>
+    <span class="league-name">${liga}</span>
+    <span class="league-pin">📌</span>
+  </div>
+
+  <div>
+    Tabla En Directo ^
+  </div>
+</div>
     `;
 
     grupos[liga].forEach(p => {
