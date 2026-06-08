@@ -202,18 +202,6 @@ nav a.active{
   border-bottom:1px solid #d9cf9c;
 }
 
-.scoreline-match{
-  background:#fff;
-  color:#111827;
-  display:grid;
-  grid-template-columns:35px 90px 1fr 160px;
-  align-items:center;
-  gap:10px;
-  padding:7px 12px;
-  border-bottom:1px solid #e5e7eb;
-  font-size:13px;
-}
-
 .scoreline-star{
   color:#94a3b8;
   font-size:20px;
@@ -827,12 +815,6 @@ footer{
     font-size:12px;
   }
 
-  .scoreline-match{
-    grid-template-columns:25px 60px 1fr 80px;
-    gap:6px;
-    padding:8px;
-  }
-
   .scoreline-extra{
     font-size:11px;
   }
@@ -999,13 +981,12 @@ footer{
 .pick-card.evitar::before{
   background:#ef4444 !important;
 }
-/* MARCADOR CENTRADO FINAL */
+/* MARCADOR CENTRADO LIMPIO */
 
 .scoreline-match{
   background:#ffffff !important;
-  color:#111827 !important;
   display:grid !important;
-  grid-template-columns:35px 55px 1fr 90px 1fr 115px !important;
+  grid-template-columns:35px 55px 1fr 80px 1fr 120px !important;
   align-items:center !important;
   gap:10px !important;
   padding:8px 12px !important;
@@ -1020,7 +1001,6 @@ footer{
 
 .scoreline-time{
   color:#ff0050 !important;
-  opacity:1 !important;
   font-size:12px !important;
   font-weight:900 !important;
   text-align:center !important;
@@ -1033,36 +1013,27 @@ footer{
   gap:7px !important;
   font-size:12px !important;
   font-weight:900 !important;
-  color:#111827 !important;
-  min-width:0 !important;
 }
 
 .equipo-local{
   justify-content:flex-end !important;
-  text-align:right !important;
 }
 
 .equipo-visitante{
   justify-content:flex-start !important;
-  text-align:left !important;
 }
 
 .equipo-local span,
 .equipo-visitante span{
   color:#111827 !important;
   opacity:1 !important;
-  display:inline-block !important;
-  white-space:nowrap !important;
-  overflow:hidden !important;
-  text-overflow:ellipsis !important;
+  display:block !important;
 }
 
 .equipo-local img,
 .equipo-visitante img{
   width:22px !important;
   height:22px !important;
-  max-width:22px !important;
-  max-height:22px !important;
   object-fit:contain !important;
 }
 
@@ -1074,19 +1045,19 @@ footer{
   color:#111827 !important;
   font-size:18px !important;
   font-weight:900 !important;
-  white-space:nowrap !important;
 }
 
 .scoreline-score strong,
 .scoreline-score span{
   color:#111827 !important;
-  opacity:1 !important;
   font-size:18px !important;
   font-weight:900 !important;
+  display:inline-block !important;
 }
 
 .scoreline-extra{
   display:flex !important;
   justify-content:flex-end !important;
   align-items:center !important;
+}
 }
