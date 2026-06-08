@@ -390,70 +390,58 @@ function mostrarPartidos(partidos){
     grupos[liga].push(p);
   });
 
-  Object.keys(grupos).forEach(liga => {
+Object.keys(grupos).forEach(liga => {
+  contenedor.innerHTML += `
+    <div class="scoreline-league">
+      <div class="league-left">
+        ⭐
+        <span class="league-country">${grupos[liga][0]?.pais || "FIFA"}:</span>
+        <span class="league-name">${liga}</span>
+      </div>
+
+      <div>Tabla En Directo ^</div>
+    </div>
+  `;
+
+  grupos[liga].forEach(p => {
+    const tiempo =
+      p.estado === "FINAL" ? "Final" :
+      p.estado === "LIVE" ? (p.minuto || "EN VIVO") :
+      p.hora;
+
     contenedor.innerHTML += `
-    
-<div class="scoreline-league">
-  <div class="league-left">
-    ⭐
-    <span class="league-country">${grupo[0]?.pais || "FIFA"}:</span>
-    <span class="league-name">${liga}</span>
-  </div>
+      <div class="scoreline-match">
+        <div class="scoreline-star">☆</div>
 
-  <div>
-    Tabla En Directo ^
-  </div>
-</div>
+        <div class="scoreline-time ${p.estado === "LIVE" ? "live-text" : ""}">
+          ${tiempo}
+        </div>
+
+        <div class="equipo-local">
+          <span>${p.local}</span>
+          <img src="${p.escudoLocal || 'logo.png'}" alt="${p.local}">
+        </div>
+
+        <div class="scoreline-score">
+          <strong>${p.golesLocal !== null ? p.golesLocal : "-"}</strong>
+          <span>-</span>
+          <strong>${p.golesVisitante !== null ? p.golesVisitante : "-"}</strong>
+        </div>
+
+        <div class="equipo-visitante">
+          <img src="${p.escudoVisitante || 'logo.png'}" alt="${p.visitante}">
+          <span>${p.visitante}</span>
+        </div>
+
+        <div class="scoreline-extra">
+          <span class="pick-ia ${clasePick}">
+            ${p.nivelPick || p.pronostico || ""}
+          </span>
+        </div>
+      </div>
     `;
-
-    grupos[liga].forEach(p => {
-      const tiempo =
-        p.estado === "LIVE" ? (p.minuto || "EN VIVO") :
-        p.estado === "FINAL" ? "FINAL" :
-        p.hora;
-
-      const clasePick =
-        p.nivelPick && p.nivelPick.includes("FUERTE") ? "pick-fuerte" :
-        p.nivelPick && p.nivelPick.includes("MEDIO") ? "pick-medio" :
-        "pick-evitar";
-
-      contenedor.innerHTML += `
-       <div class="scoreline-match">
-  <div class="scoreline-star">☆</div>
-
-  <div class="scoreline-time ${p.estado === "LIVE" ? "live-text" : ""}">
-    ${tiempo}
-  </div>
-
-  <div class="equipo-local">
-    <span>${p.local}</span>
-    <img src="${p.escudoLocal || 'logo.png'}" alt="${p.local}">
-  </div>
-
-  <div class="scoreline-score">
-    <strong>${p.golesLocal !== null ? p.golesLocal : "-"}</strong>
-    <span>-</span>
-    <strong>${p.golesVisitante !== null ? p.golesVisitante : "-"}</strong>
-  </div>
-
-  <div class="equipo-visitante">
-    <img src="${p.escudoVisitante || 'logo.png'}" alt="${p.visitante}">
-    <span>${p.visitante}</span>
-  </div>
-
-  <div class="scoreline-extra">
-    ${p.ht ? `<span>HT ${p.ht}</span>` : ""}
-    ${p.corners ? `<span>⚑ ${p.corners}</span>` : ""}
-    <span class="pick-ia ${clasePick}">
-      ${p.nivelPick || p.pronostico || ""}
-    </span>
-  </div>
-</div>
-      `;
-    });
   });
-}
-
+});
 function aplicarFiltros(){
   const buscador = document.getElementById("buscador");
   const texto = buscador ? buscador.value.toLowerCase() : "";
