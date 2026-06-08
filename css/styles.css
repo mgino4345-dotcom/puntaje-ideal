@@ -1174,5 +1174,43 @@ footer{
   justify-content:flex-end !important;
   align-items:center !important;
 }
+/* FIX FINAL - GOLES VISIBLES */
+
+.scoreline-match{
+  grid-template-columns:35px 55px 1fr 80px 1fr 120px !important;
+}
+
+.equipo-local,
+.equipo-visitante{
+  color:#ffffff !important;
+}
+
+.equipo-local span,
+.equipo-visitante span{
+  color:#ffffff !important;
+  display:inline-block !important;
+  opacity:1 !important;
+  font-size:13px !important;
+}
+
+.scoreline-score{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  color:#ffffff !important;
+  font-size:20px !important;
+  font-weight:900 !important;
+  z-index:5 !important;
+}
+
+.scoreline-score strong,
+.scoreline-score span{
+  display:inline-block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  color:#ffffff !important;
+  font-size:20px !important;
+  font-weight:900 !important;
+}
 }
 
