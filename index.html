@@ -418,6 +418,61 @@ function mostrarNotificacionGol(p){
   setTimeout(() => alerta.remove(), 6000);
 }
 
+function obtenerPaisDesdeLiga(liga, paisActual = ""){
+  const texto = `${paisActual} ${liga}`.toLowerCase();
+
+  if(texto.includes("fifa") || texto.includes("international") || texto.includes("friendlies")){
+    return { bandera:"🌎", pais:"Internacional" };
+  }
+
+  if(texto.includes("usa") || texto.includes("united states") || texto.includes("mls") || texto.includes("usl")){
+    return { bandera:"🇺🇸", pais:"Estados Unidos" };
+  }
+
+  if(texto.includes("england") || texto.includes("premier") || texto.includes("championship")){
+    return { bandera:"🏴", pais:"Inglaterra" };
+  }
+
+  if(texto.includes("peru") || texto.includes("perú") || texto.includes("liga 1")){
+    return { bandera:"🇵🇪", pais:"Perú" };
+  }
+
+  if(texto.includes("argentina") || texto.includes("primera nacional")){
+    return { bandera:"🇦🇷", pais:"Argentina" };
+  }
+
+  if(texto.includes("brasil") || texto.includes("brazil") || texto.includes("serie a brasil")){
+    return { bandera:"🇧🇷", pais:"Brasil" };
+  }
+
+  if(texto.includes("spain") || texto.includes("laliga")){
+    return { bandera:"🇪🇸", pais:"España" };
+  }
+
+  if(texto.includes("italy") || texto.includes("serie a italia")){
+    return { bandera:"🇮🇹", pais:"Italia" };
+  }
+
+  if(texto.includes("germany") || texto.includes("bundesliga")){
+    return { bandera:"🇩🇪", pais:"Alemania" };
+  }
+
+  if(texto.includes("france") || texto.includes("ligue 1")){
+    return { bandera:"🇫🇷", pais:"Francia" };
+  }
+
+  return { bandera:"🌍", pais: paisActual || "Liga" };
+}
+
+function limpiarNombreLiga(liga){
+  return (liga || "")
+    .replace(/^FIFA\s+/i, "")
+    .replace(/^USA\s+/i, "")
+    .replace(/^US\s+/i, "")
+    .replace(/^England\s+/i, "")
+    .trim();
+}
+
 function mostrarPartidos(partidos){
   const contenedor = document.getElementById("partidos-json");
   if(!contenedor) return;
@@ -444,15 +499,15 @@ function mostrarPartidos(partidos){
   let html = "";
 
   Object.keys(grupos).forEach(liga => {
-    const primerPartido = grupos[liga][0] || {};
-    const pais = formatearPais(primerPartido.pais);
+   const primerPartido = grupos[liga][0] || {};
+   const infoLiga = obtenerPaisDesdeLiga(liga, primerPartido.pais || "");
 
     html += `
       <div class="scoreline-league">
         <div class="league-left">
           ⭐
-          <span class="league-country">${pais}</span>
-          <span class="league-name">${liga}</span>
+          <span class="league-country">${infoLiga.bandera} ${infoLiga.pais}:</span>
+          <span class="league-name">${limpiarNombreLiga(liga)}</span>
           <span class="league-pin">📌</span>
         </div>
 
