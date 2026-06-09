@@ -285,7 +285,13 @@ function normalizarPartido(p){
   );
 
   const liga = p.competition?.name || p.liga || "Sin liga";
-  const pais = p.area?.code || p.pais || obtenerPaisPorLiga(liga);
+  const pais =
+  p.competition?.country ||
+  p.league?.country ||
+  p.area?.name ||
+  p.area?.code ||
+  p.pais ||
+  obtenerPaisPorLiga(liga);
 
   const local = p.homeTeam?.name || p.local || "Local";
   const visitante = p.awayTeam?.name || p.visitante || "Visitante";
@@ -351,6 +357,12 @@ function obtenerPaisPorLiga(liga){
   if(l.includes("brasil")) return "BRASIL";
   if(l.includes("premier")) return "INGLATERRA";
   if(l.includes("laliga")) return "ESPAÑA";
+  if(l.includes("serie b")) return "BRASIL";
+  if(l.includes("paranaense")) return "BRASIL";
+  if(l.includes("reserve league")) return "ARGENTINA";
+  if(l.includes("conmebol")) return "FIFA";
+  if(l.includes("canadian")) return "CANADÁ";
+  if(l.includes("league two")) return "ESTADOS UNIDOS";
 
   return "";
 }
