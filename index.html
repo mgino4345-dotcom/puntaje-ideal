@@ -511,6 +511,7 @@ function mostrarPartidos(partidos){
   let html = "";
 
   Object.keys(grupos).forEach(liga => {
+    console.log(primerPartido);
    const primerPartido = grupos[liga][0] || {};
    const infoLiga = obtenerPaisDesdeLiga(liga, primerPartido.pais || "");
 
