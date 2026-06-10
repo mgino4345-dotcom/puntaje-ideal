@@ -440,7 +440,9 @@ function obtenerPaisDesdeLiga(liga, paisActual = ""){
   if(texto.includes("usa") || texto.includes("united states") || texto.includes("mls") || texto.includes("usl")){
     return { bandera:"🇺🇸", pais:"Estados Unidos" };
   }
-
+   if(texto.includes("canadian")){
+    return { bandera:"🇨🇦", pais:"Canadá" };
+  }
   if(texto.includes("england") || texto.includes("premier") || texto.includes("championship")){
     return { bandera:"🏴", pais:"Inglaterra" };
   }
@@ -472,9 +474,7 @@ function obtenerPaisDesdeLiga(liga, paisActual = ""){
   if(texto.includes("france") || texto.includes("ligue 1")){
     return { bandera:"🇫🇷", pais:"Francia" };
   }
-  if(texto.includes("canadian")){
-    return { bandera:"🇨🇦", pais:"Canadá" };
-  }
+
   return { bandera:"🌍", pais: paisActual || "Liga" };
 }
 
