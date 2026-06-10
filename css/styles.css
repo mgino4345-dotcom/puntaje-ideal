@@ -1082,4 +1082,27 @@ footer{
   justify-content:flex-end !important;
   align-items:center !important;
 }
+.league-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
+
+.league-info{
+  display:flex;
+  flex-direction:column;
+  line-height:1.2;
+}
+
+.league-name{
+  color:#ffffff;
+  font-size:14px;
+  font-weight:900;
+}
+
+.league-country{
+  color:#94a3b8;
+  font-size:12px;
+  font-weight:700;
+}
+

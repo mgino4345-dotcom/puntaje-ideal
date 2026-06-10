@@ -517,10 +517,10 @@ function mostrarPartidos(partidos){
     html += `
       <div class="scoreline-league">
         <div class="league-left">
-          ⭐
-          <span class="league-country">${infoLiga.bandera} ${infoLiga.pais}:</span>
-          <span class="league-name">${limpiarNombreLiga(liga)}</span>
-          <span class="league-pin">📌</span>
+           <div class="league-info">
+             <div class="league-name">${limpiarNombreLiga(liga)}</div>
+             <div class="league-country">${infoLiga.bandera} ${infoLiga.pais}</div>
+           </div>
         </div>
 
         <div>Tabla En Directo ^</div>
