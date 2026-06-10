@@ -1105,4 +1105,16 @@ footer{
   font-size:12px;
   font-weight:700;
 }
+.league-country{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  color:#b8c2cc;
+  font-size:12px;
+  font-weight:700;
+}
 
+.flag{
+  font-size:15px;
+  line-height:1;
+}

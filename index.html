@@ -472,7 +472,9 @@ function obtenerPaisDesdeLiga(liga, paisActual = ""){
   if(texto.includes("france") || texto.includes("ligue 1")){
     return { bandera:"🇫🇷", pais:"Francia" };
   }
-
+  if(texto.includes("canadian")){
+    return { bandera:"🇨🇦", pais:"Canadá" };
+  }
   return { bandera:"🌍", pais: paisActual || "Liga" };
 }
 
@@ -519,7 +521,10 @@ function mostrarPartidos(partidos){
         <div class="league-left">
            <div class="league-info">
              <div class="league-name">${limpiarNombreLiga(liga)}</div>
-             <div class="league-country">${infoLiga.bandera} ${infoLiga.pais}</div>
+             <div class="league-country">
+                    <span class="flag">${infoLiga.bandera}</span>
+                    <span>${infoLiga.pais}</span>
+             </div>
            </div>
         </div>
 
