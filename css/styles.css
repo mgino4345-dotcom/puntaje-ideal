@@ -1128,10 +1128,12 @@ footer{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:16px;
-  height:16px;
+  width:18px;
+  height:18px;
   border-radius:50%;
   background:#ffffff;
-  font-size:10px;
+  font-size:13px;
+  line-height:1;
   margin-right:5px;
+  overflow:hidden;
 }
