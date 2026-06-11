@@ -11,7 +11,9 @@ body{
   letter-spacing:-0.2px;
 }
 
-/* HEADER */
+/* ==========================
+   HEADER
+========================== */
 header{
   background:#101820;
   border-bottom:1px solid #252b33;
@@ -28,6 +30,8 @@ header{
 
 .logo-img{
   width:46px;
+  height:46px;
+  object-fit:contain;
   border-radius:8px;
 }
 
@@ -55,7 +59,9 @@ header{
   padding:10px;
 }
 
-/* MENU */
+/* ==========================
+   MENU
+========================== */
 nav{
   background:#161b22;
 }
@@ -84,7 +90,9 @@ nav a.active{
   color:white;
 }
 
-/* CONTENEDOR */
+/* ==========================
+   CONTENEDOR
+========================== */
 .container{
   max-width:1200px;
   margin:auto;
@@ -94,9 +102,12 @@ nav a.active{
 .section-title{
   font-size:18px;
   margin:16px 0 10px;
+  color:#f8fafc;
 }
 
-/* FILTROS */
+/* ==========================
+   FILTROS Y FECHA
+========================== */
 .barra-filtros{
   display:flex;
   justify-content:space-between;
@@ -127,7 +138,6 @@ nav a.active{
   color:white;
 }
 
-/* SELECTOR FECHA */
 .selector-fecha{
   display:flex;
   align-items:center;
@@ -153,7 +163,9 @@ nav a.active{
   font-weight:900;
 }
 
-/* TARJETAS GENERALES */
+/* ==========================
+   TARJETAS GENERALES
+========================== */
 .section-card,
 .league-card{
   background:#111827;
@@ -186,53 +198,104 @@ nav a.active{
   padding:0;
 }
 
-/* PARTIDOS */
+/* ==========================
+   MARCADORES Y LIGAS
+========================== */
 #partidos-json{
-  background:#fff;
+  background:#ffffff;
 }
 
 .scoreline-league{
-  background:linear-gradient(90deg,#002b36,#012b38);
+  background:#003842;
   color:#ffffff;
-  font-weight:800;
-  padding:12px 14px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  border-top:1px solid #0f4c5c;
-  border-bottom:1px solid #0f4c5c;
-  font-size:15px;
+  padding:9px 12px;
+  border-top:1px solid #0f6472;
+  border-bottom:1px solid #0f6472;
+  min-height:46px;
 }
 
-.scoreline-league .league-left{
+.league-left{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:10px;
+  min-width:0;
 }
 
-.scoreline-league .league-country{
-  color:#cbd5e1;
-  font-weight:700;
+.league-logo{
+  width:24px;
+  height:24px;
+  object-fit:contain;
+  border-radius:50%;
+  flex-shrink:0;
 }
 
-.scoreline-league .league-name{
+.league-info{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-width:0;
+  line-height:1.15;
+}
+
+.league-name{
   color:#ffffff;
+  font-size:14px;
   font-weight:900;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-.scoreline-league .league-pin{
-  color:#94a3b8;
+.league-country{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  color:#b8c2cc;
+  font-size:11px;
+  font-weight:700;
+  margin-top:2px;
+}
+
+.country-flag{
+  width:16px;
+  height:11px;
+  object-fit:cover;
+  border-radius:2px;
+  flex-shrink:0;
+}
+
+.scoreline-table-link{
+  color:#ffffff;
+  font-size:12px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.scoreline-match{
+  background:#ffffff;
+  color:#111827;
+  display:grid;
+  grid-template-columns:35px 55px minmax(120px,1fr) 80px minmax(120px,1fr) 115px;
+  align-items:center;
+  gap:10px;
+  padding:8px 12px;
+  border-bottom:1px solid #e5e7eb;
+  min-height:44px;
 }
 
 .scoreline-star{
   color:#94a3b8;
-  font-size:20px;
   text-align:center;
+  font-size:18px;
 }
 
 .scoreline-time{
-  color:#475569;
-  font-weight:700;
+  color:#ff0050;
+  font-size:12px;
+  font-weight:900;
   text-align:center;
 }
 
@@ -240,39 +303,71 @@ nav a.active{
   color:#ff0050;
 }
 
-.scoreline-teams{
+.equipo-local,
+.equipo-visitante{
   display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-
-.scoreline-team-line{
-  display:grid;
-  grid-template-columns:22px 1fr 30px;
   align-items:center;
-  gap:8px;
-  font-weight:600;
-}
-
-.scoreline-team-line img{
-  width:20px !important;
-  height:20px !important;
-  object-fit:contain;
-}
-
-.team-goal{
-  text-align:center;
-  font-weight:800;
+  gap:7px;
+  font-size:12px;
+  font-weight:900;
   color:#111827;
+  min-width:0;
+}
+
+.equipo-local{
+  justify-content:flex-end;
+  text-align:right;
+}
+
+.equipo-visitante{
+  justify-content:flex-start;
+  text-align:left;
+}
+
+.equipo-local span,
+.equipo-visitante span{
+  color:#111827;
+  opacity:1;
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.equipo-local img,
+.equipo-visitante img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+.scoreline-score{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  color:#111827;
+  font-size:18px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.scoreline-score strong,
+.scoreline-score span{
+  color:#111827;
+  font-size:18px;
+  font-weight:900;
+  display:inline-block;
 }
 
 .scoreline-extra{
-  color:#9ca3af;
-  font-size:12px;
   display:flex;
   justify-content:flex-end;
   align-items:center;
   gap:8px;
+  color:#9ca3af;
+  font-size:12px;
 }
 
 .red-card{
@@ -284,13 +379,16 @@ nav a.active{
   font-weight:900;
 }
 
-/* BADGE PICK EN PARTIDOS */
+/* ==========================
+   BADGES PICKS EN PARTIDOS
+========================== */
 .pick-ia{
   padding:4px 8px;
   border-radius:8px;
-  font-size:11px;
+  font-size:10px;
   font-weight:900;
   white-space:nowrap;
+  color:white;
 }
 
 .pick-fuerte{
@@ -308,17 +406,18 @@ nav a.active{
   color:white;
 }
 
-/* SIN PARTIDOS */
 .sin-partidos{
   padding:35px;
   text-align:center;
-  color:#9ca3af;
+  color:#cbd5e1;
   font-size:17px;
   font-weight:bold;
   background:#111827;
 }
 
-/* TABLA */
+/* ==========================
+   TABLA DE POSICIONES
+========================== */
 .tabla-flash{
   width:100%;
   background:white;
@@ -369,8 +468,8 @@ nav a.active{
 }
 
 .tabla-equipo img{
-  width:22px !important;
-  height:22px !important;
+  width:22px;
+  height:22px;
   object-fit:contain;
 }
 
@@ -378,80 +477,81 @@ nav a.active{
   font-weight:900;
 }
 
-/* PICKS DE PUNTAJE IDEAL */
-.picks{
+/* ==========================
+   TOP PICK DEL DÍA
+========================== */
+#top-pick-dia{
+  background:#ffffff;
+  color:#111827;
+  padding:14px;
+}
+
+.top-pick-card{
+  background:#ffffff;
+  border-radius:14px;
   padding:20px;
+  color:#111827;
+  border:1px solid #22c55e;
+}
+
+.top-pick-card,
+.top-pick-card *{
+  color:#111827;
+  opacity:1;
+}
+
+.top-pick-header{
+  color:#16a34a;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:12px;
+}
+
+.top-pick-match{
+  color:#0f172a;
+  font-size:22px;
+  font-weight:900;
+  margin-bottom:15px;
+}
+
+.top-pick-data{
+  color:#111827;
+  line-height:1.8;
+  font-size:14px;
+}
+
+.top-pick-data p,
+.top-pick-data strong{
+  color:#111827;
+  font-weight:800;
+}
+
+/* ==========================
+   PICKS DE PUNTAJE IDEAL
+========================== */
+.picks,
+.picks-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:18px;
+  padding:20px;
   background:#ffffff;
+  border-radius:0 0 14px 14px;
 }
-
-/* TARJETA INTERNA PREMIUM */
 
 .pick-card{
-  background:#ffffff;
+  position:relative;
+  background:linear-gradient(180deg,#ffffff,#f8fafc);
+  border:1px solid #dbe3ee;
   border-radius:16px;
-  padding:18px;
-  margin-top:10px;
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
-  transition:.3s;
-}
-
-.pick-card:hover{
-  transform:translateY(-2px);
-}
-
-/* PICK FUERTE */
-.pick-card.fuerte{
-  border:2px solid #22c55e;
-  border-top:5px solid #22c55e;
-}
-
-/* PICK MEDIO */
-.pick-card.medio{
-  border:2px solid #f59e0b;
-  border-top:5px solid #f59e0b;
-}
-
-/* EVITAR */
-.pick-card.evitar{
-  border:2px solid #ef4444;
-  border-top:5px solid #ef4444;
-}
-
-.pick-card .pick-nivel{
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-.pick-card.fuerte .pick-nivel{
-  color:#16a34a;
-}
-
-.pick-card.medio .pick-nivel{
-  color:#ca8a04;
-}
-
-.pick-card.evitar .pick-nivel{
-  color:#dc2626;
-}
-
-.pick-partido{
-  font-size:18px;
-  font-weight:800;
-  color:#0f172a;
-  margin:10px 0;
-}
-
-.pick-info{
-  color:#334155;
-  line-height:1.8;
-}
-
-.pick-confianza{
-  margin-top:12px;
-  font-weight:800;
+  padding:22px;
+  color:#111827;
+  box-shadow:0 8px 22px rgba(15,23,42,.08);
+  overflow:hidden;
+  min-height:110px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
 
 .pick-card::before{
@@ -464,16 +564,31 @@ nav a.active{
   background:#dbe3ee;
 }
 
-.pick-card.fuerte::before{
-  background:#22c55e;
+.pick-card *{
+  color:#111827;
+  opacity:1;
 }
 
-.pick-card.medio::before{
-  background:#f59e0b;
+.pick-card h3{
+  color:#0f172a;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
 
-.pick-card.evitar::before{
-  background:#ef4444;
+.pick-card p,
+.pick-card small{
+  color:#334155;
+  font-size:15px;
+  line-height:1.5;
+  margin-bottom:18px;
+}
+
+.pick-card strong{
+  color:#020617;
 }
 
 .pick-card.fuerte{
@@ -488,33 +603,16 @@ nav a.active{
   border-left:5px solid #ef4444;
 }
 
-.pick-card.activo{
-  transform:translateY(-2px);
-  box-shadow:0 4px 16px rgba(15,23,42,.12);
+.pick-card.fuerte::before{
+  background:#22c55e;
 }
 
-.pick-card h3{
-  color:#0f172a;
-  font-size:20px;
-  font-weight:900;
-  margin-bottom:10px;
-  display:flex;
-  align-items:center;
-  gap:6px;
+.pick-card.medio::before{
+  background:#f59e0b;
 }
 
-.pick-card p{
-  color:#475569;
-  font-size:15px;
-  line-height:1.5;
-  margin-bottom:18px;
-}
-
-.pick-card strong,
-.pick-card span,
-.pick-card small,
-.pick-card div{
-  opacity:1;
+.pick-card.evitar::before{
+  background:#ef4444;
 }
 
 .pick-nivel{
@@ -561,7 +659,6 @@ nav a.active{
   color:#2563eb;
 }
 
-/* BARRA CONFIANZA */
 .confianza-bar{
   width:100%;
   height:10px;
@@ -588,26 +685,9 @@ nav a.active{
   background:#ef4444;
 }
 
-/* BADGES */
-.badge{
-  display:inline-block;
-  padding:7px 14px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:900;
-  background:#0d47a1;
-  color:white;
-}
-
-.badge.gold{
-  background:#f59e0b;
-}
-
-.badge.red{
-  background:#ef4444;
-}
-
-/* ESTADÍSTICAS */
+/* ==========================
+   ESTADÍSTICAS
+========================== */
 .stats-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
@@ -701,7 +781,9 @@ nav a.active{
   font-size:24px;
 }
 
-/* HISTORIAL */
+/* ==========================
+   HISTORIAL / MATCH LEGACY
+========================== */
 #estadisticas-historial,
 #historial-picks,
 #estadisticas-generales,
@@ -784,7 +866,9 @@ nav a.active{
   font-weight:bold;
 }
 
-/* ALERTA GOL */
+/* ==========================
+   ALERTA GOL
+========================== */
 .gol-alerta{
   position:fixed;
   top:20px;
@@ -798,7 +882,30 @@ nav a.active{
   box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
 
-/* FOOTER */
+/* ==========================
+   BADGES
+========================== */
+.badge{
+  display:inline-block;
+  padding:7px 14px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  background:#0d47a1;
+  color:white;
+}
+
+.badge.gold{
+  background:#f59e0b;
+}
+
+.badge.red{
+  background:#ef4444;
+}
+
+/* ==========================
+   FOOTER
+========================== */
 footer{
   margin-top:30px;
   background:#101820;
@@ -808,7 +915,9 @@ footer{
   padding:18px;
 }
 
-/* RESPONSIVE */
+/* ==========================
+   RESPONSIVE
+========================== */
 @media(max-width:768px){
   .topbar{
     flex-wrap:wrap;
@@ -837,8 +946,37 @@ footer{
     font-size:12px;
   }
 
+  .scoreline-match{
+    grid-template-columns:25px 48px 1fr 58px 1fr 88px;
+    gap:6px;
+    padding:8px;
+  }
+
+  .equipo-local,
+  .equipo-visitante{
+    font-size:10px;
+    gap:5px;
+  }
+
+  .equipo-local img,
+  .equipo-visitante img{
+    width:18px;
+    height:18px;
+  }
+
+  .scoreline-score,
+  .scoreline-score strong,
+  .scoreline-score span{
+    font-size:15px;
+  }
+
   .scoreline-extra{
-    font-size:11px;
+    font-size:10px;
+  }
+
+  .pick-ia{
+    font-size:9px;
+    padding:3px 6px;
   }
 
   .tabla-header,
@@ -848,8 +986,8 @@ footer{
   }
 
   .tabla-equipo img{
-    width:18px !important;
-    height:18px !important;
+    width:18px;
+    height:18px;
   }
 
   .match{
@@ -865,270 +1003,4 @@ footer{
   .texto-mediano{
     font-size:16px;
   }
-}
-
-
-/* ==========================
-   TOP PICK DEL DIA
-========================== */
-
-#top-pick-dia,
-#topPickDia,
-.top-pick-dia,
-.top-pick-body{
-  background:#ffffff !important;
-  color:#111827 !important;
-}
-
-#top-pick-dia,
-#topPickDia,
-.top-pick-dia{
-  padding:15px;
-}
-
-.top-pick-card{
-  background:#ffffff !important;
-  border:1px solid #22c55e;
-  border-radius:14px;
-  padding:20px;
-  color:#111827 !important;
-  box-shadow:0 8px 22px rgba(15,23,42,.08);
-}
-
-.top-pick-card *,
-.top-pick-body *,
-#topPickDia *,
-.top-pick-dia *{
-  color:#111827 !important;
-  opacity:1 !important;
-}
-
-.top-pick-header,
-.top-pick-card .titulo,
-.top-pick-body .titulo,
-#topPickDia .titulo{
-  color:#16a34a !important;
-  font-size:20px;
-  font-weight:900;
-  margin-bottom:12px;
-}
-
-.top-pick-match{
-  color:#0f172a !important;
-  font-size:22px;
-  font-weight:900;
-  margin-bottom:15px;
-}
-
-.top-pick-data{
-  color:#111827 !important;
-  line-height:1.8;
-  font-size:14px;
-}
-
-.top-pick-data p,
-.top-pick-data strong{
-  color:#111827 !important;
-  font-weight:800;
-}
-
-/* ==========================
-   FIX FINAL PICKS PUNTAJE IDEAL
-========================== */
-
-.picks,
-.picks-grid{
-  display:grid !important;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:18px;
-  padding:20px;
-  background:#ffffff;
-  border-radius:0 0 14px 14px;
-}
-
-.pick-card{
-  position:relative;
-  background:linear-gradient(180deg,#ffffff,#f8fafc) !important;
-  border:1px solid #dbe3ee !important;
-  border-radius:16px !important;
-  padding:22px !important;
-  color:#111827 !important;
-  box-shadow:0 8px 22px rgba(15,23,42,.08) !important;
-  overflow:hidden;
-      min-height:110px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.pick-card *{
-  color:#111827 !important;
-  opacity:1 !important;
-}
-
-.pick-card h3{
-  color:#0f172a !important;
-  font-weight:900 !important;
-}
-
-.pick-card strong{
-  color:#020617 !important;
-}
-
-.pick-card p,
-.pick-card small{
-  color:#334155 !important;
-}
-
-.pick-card.fuerte{
-  border-left:5px solid #22c55e !important;
-}
-
-.pick-card.medio{
-  border-left:5px solid #f59e0b !important;
-}
-
-.pick-card.evitar{
-  border-left:5px solid #ef4444 !important;
-}
-
-.pick-card.fuerte::before{
-  background:#22c55e !important;
-}
-
-.pick-card.medio::before{
-  background:#f59e0b !important;
-}
-
-.pick-card.evitar::before{
-  background:#ef4444 !important;
-}
-/* MARCADOR CENTRADO LIMPIO */
-
-.scoreline-match{
-  background:#ffffff !important;
-  display:grid !important;
-  grid-template-columns:35px 55px 1fr 80px 1fr 120px !important;
-  align-items:center !important;
-  gap:10px !important;
-  padding:8px 12px !important;
-  border-bottom:1px solid #e5e7eb !important;
-  min-height:44px !important;
-}
-
-.scoreline-star{
-  color:#94a3b8 !important;
-  text-align:center !important;
-}
-
-.scoreline-time{
-  color:#ff0050 !important;
-  font-size:12px !important;
-  font-weight:900 !important;
-  text-align:center !important;
-}
-
-.equipo-local,
-.equipo-visitante{
-  display:flex !important;
-  align-items:center !important;
-  gap:7px !important;
-  font-size:12px !important;
-  font-weight:900 !important;
-}
-
-.equipo-local{
-  justify-content:flex-end !important;
-}
-
-.equipo-visitante{
-  justify-content:flex-start !important;
-}
-
-.equipo-local span,
-.equipo-visitante span{
-  color:#111827 !important;
-  opacity:1 !important;
-  display:block !important;
-}
-
-.equipo-local img,
-.equipo-visitante img{
-  width:22px !important;
-  height:22px !important;
-  object-fit:contain !important;
-}
-
-.scoreline-score{
-  display:flex !important;
-  justify-content:center !important;
-  align-items:center !important;
-  gap:6px !important;
-  color:#111827 !important;
-  font-size:18px !important;
-  font-weight:900 !important;
-}
-
-.scoreline-score strong,
-.scoreline-score span{
-  color:#111827 !important;
-  font-size:18px !important;
-  font-weight:900 !important;
-  display:inline-block !important;
-}
-
-.scoreline-extra{
-  display:flex !important;
-  justify-content:flex-end !important;
-  align-items:center !important;
-}
-.country-badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  background:#ffffff;
-  font-size:13px;
-  line-height:1;
-  margin-right:5px;
-  overflow:hidden;
-}
-.league-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.league-logo{
-  width:22px;
-  height:22px;
-  object-fit:contain;
-}
-
-.league-info{
-  display:flex;
-  flex-direction:column;
-}
-
-.league-name{
-  font-size:15px;
-  font-weight:700;
-  color:#fff;
-}
-
-.league-country{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  font-size:12px;
-  color:#b8c2cc;
-}
-
-.country-flag{
-  width:16px;
-  height:11px;
-  object-fit:cover;
-  border-radius:2px;
 }

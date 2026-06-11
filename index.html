@@ -152,6 +152,7 @@
 <footer>
   © 2026 Puntaje Ideal - Resultados, partidos y pronósticos deportivos
 </footer>
+
 <script>
 let partidosGlobal = [];
 let estadoSeleccionado = "TODOS";
@@ -396,11 +397,12 @@ function formatearPais(pais){
 }
 
 function obtenerClasePick(p){
-  const texto = (p.nivelPick || p.pickIA || p.pronostico || "").toUpperCase();
+  const texto = `${p.nivelPick || p.pickIA || p.pronostico || ""}`.toUpperCase();
 
   if(texto.includes("EVITAR")) return "pick-evitar";
   if(texto.includes("MEDIO")) return "pick-medio";
   if(texto.includes("FUERTE")) return "pick-fuerte";
+  if(texto.includes("FINALIZADO")) return "pick-medio";
 
   return "pick-medio";
 }
@@ -436,10 +438,88 @@ function mostrarNotificacionGol(p){
   setTimeout(() => alerta.remove(), 6000);
 }
 
-function obtenerPaisDesdeLiga(liga, paisActual = ""){
-  const texto = `${paisActual} ${liga}`.toLowerCase();
+function normalizarNombrePais(pais){
+  const p = String(pais || "").trim();
+  const upper = p.toUpperCase();
 
-  if(texto.includes("asean") || texto.includes("conmebol") || texto.includes("fifa") || texto.includes("international") || texto.includes("friendlies")){
+  const mapa = {
+    "US":"Estados Unidos",
+    "USA":"Estados Unidos",
+    "UNITED STATES":"Estados Unidos",
+    "ESTADOS UNIDOS":"Estados Unidos",
+    "ENGLAND":"Inglaterra",
+    "INGLATERRA":"Inglaterra",
+    "CANADA":"Canadá",
+    "CANADÁ":"Canadá",
+    "BRAZIL":"Brasil",
+    "BRASIL":"Brasil",
+    "PERU":"Perú",
+    "PERÚ":"Perú",
+    "SPAIN":"España",
+    "ESPAÑA":"España",
+    "ITALY":"Italia",
+    "ITALIA":"Italia",
+    "GERMANY":"Alemania",
+    "ALEMANIA":"Alemania",
+    "FRANCE":"Francia",
+    "FRANCIA":"Francia",
+    "FIFA":"Internacional",
+    "INTERNACIONAL":"Internacional",
+    "INTERNATIONAL":"Internacional"
+  };
+
+  return mapa[upper] || p;
+}
+
+function obtenerEmojiPais(pais){
+  const p = normalizarNombrePais(pais).toUpperCase();
+
+  const mapa = {
+    "INTERNACIONAL":"🌎",
+    "FIFA":"🌎",
+    "ESTADOS UNIDOS":"🇺🇸",
+    "INGLATERRA":"🏴",
+    "CANADÁ":"🇨🇦",
+    "BRASIL":"🇧🇷",
+    "ARGENTINA":"🇦🇷",
+    "PERÚ":"🇵🇪",
+    "ESPAÑA":"🇪🇸",
+    "ITALIA":"🇮🇹",
+    "ALEMANIA":"🇩🇪",
+    "FRANCIA":"🇫🇷",
+    "PORTUGAL":"🇵🇹",
+    "MÉXICO":"🇲🇽",
+    "COLOMBIA":"🇨🇴",
+    "CHILE":"🇨🇱",
+    "URUGUAY":"🇺🇾",
+    "PARAGUAY":"🇵🇾",
+    "BOLIVIA":"🇧🇴",
+    "ECUADOR":"🇪🇨",
+    "VENEZUELA":"🇻🇪"
+  };
+
+  return mapa[p] || "";
+}
+
+function obtenerPaisDesdeLiga(liga, paisActual = ""){
+  const paisBase = normalizarNombrePais(paisActual);
+  const texto = `${paisBase} ${liga || ""}`.toLowerCase();
+
+  if(paisBase && paisBase !== "Liga"){
+    const banderaBase = obtenerEmojiPais(paisBase);
+    if(banderaBase){
+      return { bandera: banderaBase, pais: paisBase };
+    }
+  }
+
+  if(
+    texto.includes("asean") ||
+    texto.includes("conmebol") ||
+    texto.includes("fifa") ||
+    texto.includes("international") ||
+    texto.includes("friendlies") ||
+    texto.includes("amistoso")
+  ){
     return { bandera:"🌎", pais:"Internacional" };
   }
 
@@ -447,7 +527,12 @@ function obtenerPaisDesdeLiga(liga, paisActual = ""){
     return { bandera:"🇨🇦", pais:"Canadá" };
   }
 
-  if(texto.includes("usa") || texto.includes("united states") || texto.includes("mls") || texto.includes("usl")){
+  if(
+    texto.includes("usa") ||
+    texto.includes("united states") ||
+    texto.includes("mls") ||
+    texto.includes("usl")
+  ){
     return { bandera:"🇺🇸", pais:"Estados Unidos" };
   }
 
@@ -459,11 +544,20 @@ function obtenerPaisDesdeLiga(liga, paisActual = ""){
     return { bandera:"🇵🇪", pais:"Perú" };
   }
 
-  if(texto.includes("argentina") || texto.includes("primera nacional") || texto.includes("reserve league")){
+  if(
+    texto.includes("argentina") ||
+    texto.includes("primera nacional") ||
+    texto.includes("reserve league")
+  ){
     return { bandera:"🇦🇷", pais:"Argentina" };
   }
 
-  if(texto.includes("brasil") || texto.includes("brazil") || texto.includes("serie b") || texto.includes("paranaense")){
+  if(
+    texto.includes("brasil") ||
+    texto.includes("brazil") ||
+    texto.includes("serie b") ||
+    texto.includes("paranaense")
+  ){
     return { bandera:"🇧🇷", pais:"Brasil" };
   }
 
@@ -483,7 +577,7 @@ function obtenerPaisDesdeLiga(liga, paisActual = ""){
     return { bandera:"🇫🇷", pais:"Francia" };
   }
 
-  return { bandera:"🌍", pais: paisActual || "Liga" };
+  return { bandera:"🌍", pais: paisBase || "Liga" };
 }
 
 function mostrarPartidos(partidos){
@@ -512,41 +606,33 @@ function mostrarPartidos(partidos){
   let html = "";
 
   Object.keys(grupos).forEach(liga => {
-   const primerPartido = grupos[liga][0] || {};
-   const infoLiga = obtenerPaisDesdeLiga(liga, primerPartido.pais || "");
+    const primerPartido = grupos[liga][0] || {};
+    const infoLiga = obtenerPaisDesdeLiga(liga, primerPartido.pais || "");
 
-  html += `
-<div class="scoreline-league">
+    html += `
+      <div class="scoreline-league">
+        <div class="league-left">
+          <img
+            class="league-logo"
+            src="${primerPartido.logoLiga || "logo.png"}"
+            alt="${liga}"
+          >
 
-  <div class="league-left">
+          <div class="league-info">
+            <div class="league-name">${limpiarNombreLiga(liga)}</div>
 
-    <img
-      class="league-logo"
-      src="${primerPartido.logoLiga || 'logo.png'}"
-      alt="${liga}"
-    >
-
-    <div class="league-info">
-
-      <div class="league-name">
-        ${limpiarNombreLiga(liga)}
+            <div class="league-country">
+              <img
+                class="country-flag"
+                src="${obtenerBanderaPais(infoLiga.pais)}"
+                alt="${infoLiga.pais}"
+              >
+              <span>${infoLiga.pais}</span>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="league-country">
-        <img
-          class="country-flag"
-          src="${obtenerBanderaPais(infoLiga.pais)}"
-          alt="${infoLiga.pais}"
-        >
-        <span>${infoLiga.pais}</span>
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-`;
+    `;
 
     grupos[liga].forEach(p => {
       const tiempo =
@@ -566,7 +652,7 @@ function mostrarPartidos(partidos){
 
           <div class="equipo-local">
             <span>${p.local}</span>
-            <img src="${p.escudoLocal || 'logo.png'}" alt="${p.local}">
+            <img src="${p.escudoLocal || "logo.png"}" alt="${p.local}">
           </div>
 
           <div class="scoreline-score">
@@ -576,7 +662,7 @@ function mostrarPartidos(partidos){
           </div>
 
           <div class="equipo-visitante">
-            <img src="${p.escudoVisitante || 'logo.png'}" alt="${p.visitante}">
+            <img src="${p.escudoVisitante || "logo.png"}" alt="${p.visitante}">
             <span>${p.visitante}</span>
           </div>
 
@@ -596,19 +682,47 @@ function mostrarPartidos(partidos){
 }
 
 function obtenerBanderaPais(pais){
+  const p = normalizarNombrePais(pais).toUpperCase();
 
   const banderas = {
+    "INTERNACIONAL":"https://flagcdn.com/w20/un.png",
+    "FIFA":"https://flagcdn.com/w20/un.png",
     "INGLATERRA":"https://flagcdn.com/w20/gb.png",
+    "ENGLAND":"https://flagcdn.com/w20/gb.png",
     "ESTADOS UNIDOS":"https://flagcdn.com/w20/us.png",
+    "UNITED STATES":"https://flagcdn.com/w20/us.png",
+    "US":"https://flagcdn.com/w20/us.png",
+    "USA":"https://flagcdn.com/w20/us.png",
     "CANADÁ":"https://flagcdn.com/w20/ca.png",
+    "CANADA":"https://flagcdn.com/w20/ca.png",
     "BRASIL":"https://flagcdn.com/w20/br.png",
+    "BRAZIL":"https://flagcdn.com/w20/br.png",
     "ARGENTINA":"https://flagcdn.com/w20/ar.png",
     "PERÚ":"https://flagcdn.com/w20/pe.png",
+    "PERU":"https://flagcdn.com/w20/pe.png",
     "ESPAÑA":"https://flagcdn.com/w20/es.png",
-    "FIFA":"https://flagcdn.com/w20/un.png"
+    "SPAIN":"https://flagcdn.com/w20/es.png",
+    "ITALIA":"https://flagcdn.com/w20/it.png",
+    "ITALY":"https://flagcdn.com/w20/it.png",
+    "ALEMANIA":"https://flagcdn.com/w20/de.png",
+    "GERMANY":"https://flagcdn.com/w20/de.png",
+    "FRANCIA":"https://flagcdn.com/w20/fr.png",
+    "FRANCE":"https://flagcdn.com/w20/fr.png",
+    "PORTUGAL":"https://flagcdn.com/w20/pt.png",
+    "PAÍSES BAJOS":"https://flagcdn.com/w20/nl.png",
+    "NETHERLANDS":"https://flagcdn.com/w20/nl.png",
+    "MÉXICO":"https://flagcdn.com/w20/mx.png",
+    "MEXICO":"https://flagcdn.com/w20/mx.png",
+    "COLOMBIA":"https://flagcdn.com/w20/co.png",
+    "CHILE":"https://flagcdn.com/w20/cl.png",
+    "URUGUAY":"https://flagcdn.com/w20/uy.png",
+    "PARAGUAY":"https://flagcdn.com/w20/py.png",
+    "BOLIVIA":"https://flagcdn.com/w20/bo.png",
+    "ECUADOR":"https://flagcdn.com/w20/ec.png",
+    "VENEZUELA":"https://flagcdn.com/w20/ve.png"
   };
 
-  return banderas[pais] || "https://flagcdn.com/w20/un.png";
+  return banderas[p] || "https://flagcdn.com/w20/un.png";
 }
 
 function aplicarFiltros(){
@@ -1133,6 +1247,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(cargarPartidosAPI, 60000);
 });
 </script>
+
 
 
 </body>
