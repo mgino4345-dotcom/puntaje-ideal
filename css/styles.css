@@ -1099,24 +1099,20 @@ footer{
   font-size:14px;
   font-weight:900;
 }
-
-.league-country{
-  color:#94a3b8;
-  font-size:12px;
-  font-weight:700;
-}
 .league-country{
   display:flex;
   align-items:center;
   gap:5px;
+  font-size:11px;
   color:#b8c2cc;
-  font-size:12px;
-  font-weight:700;
+  font-weight:600;
 }
 
-.flag{
-  font-size:15px;
-  line-height:1;
+.country-flag{
+  width:16px;
+  height:11px;
+  object-fit:cover;
+  border-radius:2px;
 }
 .league-logo{
   width:20px;

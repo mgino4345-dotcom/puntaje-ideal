@@ -526,6 +526,8 @@ function mostrarPartidos(partidos){
       <div class="scoreline-league">
 <div class="league-left">
 
+<div class="league-left">
+
   <img
     class="league-logo"
     src="${primerPartido.logoLiga || 'logo.png'}"
@@ -538,9 +540,16 @@ function mostrarPartidos(partidos){
     </div>
 
     <div class="league-country">
-     <span class="country-badge">${infoLiga.bandera}</span>
-     <span>${infoLiga.pais}</span>
+      <img
+        class="country-flag"
+        src="${obtenerBanderaPais(infoLiga.pais)}"
+        alt="${infoLiga.pais}"
+      >
+      ${infoLiga.pais}
     </div>
+  </div>
+
+</div>
   </div>
 
 </div>
@@ -595,6 +604,22 @@ function mostrarPartidos(partidos){
   });
 
   contenedor.innerHTML = html;
+}
+
+function obtenerBanderaPais(pais){
+
+  const banderas = {
+    "INGLATERRA":"https://flagcdn.com/w20/gb.png",
+    "ESTADOS UNIDOS":"https://flagcdn.com/w20/us.png",
+    "CANADÁ":"https://flagcdn.com/w20/ca.png",
+    "BRASIL":"https://flagcdn.com/w20/br.png",
+    "ARGENTINA":"https://flagcdn.com/w20/ar.png",
+    "PERÚ":"https://flagcdn.com/w20/pe.png",
+    "ESPAÑA":"https://flagcdn.com/w20/es.png",
+    "FIFA":"https://flagcdn.com/w20/un.png"
+  };
+
+  return banderas[pais] || "https://flagcdn.com/w20/un.png";
 }
 
 function aplicarFiltros(){
