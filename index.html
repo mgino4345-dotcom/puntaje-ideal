@@ -580,6 +580,17 @@ function obtenerPaisDesdeLiga(liga, paisActual = ""){
   return { bandera:"🌍", pais: paisBase || "Liga" };
 }
 
+
+function limpiarNombreLiga(liga){
+  return (liga || "")
+    .replace(/^FIFA\s+/i, "")
+    .replace(/^USA\s+/i, "")
+    .replace(/^US\s+/i, "")
+    .replace(/^England\s+/i, "")
+    .replace(/^International\s+/i, "")
+    .trim();
+}
+
 function mostrarPartidos(partidos){
   const contenedor = document.getElementById("partidos-json");
   if(!contenedor) return;
