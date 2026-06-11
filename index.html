@@ -439,17 +439,19 @@ function mostrarNotificacionGol(p){
 function obtenerPaisDesdeLiga(liga, paisActual = ""){
   const texto = `${paisActual} ${liga}`.toLowerCase();
 
-  if(texto.includes("fifa") || texto.includes("international") || texto.includes("friendlies")){
+  if(texto.includes("asean") || texto.includes("conmebol") || texto.includes("fifa") || texto.includes("international") || texto.includes("friendlies")){
     return { bandera:"🌎", pais:"Internacional" };
+  }
+
+  if(texto.includes("canadian")){
+    return { bandera:"🇨🇦", pais:"Canadá" };
   }
 
   if(texto.includes("usa") || texto.includes("united states") || texto.includes("mls") || texto.includes("usl")){
     return { bandera:"🇺🇸", pais:"Estados Unidos" };
   }
-   if(texto.includes("canadian")){
-    return { bandera:"🇨🇦", pais:"Canadá" };
-  }
-  if(texto.includes("england") || texto.includes("premier") || texto.includes("championship")){
+
+  if(texto.includes("england") || texto.includes("premier league")){
     return { bandera:"🏴", pais:"Inglaterra" };
   }
 
@@ -457,11 +459,11 @@ function obtenerPaisDesdeLiga(liga, paisActual = ""){
     return { bandera:"🇵🇪", pais:"Perú" };
   }
 
-  if(texto.includes("argentina") || texto.includes("primera nacional")){
+  if(texto.includes("argentina") || texto.includes("primera nacional") || texto.includes("reserve league")){
     return { bandera:"🇦🇷", pais:"Argentina" };
   }
 
-  if(texto.includes("brasil") || texto.includes("brazil") || texto.includes("serie a brasil")){
+  if(texto.includes("brasil") || texto.includes("brazil") || texto.includes("serie b") || texto.includes("paranaense")){
     return { bandera:"🇧🇷", pais:"Brasil" };
   }
 
@@ -482,15 +484,6 @@ function obtenerPaisDesdeLiga(liga, paisActual = ""){
   }
 
   return { bandera:"🌍", pais: paisActual || "Liga" };
-}
-
-function limpiarNombreLiga(liga){
-  return (liga || "")
-    .replace(/^FIFA\s+/i, "")
-    .replace(/^USA\s+/i, "")
-    .replace(/^US\s+/i, "")
-    .replace(/^England\s+/i, "")
-    .trim();
 }
 
 function mostrarPartidos(partidos){
@@ -524,39 +517,25 @@ function mostrarPartidos(partidos){
 
     html += `
       <div class="scoreline-league">
-<div class="league-left">
+        <div class="league-left">
+           <img class="league-logo"src="${primerPartido.logoLiga || 'logo.png'}"
+              alt="${liga}"
+           >
 
-<div class="league-left">
+        <div class="league-info">
+          <div class="league-name">
+            ${limpiarNombreLiga(liga)}
+          </div>
 
-  <img
-    class="league-logo"
-    src="${primerPartido.logoLiga || 'logo.png'}"
-    alt="${liga}"
-  >
-
-  <div class="league-info">
-    <div class="league-name">
-      ${limpiarNombreLiga(liga)}
-    </div>
-
-    <div class="league-country">
-      <img
-        class="country-flag"
-        src="${obtenerBanderaPais(infoLiga.pais)}"
-        alt="${infoLiga.pais}"
-      >
-      ${infoLiga.pais}
-    </div>
-  </div>
-
-</div>
-  </div>
-
-</div>
+        <div class="league-country">
+          <img
+            class="country-flag"
+            src="${obtenerBanderaPais(infoLiga.pais)}"
+            alt="${infoLiga.pais}">
         </div>
-
-        <div>Tabla En Directo ^</div>
       </div>
+      </div>
+  </div>
     `;
 
     grupos[liga].forEach(p => {
