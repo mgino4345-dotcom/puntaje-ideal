@@ -293,6 +293,11 @@ function normalizarPartido(p){
   p.pais ||
   obtenerPaisPorLiga(liga);
 
+  const logoLiga =
+  p.competition?.logo ||
+  p.logoLiga ||
+  "";
+
   const local = p.homeTeam?.name || p.local || "Local";
   const visitante = p.awayTeam?.name || p.visitante || "Visitante";
 
@@ -326,6 +331,7 @@ function normalizarPartido(p){
     hora,
     pais,
     liga,
+    logoLiga,
     local,
     visitante,
     escudoLocal,
@@ -518,14 +524,25 @@ function mostrarPartidos(partidos){
 
     html += `
       <div class="scoreline-league">
-        <div class="league-left">
-           <div class="league-info">
-             <div class="league-name">${limpiarNombreLiga(liga)}</div>
-             <div class="league-country">
-                    <span class="flag">${infoLiga.bandera}</span>
-                    <span>${infoLiga.pais}</span>
-             </div>
-           </div>
+<div class="league-left">
+
+  <img
+    class="league-logo"
+    src="${primerPartido.logoLiga || 'logo.png'}"
+    alt="${liga}"
+  >
+
+  <div class="league-info">
+    <div class="league-name">
+      ${limpiarNombreLiga(liga)}
+    </div>
+
+    <div class="league-country">
+      ${infoLiga.bandera} ${infoLiga.pais}
+    </div>
+  </div>
+
+</div>
         </div>
 
         <div>Tabla En Directo ^</div>
