@@ -1082,44 +1082,6 @@ footer{
   justify-content:flex-end !important;
   align-items:center !important;
 }
-.league-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.league-info{
-  display:flex;
-  flex-direction:column;
-  line-height:1.2;
-}
-
-.league-name{
-  color:#ffffff;
-  font-size:14px;
-  font-weight:900;
-}
-.league-country{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  font-size:11px;
-  color:#b8c2cc;
-  font-weight:600;
-}
-
-.country-flag{
-  width:16px;
-  height:11px;
-  object-fit:cover;
-  border-radius:2px;
-}
-.league-logo{
-  width:20px;
-  height:20px;
-  object-fit:contain;
-  border-radius:50%;
-}
 .country-badge{
   display:inline-flex;
   align-items:center;
@@ -1132,4 +1094,41 @@ footer{
   line-height:1;
   margin-right:5px;
   overflow:hidden;
+}
+.league-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.league-logo{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+}
+
+.league-info{
+  display:flex;
+  flex-direction:column;
+}
+
+.league-name{
+  font-size:15px;
+  font-weight:700;
+  color:#fff;
+}
+
+.league-country{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  font-size:12px;
+  color:#b8c2cc;
+}
+
+.country-flag{
+  width:16px;
+  height:11px;
+  object-fit:cover;
+  border-radius:2px;
 }

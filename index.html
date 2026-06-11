@@ -515,28 +515,38 @@ function mostrarPartidos(partidos){
    const primerPartido = grupos[liga][0] || {};
    const infoLiga = obtenerPaisDesdeLiga(liga, primerPartido.pais || "");
 
-    html += `
-      <div class="scoreline-league">
-        <div class="league-left">
-           <img class="league-logo"src="${primerPartido.logoLiga || 'logo.png'}"
-              alt="${liga}"
-           >
+  html += `
+<div class="scoreline-league">
 
-        <div class="league-info">
-          <div class="league-name">
-            ${limpiarNombreLiga(liga)}
-          </div>
+  <div class="league-left">
 
-        <div class="league-country">
-          <img
-            class="country-flag"
-            src="${obtenerBanderaPais(infoLiga.pais)}"
-            alt="${infoLiga.pais}">
-        </div>
+    <img
+      class="league-logo"
+      src="${primerPartido.logoLiga || 'logo.png'}"
+      alt="${liga}"
+    >
+
+    <div class="league-info">
+
+      <div class="league-name">
+        ${limpiarNombreLiga(liga)}
       </div>
+
+      <div class="league-country">
+        <img
+          class="country-flag"
+          src="${obtenerBanderaPais(infoLiga.pais)}"
+          alt="${infoLiga.pais}"
+        >
+        <span>${infoLiga.pais}</span>
       </div>
+
+    </div>
+
   </div>
-    `;
+
+</div>
+`;
 
     grupos[liga].forEach(p => {
       const tiempo =
