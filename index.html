@@ -298,6 +298,9 @@ function normalizarPartido(p){
   p.competition?.logo ||
   p.logoLiga ||
   "";
+  const banderaLiga =
+  p.competition?.flag ||
+  "";
 
   const local = p.homeTeam?.name || p.local || "Local";
   const visitante = p.awayTeam?.name || p.visitante || "Visitante";
@@ -333,6 +336,7 @@ function normalizarPartido(p){
     pais,
     liga,
     logoLiga,
+    banderaLiga,
     local,
     visitante,
     escudoLocal,
@@ -633,10 +637,8 @@ function mostrarPartidos(partidos){
             <div class="league-name">${liga}</div>
 
             <div class="league-country">
-              <img
-                class="country-flag"
-                src="${obtenerBanderaPais(infoLiga.pais)}"
-                alt="${infoLiga.pais}"
+              <img class="country-flag"src="${primerPartido.banderaLiga || obtenerBanderaPais(infoLiga.pais)}"
+                   alt="${infoLiga.pais}"
               >
               <span>${infoLiga.pais}</span>
             </div>
