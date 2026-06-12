@@ -614,6 +614,31 @@ function obtenerIconoCompeticion(liga, logoOriginal){
   return logoOriginal || "logo.png";
 }
 
+function obtenerLogoCompeticion(liga, logoApi){
+  const l = (liga || "").toLowerCase();
+
+  if(l.includes("world cup") || l.includes("copa mundial")){
+    return "img/competencias/world-cup.png";
+  }
+
+  if(l.includes("champions league")){
+    return "img/competencias/champions.png";
+  }
+
+  if(l.includes("libertadores")){
+    return "img/competencias/libertadores.png";
+  }
+
+  if(l.includes("sudamericana")){
+    return "img/competencias/sudamericana.png";
+  }
+
+  if(l.includes("conmebol")){
+    return "img/competencias/conmebol.png";
+  }
+
+  return logoApi || "logo.png";
+}
 
 function mostrarPartidos(partidos){
   const contenedor = document.getElementById("partidos-json");
@@ -649,10 +674,7 @@ function mostrarPartidos(partidos){
         <div class="league-left">
 <img
   class="league-logo"
-  src="${obtenerIconoCompeticion(
-    liga,
-    primerPartido.logoLiga
-  )}"
+  src="${obtenerLogoCompeticion(liga, primerPartido.logoLiga)}"
   alt="${liga}"
 >
 
