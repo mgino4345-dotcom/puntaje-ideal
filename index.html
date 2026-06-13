@@ -617,6 +617,10 @@ function obtenerIconoCompeticion(liga, logoOriginal){
 function obtenerLogoCompeticion(liga, logoApi){
   const l = (liga || "").toLowerCase();
 
+    if(l.includes("copa de la liga")){
+    return "escudos/competiciones/copa-de-la-liga.png";
+  }
+
   if(l.includes("world cup") || l.includes("copa mundial")){
     return "img/competencias/world-cup.png";
   }
